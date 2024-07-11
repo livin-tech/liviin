@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Baskervville.ttf",
+      "sha1": "047480033bd5e15baf9585efba8c3215a009c132"
+    },
+    {
+      "path": "assets/fonts/Plus Jakarta Sans.ttf",
+      "sha1": "f9292b9fb01731811fe12635ec5445a8fed9475e"
+    }
+  ]
+}
