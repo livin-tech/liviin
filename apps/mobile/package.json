@@ -13,7 +13,8 @@
     "react-native-svg-transformer": "*",
     "react-dom": "*",
     "@nx/webpack": "*",
-    "@nx/react": "*"
+    "@nx/react": "*",
+    "react-native-paper": "*"
   },
   "devDependencies": {}
 }
