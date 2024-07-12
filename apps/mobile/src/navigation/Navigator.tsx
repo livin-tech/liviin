@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Landing } from '../screens/Landing';
 import { OnBoarding } from '../screens/on-boarding';
-import { View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
