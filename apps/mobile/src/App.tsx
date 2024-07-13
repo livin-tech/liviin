@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { I18nextProvider } from 'react-i18next';
 import { Navigation } from './navigation/Navigator';
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -25,11 +25,19 @@ export const App = () => {
       />
       <I18nextProvider i18n={i18n}>
         <PaperProvider theme={theme}>
-          <Navigation />
+          <SafeAreaView style={styles.safeArea}>
+            <Navigation />
+          </SafeAreaView>
         </PaperProvider>
       </I18nextProvider>
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+});
 
 export default App;
