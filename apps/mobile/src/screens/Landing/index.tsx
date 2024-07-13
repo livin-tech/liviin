@@ -1,30 +1,73 @@
-import { Button, Headline, Paragraph, Subheading } from 'react-native-paper';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { RouteNavigators } from '../../navigation/routes';
+import { Button, Text, FAB } from 'react-native-paper';
+import { useFocusEffect } from '@react-navigation/native';
+import { StatusBar, StyleSheet, View } from 'react-native';
+
+// Utils
+import { LANGS } from '../../utils';
 import { theme } from '../../theme';
 import { Icons } from '../../assets';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { BackgroundLayout } from '../../layouts';
 
 export const Landing = ({ navigation }) => {
   const { t } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(LANGS.ENGLISH);
+
+  useFocusEffect(() => {
+    StatusBar.setBarStyle('light-content', true);
+    return () => {
+      // Reset status bar style when screen loses focus
+      StatusBar.setBarStyle('dark-content', true);
+    };
+  });
+
+  const navigateToOnBoarding = () => {
+    navigation.navigate(RouteNavigators.WithSafeAreaNavigator);
+  };
+
+  const onLangChange = () => {};
+
   return (
-    <View style={{ flex: 1 }}>
-      <Text>{t('welcome')}</Text>
-      <Text>{t('greeting', { name: 'Ameer' })}</Text>
-      <Headline>This is a Headline</Headline>
-      <Subheading>This is a sub-heading</Subheading>
-      <Paragraph>This is a paragraph</Paragraph>
-      <Text>This is a text</Text>
-      <Button
-        style={{
-          backgroundColor: theme.colors.background,
-          borderRadius: 20,
-          padding: 8,
-        }}
-        onPress={() => navigation.navigate('OnBoarding' as never)}
-      >
-        <Icons.RightArrow />
-      </Button>
-    </View>
+    <BackgroundLayout>
+      <View>
+        <Icons.LiviinLogo />
+        <Button
+          mode="contained"
+          onPress={onLangChange}
+          color={theme.colors.background}
+        >
+          <View style={styles.buttonContainer}>
+            <Text style={styles.marginRight}>{currentLanguage}</Text>
+            <Icons.ArrowDownSmall />
+          </View>
+        </Button>
+        <FAB
+          style={styles.fab}
+          icon={Icons.RightArrow}
+          onPress={navigateToOnBoarding}
+        />
+      </View>
+    </BackgroundLayout>
   );
 };
+
+const styles = StyleSheet.create({
+  fab: {
+    margin: 16,
+    right: -60,
+    bottom: -280,
+    position: 'absolute',
+    backgroundColor: theme.colors.background,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  marginRight: {
+    marginRight: 10,
+  },
+});
