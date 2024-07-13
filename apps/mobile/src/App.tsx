@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import { I18nextProvider } from 'react-i18next';
-import { Navigation } from './navigation/Navigator';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 
 // Utils
 import i18n from './i18n';
 import { theme } from './theme';
+import { AppNavigator } from './navigation';
 
 /**
  * To change the language programmatically...
@@ -26,7 +26,7 @@ export const App = () => {
       <I18nextProvider i18n={i18n}>
         <PaperProvider theme={theme}>
           <SafeAreaView style={styles.safeArea}>
-            <Navigation />
+            <AppNavigator />
           </SafeAreaView>
         </PaperProvider>
       </I18nextProvider>

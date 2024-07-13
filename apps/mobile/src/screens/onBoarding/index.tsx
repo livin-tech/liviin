@@ -7,8 +7,20 @@ const Stack = createNativeStackNavigator();
 
 export const OnBoarding = () => (
   <Stack.Navigator initialRouteName="Step1">
-    <Stack.Screen options={{ headerShown: false }} name="Step1" component={Step1} />
-    <Stack.Screen options={{ headerShown: false }} name="Step2" component={Step2} />
-    <Stack.Screen options={{ headerShown: false }} name="Step3" component={Step3} />
+    <Stack.Screen
+      options={{ headerShown: false }}
+      name="Step1"
+      component={Step1}
+    />
+    <Stack.Screen
+      options={{ headerShown: false }}
+      name="Step2"
+      component={Step2}
+    />
+    <Stack.Screen
+      options={{ headerShown: false }}
+      name="Step3"
+      component={Step3}
+    />
   </Stack.Navigator>
-)
+);

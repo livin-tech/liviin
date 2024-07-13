@@ -1,5 +1,5 @@
-import { LeftArrowIcon } from '../assets/icons/LeftArrowIcon';
-import { Dimensions, StyleSheet, Touchable, TouchableOpacity, View } from 'react-native';
+import { Icons } from '../assets';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { theme } from '../theme';
 import { Headline } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -9,7 +9,7 @@ export function Header({ headerTitle }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.leftArrow} onPress={() => navigation.goBack()}>
-        <LeftArrowIcon />
+        <Icons.LeftArrow />
       </TouchableOpacity>
       <Headline style={styles.heading}>{headerTitle}</Headline>
     </View>

@@ -1,14 +1,17 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Landing } from '../screens/Landing';
-import { OnBoarding } from '../screens/on-boarding';
+import { Landing, OnBoarding } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
-export const Navigation = () => (
+export const AppNavigator = () => (
   <Stack.Navigator initialRouteName="Landing">
     <Stack.Screen name="Landing" component={Landing} />
-    <Stack.Screen options={{
-      headerShown: false
-    }} name="OnBoarding" component={OnBoarding} />
+    <Stack.Screen
+      options={{
+        headerShown: false,
+      }}
+      name="OnBoarding"
+      component={OnBoarding}
+    />
   </Stack.Navigator>
-)
+);

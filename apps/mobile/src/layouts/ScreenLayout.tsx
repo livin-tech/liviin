@@ -10,16 +10,16 @@ export function ScreenLayout({ headerTitle, children }) {
       </View>
       {children}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.background,
     flex: 1,
-    padding: 12
+    padding: 12,
   },
   header: {
-    marginBottom: 16
-  }
+    marginBottom: 16,
+  },
 });

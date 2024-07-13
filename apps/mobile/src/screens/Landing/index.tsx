@@ -1,7 +1,7 @@
 import { Button, Headline, Paragraph, Subheading } from 'react-native-paper';
 import { Text, View } from 'react-native';
 import { theme } from '../../theme';
-import { RightArrowIcon } from '../../assets/icons/RightArrowIcon';
+import { Icons } from '../../assets';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -15,9 +15,15 @@ export const Landing = ({ navigation }) => {
       <Subheading>This is a sub-heading</Subheading>
       <Paragraph>This is a paragraph</Paragraph>
       <Text>This is a text</Text>
-      <Button style={{backgroundColor: theme.colors.background, borderRadius: 20, padding: 8}}
-              onPress={() => navigation.navigate('OnBoarding' as never)}>
-        <RightArrowIcon/>
+      <Button
+        style={{
+          backgroundColor: theme.colors.background,
+          borderRadius: 20,
+          padding: 8,
+        }}
+        onPress={() => navigation.navigate('OnBoarding' as never)}
+      >
+        <Icons.RightArrow />
       </Button>
     </View>
   );

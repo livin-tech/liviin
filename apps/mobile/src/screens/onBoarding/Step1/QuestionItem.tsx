@@ -1,11 +1,9 @@
-import { Card, Paragraph, Subheading, TextInput, TextInputProps } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
-import { BedIcon } from '../../../assets/icons/BedIcon';
+import { Card, Paragraph, TextInput, TextInputProps } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
 import { CountInput } from '../../../components/CountInput';
 import React from 'react';
-import { theme } from '../../../theme';
 
-function Item({ icon: Icon, text, }) {
+function Item({ icon: Icon, text }) {
   return (
     <Card style={styles.card}>
       <Card.Content>
@@ -16,7 +14,7 @@ function Item({ icon: Icon, text, }) {
             </View>
             <Paragraph style={styles.text}>{text}</Paragraph>
           </View>
-          <CountInput/>
+          <CountInput />
         </View>
       </Card.Content>
     </Card>
@@ -27,10 +25,7 @@ function ItemTextInput(props: TextInputProps) {
   return (
     <Card style={styles.card}>
       <Card.Content>
-        <TextInput
-          style={styles.textInput}
-          {...props}
-        />
+        <TextInput style={styles.textInput} {...props} />
       </Card.Content>
     </Card>
   );
@@ -38,8 +33,8 @@ function ItemTextInput(props: TextInputProps) {
 
 export default {
   Item,
-  ItemTextInput
-}
+  ItemTextInput,
+};
 
 const styles = StyleSheet.create({
   card: {
@@ -50,22 +45,22 @@ const styles = StyleSheet.create({
   cardContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   subContent: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textInput: {
     backgroundColor: 'transparent',
     fontSize: 13,
   },
   text: {
-    marginLeft: 8
+    marginLeft: 8,
   },
   icon: {
     backgroundColor: '#FFF',
     borderRadius: 30,
-    padding: 4
-  }
+    padding: 4,
+  },
 });
