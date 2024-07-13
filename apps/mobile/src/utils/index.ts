@@ -1,4 +1,4 @@
-export const LANGS = {
-  ENGLISH: 'English',
-  SPANISH: 'Español',
-};
+export const LANGS = [
+  { name: 'English', code: 'en' },
+  { name: 'Español', code: 'es' },
+];
