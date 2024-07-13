@@ -1,6 +1,6 @@
 import Svg, { Path } from 'react-native-svg';
 import { View } from 'react-native';
-export function RightArrow() {
+export function RightArrowIcon() {
   return (
     <View>
       <Svg width="24" height="24" viewBox="0 0 24 8" fill="none">

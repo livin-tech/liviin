@@ -24,7 +24,8 @@
     "react-native-screens": "^3.32.0",
     "react-native-svg": "*",
     "react-native-svg-transformer": "*",
-    "yarn": "^1.22.22"
+    "yarn": "^1.22.22",
+    "react-native-vector-icons": "^10.1.0"
   },
   "devDependencies": {}
 }

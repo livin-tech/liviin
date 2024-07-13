@@ -2,7 +2,6 @@ import { configureFonts, DefaultTheme } from 'react-native-paper';
 
 export const theme: ReactNativePaper.Theme = {
   ...DefaultTheme,
-  roundness: 2,
   colors: {
     ...DefaultTheme.colors,
     primary: '#4E5C4F',

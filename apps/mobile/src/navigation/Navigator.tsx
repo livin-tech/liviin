@@ -7,6 +7,8 @@ const Stack = createNativeStackNavigator();
 export const Navigation = () => (
   <Stack.Navigator initialRouteName="Landing">
     <Stack.Screen name="Landing" component={Landing} />
-    <Stack.Screen name="OnBoarding" component={OnBoarding} />
+    <Stack.Screen options={{
+      headerShown: false
+    }} name="OnBoarding" component={OnBoarding} />
   </Stack.Navigator>
 )
