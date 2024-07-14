@@ -7,7 +7,6 @@ export const LiviinLogo = () => (
     height="185"
     viewBox="0 0 216 185"
     fill="none"
-    // xmlns="http://www.w3.org/2000/svg"
   >
     <Rect width="216" height="185" fill="url(#pattern0_1122_25880)" />
     <Defs>

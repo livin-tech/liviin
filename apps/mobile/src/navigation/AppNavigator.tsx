@@ -3,8 +3,16 @@ import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Utils
-import { Landing, OnBoarding } from '../screens';
 import { RouteNavigators, Routes } from './routes';
+
+// Screens
+import {
+  Login,
+  Landing,
+  Register,
+  OnBoarding,
+  ForgotPassword,
+} from '../screens';
 
 // Navigation Options
 const noHeader = {
@@ -41,6 +49,21 @@ const WithoutSafeAreaNavigator = () => {
         options={noHeader}
         component={Landing}
         name={Routes.Landing}
+      />
+      <StackWithoutSafeArea.Screen
+        options={noHeader}
+        component={Login}
+        name={Routes.Login}
+      />
+      <StackWithoutSafeArea.Screen
+        options={noHeader}
+        component={Register}
+        name={Routes.Register}
+      />
+      <StackWithoutSafeArea.Screen
+        options={noHeader}
+        component={ForgotPassword}
+        name={Routes.ForgotPassword}
       />
       {/* Add more screens without SafeAreaView here */}
     </StackWithoutSafeArea.Navigator>

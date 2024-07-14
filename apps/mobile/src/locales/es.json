@@ -1,4 +1,10 @@
 {
-  "welcome": "Bienvenido",
-  "greeting": "Hola, {{name}}!"
+  "authentication": {
+    "register": {
+      "heading": "Registrarse",
+      "continueWithApple": "Continuar con Apple",
+      "continueWithGoogle": "Continuar con Google",
+      "continueWithEmail": "Continuar con Email"
+    }
+  }
 }

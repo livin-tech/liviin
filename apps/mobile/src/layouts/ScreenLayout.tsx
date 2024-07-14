@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import { Header } from './Header';
 import { theme } from '../theme';
 
-export function ScreenLayout({ headerTitle, children }) {
+export const ScreenLayout = ({ headerTitle, children }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -11,7 +11,7 @@ export function ScreenLayout({ headerTitle, children }) {
       {children}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

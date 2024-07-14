@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)', // Optional: Overlay with a semi-transparent background
-    justifyContent: 'center',
     alignItems: 'center',
   },
 });

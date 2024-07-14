@@ -5,6 +5,9 @@ export const RouteNavigators = {
 
 export const RoutesWithSafeAreaView = {
   Landing: 'Landing',
+  Login: 'Login',
+  Register: 'Register',
+  ForgotPassword: 'ForgotPassword',
 };
 
 export const RoutesWithoutSafeAreaView = {
