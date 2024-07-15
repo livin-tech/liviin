@@ -12,8 +12,8 @@ import { AppNavigator } from './navigation';
 /**
  * To change the language programmatically...
  */
-// i18n.changeLanguage('en'); /* English */
-i18n.changeLanguage('es'); /* Español */
+i18n.changeLanguage('en'); /* English */
+// i18n.changeLanguage('es'); /* Español */
 
 export const App = () => {
   return (

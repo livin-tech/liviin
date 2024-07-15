@@ -17,7 +17,7 @@ export function Step1({navigation}) {
 
   return (
     <ScreenLayout headerTitle="Your property is...">
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View>
           <View style={{alignItems: 'center'}}>
             <View style={{width: 200, marginVertical: 16}}>
