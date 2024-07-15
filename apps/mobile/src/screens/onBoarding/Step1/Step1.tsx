@@ -8,6 +8,7 @@ import React from 'react';
 import { LeftArrow } from '../../../assets/icons/LeftArrow';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { LANGS } from '../../../utils';
+// import {[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)} from 'react-native-calendars';
 
 export function Step1({navigation}) {
   const [type, setType] = React.useState('');
@@ -41,9 +42,9 @@ export function Step1({navigation}) {
           </Card>
           <QuestionItem.ItemTextInput
             theme={theme}
-            label="Name of the Property"
-            placeholder="e.g beach house"
-
+            label="e.g beach house"
+            // placeholder="e.g beach house"
+            heading="Name of the property"
           />
           <QuestionItem.Item icon={Icons.MeasureTape} text="How many">
             <Menu

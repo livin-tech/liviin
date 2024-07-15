@@ -1,7 +1,17 @@
-import { Card, Paragraph, TextInput, TextInputProps } from 'react-native-paper';
+import {
+  Text,
+  Card,
+  Headline,
+  Paragraph,
+  TextInput,
+  TextInputProps,
+  DefaultTheme
+} from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import { CountInput } from './CountInput';
 import React from 'react';
+import { theme as AppTheme } from '../theme';
+import { StyledText } from './StyledText';
 
 interface ItemProps {
   icon?: React.ElementType;
@@ -33,10 +43,14 @@ function Item({ icon: Icon, text, input: Input = CountInput, children }: ItemPro
   );
 }
 
-function ItemTextInput(props: TextInputProps) {
+function ItemTextInput({heading, theme = AppTheme, children, ...props}: Partial<TextInputProps> & { heading: string }) {
   return (
     <Card style={styles.card}>
-      <TextInput style={styles.textInput} {...props} />
+      <Card.Content>
+        <Paragraph>{heading}</Paragraph>
+        <TextInput style={styles.textInput} {...props} />
+        {children}
+      </Card.Content>
     </Card>
   );
 }
