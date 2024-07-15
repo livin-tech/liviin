@@ -10,9 +10,10 @@ import {
   Login,
   Landing,
   Register,
-  OnBoarding,
+  OnBoardingNavigation,
   ForgotPassword,
 } from '../screens';
+import { theme } from '../theme';
 
 // Navigation Options
 const noHeader = {
@@ -31,7 +32,7 @@ const WithSafeAreaNavigator = () => {
       <StackWithSafeArea.Navigator initialRouteName={Routes.OnBoarding}>
         <StackWithSafeArea.Screen
           options={noHeader}
-          component={OnBoarding}
+          component={OnBoardingNavigation}
           name={Routes.OnBoarding}
         />
         {/* Add more screens with SafeAreaView here */}
@@ -97,6 +98,7 @@ export const AppNavigator = () => (
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    backgroundColor: theme.colors.background
   },
   screen: {
     flex: 1,

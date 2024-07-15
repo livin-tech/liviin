@@ -1,20 +1,32 @@
 import { Card, Paragraph, TextInput, TextInputProps } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
-import { CountInput } from '../../../components/CountInput';
+import { CountInput } from './CountInput';
 import React from 'react';
 
-function Item({ icon: Icon, text }) {
+interface ItemProps {
+  icon?: React.ElementType;
+  text: string;
+  children?: React.ReactNode;
+  input?: () => React.JSX.Element;
+}
+
+function Item({ icon: Icon, text, input: Input = CountInput, children }: ItemProps) {
   return (
     <Card style={styles.card}>
       <Card.Content>
         <View style={styles.cardContent}>
           <View style={styles.subContent}>
-            <View style={styles.icon}>
-              <Icon />
-            </View>
+            {
+              Icon && (
+                <View style={styles.icon}>
+                  <Icon />
+                </View>
+              )
+            }
             <Paragraph style={styles.text}>{text}</Paragraph>
+            {children}
           </View>
-          <CountInput />
+          <Input />
         </View>
       </Card.Content>
     </Card>
@@ -24,9 +36,7 @@ function Item({ icon: Icon, text }) {
 function ItemTextInput(props: TextInputProps) {
   return (
     <Card style={styles.card}>
-      <Card.Content>
-        <TextInput style={styles.textInput} {...props} />
-      </Card.Content>
+      <TextInput style={styles.textInput} {...props} />
     </Card>
   );
 }

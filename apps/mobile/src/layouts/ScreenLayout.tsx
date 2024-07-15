@@ -1,6 +1,7 @@
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Header } from './Header';
 import { theme } from '../theme';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export const ScreenLayout = ({ headerTitle, children }) => {
   return (

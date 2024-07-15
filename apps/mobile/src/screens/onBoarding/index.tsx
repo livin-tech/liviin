@@ -5,7 +5,7 @@ import { Step2 } from './Step2';
 
 const Stack = createNativeStackNavigator();
 
-export const OnBoarding = () => (
+export const OnBoardingNavigation = () => (
   <Stack.Navigator initialRouteName="Step1">
     <Stack.Screen
       options={{ headerShown: false }}
