@@ -1,0 +1,16 @@
+{
+  "authentication": {
+    "register": {
+      "heading": "Register",
+      "continueWithApple": "Continue with Apple",
+      "continueWithGoogle": "Continue with Google",
+      "continueWithEmail": "Continue with Email"
+    },
+    "login": {
+      "heading": "Login"
+    },
+    "forgotPassword": {
+      "heading": "Forgot Password"
+    }
+  }
+}

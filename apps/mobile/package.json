@@ -3,12 +3,33 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@nx/react": "*",
+    "@nx/webpack": "*",
+    "@os-team/i18next-react-native-language-detector": "^1.0.34",
     "@react-native/metro-config": "*",
+    "@react-navigation/material-top-tabs": "^6.6.13",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/native-stack": "^6.10.0",
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
+    "add": "^2.0.6",
+    "i18next": "*",
+    "intl-pluralrules": "^2.0.1",
+    "metro-config": "*",
     "react": "*",
+    "react-dom": "*",
+    "react-i18next": "*",
     "react-native": "*",
+    "react-native-calendars": "^1.1305.0",
+    "react-native-date-picker": "^5.0.4",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-paper": "4.12.8",
+    "react-native-safe-area-context": "^4.10.8",
+    "react-native-screens": "^3.32.0",
     "react-native-svg": "*",
-    "metro-config": "*"
-  }
+    "react-native-svg-transformer": "*",
+    "react-native-vector-icons": "^10.1.0",
+    "yarn": "^1.22.22"
+  },
+  "devDependencies": {}
 }
