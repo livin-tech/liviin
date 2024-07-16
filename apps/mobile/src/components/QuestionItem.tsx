@@ -24,8 +24,9 @@ function Item({
   icon: Icon,
   text,
   input: Input = CountInput,
+  onInputValueChange,
   children,
-}: ItemProps) {
+}: any) {
   return (
     <Card style={styles.card}>
       <Card.Content>
@@ -39,7 +40,14 @@ function Item({
             <Paragraph style={styles.text}>{text}</Paragraph>
             {children}
           </View>
-          <Input />
+          {
+            (Input.name === 'CountInput') ? (
+              // @ts-ignore
+              <Input onValueChange={onInputValueChange} />
+            ) : (
+              Input()
+            )
+          }
         </View>
       </Card.Content>
     </Card>

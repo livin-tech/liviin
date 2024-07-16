@@ -2,6 +2,9 @@
   "name": "mobile",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "fix-lint": "npx prettier --write src"
+  },
   "dependencies": {
     "@nx/react": "*",
     "@nx/webpack": "*",
