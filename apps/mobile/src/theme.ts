@@ -44,6 +44,6 @@ export const theme: ReactNativePaper.Theme = {
         fontFamily: 'Plus Jakarta Sans-Light',
         fontWeight: 'normal',
       },
-    }
-  })
-}
+    },
+  }),
+};

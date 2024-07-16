@@ -40,24 +40,24 @@ export const Login = ({ navigation }) => {
 
   return (
     <BackgroundLayout>
-        <BackButton onPress={goBack} />
-        <View style={styles.mainContainer}>
-          <CenterContainer>
-            <Spacer.md />
-            <Icons.LiviinLogo />
-            <StyledText.H4
-              color={theme.colors.background}
-              translationKey={getTransKey('heading')}
-            />
-            <Spacer.xl />
-            <TouchableOpacity onPress={onRegisterPress}>
-              <Text style={styles.loginText}>
-                Don't have an account? Register now
-              </Text>
-            </TouchableOpacity>
-            <Spacer.md />
-            <View style={styles.inputContainer}>
-              {/* <TextInput
+      <BackButton onPress={goBack} />
+      <View style={styles.mainContainer}>
+        <CenterContainer>
+          <Spacer.md />
+          <Icons.LiviinLogo />
+          <StyledText.H4
+            color={theme.colors.background}
+            translationKey={getTransKey('heading')}
+          />
+          <Spacer.xl />
+          <TouchableOpacity onPress={onRegisterPress}>
+            <Text style={styles.loginText}>
+              Don't have an account? Register now
+            </Text>
+          </TouchableOpacity>
+          <Spacer.md />
+          <View style={styles.inputContainer}>
+            {/* <TextInput
               mode="outlined"
               label="Email"
               placeholder="Enter your email"
@@ -72,45 +72,45 @@ export const Login = ({ navigation }) => {
               left={<TextInput.Icon name="lock" />}
               style={styles.input}
             /> */}
-              <TouchableOpacity
-                onPress={onForgotPassword}
-                style={styles.forgotPasswordContainer}
-              >
-                <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-              </TouchableOpacity>
-              <Spacer.sm />
-              <Button
-                mode="contained"
-                style={styles.button}
-                onPress={onLoginPress}
-                labelStyle={styles.label}
-                contentStyle={styles.buttonContent}
-              >
-                {'Login'}
-              </Button>
-            </View>
-            <View style={styles.buttonsContainer}>
-              <Button
-                mode="contained"
-                onPress={onPressFaq}
-                style={styles.button}
-                labelStyle={styles.label}
-                contentStyle={styles.buttonContent}
-              >
-                {'FAQ'}
-              </Button>
-              <Button
-                mode="contained"
-                onPress={onPressHelp}
-                style={styles.button}
-                labelStyle={styles.label}
-                contentStyle={styles.buttonContent}
-              >
-                {'Help'}
-              </Button>
-            </View>
-          </CenterContainer>
-        </View>
+            <TouchableOpacity
+              onPress={onForgotPassword}
+              style={styles.forgotPasswordContainer}
+            >
+              <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+            </TouchableOpacity>
+            <Spacer.sm />
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={onLoginPress}
+              labelStyle={styles.label}
+              contentStyle={styles.buttonContent}
+            >
+              {'Login'}
+            </Button>
+          </View>
+          <View style={styles.buttonsContainer}>
+            <Button
+              mode="contained"
+              onPress={onPressFaq}
+              style={styles.button}
+              labelStyle={styles.label}
+              contentStyle={styles.buttonContent}
+            >
+              {'FAQ'}
+            </Button>
+            <Button
+              mode="contained"
+              onPress={onPressHelp}
+              style={styles.button}
+              labelStyle={styles.label}
+              contentStyle={styles.buttonContent}
+            >
+              {'Help'}
+            </Button>
+          </View>
+        </CenterContainer>
+      </View>
     </BackgroundLayout>
   );
 };

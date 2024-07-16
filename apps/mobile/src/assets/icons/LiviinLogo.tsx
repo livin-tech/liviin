@@ -2,12 +2,7 @@ import React from 'react';
 import Svg, { Rect, Defs, Pattern, Use, Image } from 'react-native-svg';
 
 export const LiviinLogo = () => (
-  <Svg
-    width="216"
-    height="185"
-    viewBox="0 0 216 185"
-    fill="none"
-  >
+  <Svg width="216" height="185" viewBox="0 0 216 185" fill="none">
     <Rect width="216" height="185" fill="url(#pattern0_1122_25880)" />
     <Defs>
       <Pattern

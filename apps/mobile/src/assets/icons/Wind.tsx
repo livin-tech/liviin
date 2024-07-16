@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
 function Wind(props) {
   return (
@@ -23,7 +23,7 @@ function Wind(props) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
-export default Wind
+export default Wind;
