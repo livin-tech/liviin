@@ -12,6 +12,7 @@ export const RoutesWithSafeAreaView = {
 
 export const RoutesWithoutSafeAreaView = {
   OnBoarding: 'OnBoarding',
+  Home: 'Home',
 };
 
 export const Routes = {
