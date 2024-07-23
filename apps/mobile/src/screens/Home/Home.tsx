@@ -1,33 +1,14 @@
 import { StyleSheet, Image, View } from 'react-native';
 import { ScreenLayout } from '../../layouts';
-import {
-  Button,
-  ProgressBar,
-  Subheading,
-  Switch,
-  Checkbox,
-  Paragraph,
-  Divider,
-  Text,
-} from 'react-native-paper';
-import React, { useRef, useState } from 'react';
-import { Icons, Images } from '../../assets';
-import QuestionItem from '../../components/QuestionItem';
-import Wind from '../../assets/icons/Wind';
-import { theme } from '../../theme';
-import DatePicker from 'react-native-date-picker';
+import { Text } from 'react-native-paper';
+import React, { useState } from 'react';
+import { Icons } from '../../assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { HorizontalLayout } from '../../layouts/HorizontalLayout';
 import { ConfirmationModal } from '../../components/ConfirmationModal';
 import { CenterContainer } from '../../components';
 
 export function Home({ navigation }) {
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-  const [switchValue, setSwitchValue] = useState(false);
-  const [checkboxValue, setCheckboxValue] = useState<'checked' | 'unchecked'>(
-    'unchecked'
-  );
   const [openModal, setOpenModal] = useState(true);
 
   return (
