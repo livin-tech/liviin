@@ -1,13 +1,23 @@
-import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { ScreenLayout } from '../../layouts/ScreenLayout';
 import {
   Button,
   Checkbox,
-  Divider, Menu, Paragraph,
+  Divider,
+  Menu,
+  Paragraph,
   ProgressBar,
   Subheading,
   Switch,
-  TextInput as PaperInput
+  TextInput as PaperInput,
 } from 'react-native-paper';
 import React, { useRef, useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -25,7 +35,9 @@ export function Step3({ navigation }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<TextInput>();
   const [switchValue, setSwitchValue] = useState(false);
-  const [checkboxValue, setCheckboxValue] = useState<'checked' | 'unchecked'>('unchecked');
+  const [checkboxValue, setCheckboxValue] = useState<'checked' | 'unchecked'>(
+    'unchecked'
+  );
   const [openModal, setOpenModal] = useState(false);
   const [meter, setMeter] = React.useState('Leather');
   const [visible, setVisibility] = React.useState(false);
@@ -40,44 +52,54 @@ export function Step3({ navigation }) {
         </View>
         <Image source={Images.Couch} />
         <Subheading style={{ marginVertical: 16 }}>
-          This is the description about why cleaning of household items is important.
+          This is the description about why cleaning of household items is
+          important.
         </Subheading>
         <QuestionItem.Item
           icon={Sofa}
           text="Couch cleaning?"
-          input={() => <Switch color={theme.colors.primary} value={switchValue} onValueChange={(val) => setSwitchValue(val)} />}
+          input={() => (
+            <Switch
+              color={theme.colors.primary}
+              value={switchValue}
+              onValueChange={(val) => setSwitchValue(val)}
+            />
+          )}
         />
 
-        <QuestionItem.Item text="Couch material?" input={() => (
-          <Menu
-            visible={visible}
-            onDismiss={() => setVisibility(false)}
-            anchor={
-              <TouchableOpacity
-                // mode="outlined"
-                onPress={() => setVisibility(true)}
-                // color={theme.colors.background}
-                style={styles.buttonContainer}
-              >
-                <Text style={styles.marginRight}>{meter}</Text>
-                <Icons.ArrowDownSmall />
-              </TouchableOpacity>
-            }
-          >
-            {['Leather', 'Fabric', 'Raxeen'].map((lang, index) => (
-              <React.Fragment key={index}>
-                <Menu.Item
-                  onPress={() => {
-                    setMeter(lang);
-                    setVisibility(false);
-                  }}
-                  title={lang}
-                />
-                {index < LANGS.length - 1 && <Divider />}
-              </React.Fragment>
-            ))}
-          </Menu>
-        )}/>
+        <QuestionItem.Item
+          text="Couch material?"
+          input={() => (
+            <Menu
+              visible={visible}
+              onDismiss={() => setVisibility(false)}
+              anchor={
+                <TouchableOpacity
+                  // mode="outlined"
+                  onPress={() => setVisibility(true)}
+                  // color={theme.colors.background}
+                  style={styles.buttonContainer}
+                >
+                  <Text style={styles.marginRight}>{meter}</Text>
+                  <Icons.ArrowDownSmall />
+                </TouchableOpacity>
+              }
+            >
+              {['Leather', 'Fabric', 'Raxeen'].map((lang, index) => (
+                <React.Fragment key={index}>
+                  <Menu.Item
+                    onPress={() => {
+                      setMeter(lang);
+                      setVisibility(false);
+                    }}
+                    title={lang}
+                  />
+                  {index < LANGS.length - 1 && <Divider />}
+                </React.Fragment>
+              ))}
+            </Menu>
+          )}
+        />
 
         <QuestionItem.ItemTextInput
           ref={ref}
@@ -99,7 +121,15 @@ export function Step3({ navigation }) {
             <Divider style={{ flex: 1 }} />
           </HorizontalLayout>
           <HorizontalLayout style={{ justifyContent: 'center' }}>
-            <Checkbox.Android color={theme.colors.primary} status={checkboxValue} onPress={() => setCheckboxValue(checkboxValue === 'checked' ? 'unchecked' : 'checked')} />
+            <Checkbox.Android
+              color={theme.colors.primary}
+              status={checkboxValue}
+              onPress={() =>
+                setCheckboxValue(
+                  checkboxValue === 'checked' ? 'unchecked' : 'checked'
+                )
+              }
+            />
             <Paragraph>Never</Paragraph>
           </HorizontalLayout>
         </QuestionItem.ItemTextInput>
@@ -128,15 +158,32 @@ export function Step3({ navigation }) {
       <ConfirmationModal
         show={openModal}
         onDismiss={() => setOpenModal(false)}
-        onConfirm={() => navigation.navigate('Step3')}
+        onConfirm={() => navigation.navigate('Home')}
         dismissText="Ignore"
         confirmText="Add"
       >
-        <Paragraph style={{ textAlign: 'center'}}>
-          Please enter the phone number and name of the person who will be notified for this property.
+        <Paragraph style={{ textAlign: 'center' }}>
+          Please enter the phone number and name of the person who will be
+          notified for this property.
         </Paragraph>
-        <TextInput style={{ backgroundColor: theme.colors.accent, borderRadius: 10, padding: 8, marginVertical: 8 }} placeholder="+1 999-999-9999"/>
-        <TextInput style={{ backgroundColor: theme.colors.accent, borderRadius: 10, padding: 8, marginVertical: 8 }} placeholder="John Doe"/>
+        <TextInput
+          style={{
+            backgroundColor: theme.colors.accent,
+            borderRadius: 10,
+            padding: 8,
+            marginVertical: 8,
+          }}
+          placeholder="+1 999-999-9999"
+        />
+        <TextInput
+          style={{
+            backgroundColor: theme.colors.accent,
+            borderRadius: 10,
+            padding: 8,
+            marginVertical: 8,
+          }}
+          placeholder="John Doe"
+        />
       </ConfirmationModal>
     </ScreenLayout>
   );
