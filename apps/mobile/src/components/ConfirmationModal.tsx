@@ -10,6 +10,7 @@ export function ConfirmationModal({
   children,
   dismissText = 'Cancel',
   confirmText = 'Confirm',
+  headline = 'Ready!',
 }: any) {
   return (
     <Modal
@@ -18,18 +19,20 @@ export function ConfirmationModal({
       contentContainerStyle={styles.container}
     >
       <Headline style={{ textAlign: 'center', fontFamily: 'Baskervville' }}>
-        Ready!
+        {headline}
       </Headline>
       <Divider style={{ marginVertical: 8 }} />
       {children}
       <HorizontalLayout style={{ justifyContent: 'space-evenly' }}>
-        <Button
-          mode="contained"
-          style={{ borderRadius: 20, marginTop: 16 }}
-          onPress={onDismiss}
-        >
-          {dismissText}
-        </Button>
+        {dismissText && (
+          <Button
+            mode="contained"
+            style={{ borderRadius: 20, marginTop: 16 }}
+            onPress={onDismiss}
+          >
+            {dismissText}
+          </Button>
+        )}
         <Button
           mode="contained"
           style={{ borderRadius: 20, marginTop: 16 }}
