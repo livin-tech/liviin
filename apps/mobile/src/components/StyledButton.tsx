@@ -72,12 +72,15 @@ export const StyledButton: React.FC<StyledButtonProps> = ({
   const LeftIcon = () => renderSvgLeftIcon || renderLeftIcon;
   const RightIcon = () => renderSvgRightIcon || renderRightIcon;
 
+  const combinedStyles = [
+    styles[`${variant}Button` as keyof typeof styles], // Access variant styles dynamically
+    props.style,
+  ]
+
   return (
     <PaperButton
-      style={[
-        styles[`${variant}Button` as keyof typeof styles], // Access variant styles dynamically
-        props.style,
-      ]}
+      style={combinedStyles}
+      uppercase={false}
       {...props}
       icon={() => (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -87,6 +90,7 @@ export const StyledButton: React.FC<StyledButtonProps> = ({
       )}
     >
       {content}
+      {/* <StyledText color="white">{content}</StyledText> */}
     </PaperButton>
   );
 };

@@ -8,6 +8,7 @@ const SPACING_SIZES = {
   md: 12,
   lg: 16,
   xl: 20,
+  xxl: 22,
 };
 
 // Props for the Spacer component

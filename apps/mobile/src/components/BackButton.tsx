@@ -22,7 +22,7 @@ export const BackButton = ({ onPress = () => {} }) => (
 // Styles
 const styles = StyleSheet.create({
   fab: {
-    top: 40,
+    top: 60,
     left: 20,
     alignItems: 'center',
     position: 'absolute',

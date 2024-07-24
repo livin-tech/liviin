@@ -11,7 +11,7 @@ interface CenterContainerProps {
 export const CenterContainer: React.FC<CenterContainerProps> = ({
   children,
   horizontal = false,
-  vertical = true,
+  vertical = false,
   style,
 }) => {
   // Conditionally apply justifyContent and alignItems based on props

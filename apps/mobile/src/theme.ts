@@ -1,12 +1,13 @@
 import { configureFonts, DefaultTheme } from 'react-native-paper';
 
-export const theme: ReactNativePaper.Theme = {
+export const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
     primary: '#4E5C4F',
     accent: '#D2D8BE',
     background: '#FFFFFF',
+    white: '#FFFFFF'
   },
   fonts: configureFonts({
     ios: {

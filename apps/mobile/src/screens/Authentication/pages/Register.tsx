@@ -11,10 +11,8 @@ import {
   StyledText,
   BackButton,
   OutlinedButton,
-  CenterContainer,
 } from '../../../components';
 import { RouteNavigators, Routes } from '../../../navigation';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // Fetches the translation for this particular page
 const getTransKey = (key) => `authentication.register.${key}`;
@@ -50,72 +48,78 @@ export const Register = ({ navigation }) => {
 
   return (
     <BackgroundLayout>
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <BackButton onPress={goBack} />
-        <View style={styles.mainContainer}>
-          <CenterContainer>
-            <Spacer.md />
-            <Icons.LiviinLogo />
-            <StyledText.H4
-              color={theme.colors.background}
-              translationKey={getTransKey('heading')}
-            />
-            <Spacer.md />
-            <OutlinedButton
-              onPress={registerWithApple}
-              color={theme.colors.background}
-              svgIconLeft={<Icons.AppleLogo />}
-              translationKey={getTransKey('continueWithApple')}
-            />
-            <Spacer.sm />
-            <OutlinedButton
-              onPress={registerWithGoogle}
-              color={theme.colors.background}
-              svgIconLeft={<Icons.GoogleLogo />}
-              translationKey={getTransKey('continueWithGoogle')}
-            />
-            <Spacer.sm />
-            <OutlinedButton
-              onPress={registerWithEmail}
-              svgIconLeft={<Icons.Email />}
-              color={theme.colors.background}
-              translationKey={getTransKey('continueWithEmail')}
-            />
-            <Spacer.sm />
-            <View style={styles.container}>
-              <Checkbox
-                status={checked ? 'checked' : 'unchecked'}
-                onPress={() => {
-                  setChecked(!checked);
-                }}
-              />
-              <Text style={styles.text}>
-                I accept{' '}
-                <Text style={styles.underline} onPress={handleLinkPress}>
-                  Terms & Conditions
-                </Text>
-              </Text>
-            </View>
-            <Spacer.xl />
-            <TouchableOpacity onPress={handleLoginPress}>
-              <Text style={styles.loginText}>
-                Already have an account?{' '}
-                <Text style={styles.underline}>Login</Text>
-              </Text>
-            </TouchableOpacity>
-            <Spacer.md />
-            <Button
-              mode="contained"
-              onPress={onPressFaq}
-              style={styles.button}
-              labelStyle={styles.label}
-              contentStyle={styles.buttonContent}
-            >
-              {'FAQ'}
-            </Button>
-          </CenterContainer>
+      <BackButton onPress={goBack} />
+      <View style={styles.mainContainer}>
+        <Spacer.md />
+        <View style={styles.centerContainer}>
+          <Icons.LiviinLogo />
+          <StyledText.H4
+            color={theme.colors.background}
+            translationKey={getTransKey('heading')}
+          />
         </View>
-      </KeyboardAwareScrollView>
+        <Spacer.md />
+        <OutlinedButton
+          onPress={registerWithApple}
+          color={theme.colors.background}
+          svgIconLeft={<Icons.AppleLogo />}
+          style={styles.outlinedButtonStyles}
+          translationKey={getTransKey('continueWithApple')}
+        />
+        <Spacer.sm />
+        <OutlinedButton
+          onPress={registerWithGoogle}
+          color={theme.colors.background}
+          svgIconLeft={<Icons.GoogleLogo />}
+          style={styles.outlinedButtonStyles}
+          translationKey={getTransKey('continueWithGoogle')}
+        />
+        <Spacer.sm />
+        <OutlinedButton
+          onPress={registerWithEmail}
+          svgIconLeft={<Icons.Email />}
+          color={theme.colors.background}
+          style={styles.outlinedButtonStyles}
+          translationKey={getTransKey('continueWithEmail')}
+        />
+        <Spacer.sm />
+        <View style={styles.container}>
+          <Checkbox.Item
+            label=''
+            mode="android"
+            uncheckedColor={theme.colors.white}
+            color={theme.colors.background}
+            status={checked ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setChecked(!checked);
+            }}
+          />
+          <Text style={styles.text}>
+            I accept{' '}
+            <Text style={styles.underline} onPress={handleLinkPress}>
+              Terms & Conditions
+            </Text>
+          </Text>
+        </View>
+        <Spacer.xl />
+      </View>
+      <View style={styles.footerContainer}>
+        <TouchableOpacity onPress={handleLoginPress}>
+          <Text style={styles.loginText}>
+            Already have an account? <Text style={styles.underline}>Login</Text>
+          </Text>
+        </TouchableOpacity>
+        <Spacer.md />
+        <Button
+          mode="contained"
+          onPress={onPressFaq}
+          style={styles.button}
+          labelStyle={styles.label}
+          contentStyle={styles.buttonContent}
+        >
+          {'FAQ'}
+        </Button>
+      </View>
     </BackgroundLayout>
   );
 };
@@ -123,29 +127,38 @@ export const Register = ({ navigation }) => {
 const styles = StyleSheet.create({
   mainContainer: {
     marginTop: 50,
+    textAlign: 'center',
   },
   textStyle: {
-    color: 'white',
+    color: theme.colors.white,
   },
   container: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  centerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '40%',
   },
   text: {
     fontSize: 16,
-    color: 'white',
+    color: theme.colors.white,
   },
   underline: {
     textDecorationLine: 'underline',
-    color: 'white',
+    color: theme.colors.white,
   },
   loginText: {
     fontSize: 16,
-    color: 'white',
+    color: theme.colors.white,
   },
   button: {
     borderRadius: 22,
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.white,
+    width: 78,
+    height: 38,
   },
   buttonContent: {
     height: 40,
@@ -153,4 +166,23 @@ const styles = StyleSheet.create({
   label: {
     color: '#4E5C4F',
   },
+  outlinedButtonStyles: {
+    borderWidth: 1,
+    borderColor: theme.colors.white,
+    borderRadius: 35,
+    height: 37,
+    width: 320,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingLeft: 35,
+  },
+  footerContainer: {
+    position: 'absolute',
+    bottom: 10,
+    left: 0,
+    right: 0,
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });

@@ -38,7 +38,6 @@ export const Landing = ({ navigation }) => {
     <BackgroundLayout>
       <View style={styles.parentContainer}>
         <Icons.LiviinLogo />
-        {/* <Text style={{color: 'white'}}>{t('welcome')}</Text> */}
         <View style={styles.menuContainer}>
           <Menu
             visible={visible}
