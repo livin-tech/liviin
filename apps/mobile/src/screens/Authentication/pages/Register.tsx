@@ -11,6 +11,7 @@ import {
   StyledText,
   BackButton,
   OutlinedButton,
+  ConfirmationModal,
 } from '../../../components';
 import { RouteNavigators, Routes } from '../../../navigation';
 
@@ -19,21 +20,22 @@ const getTransKey = (key) => `authentication.register.${key}`;
 
 export const Register = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const goBack = () => {
     navigation.goBack();
   };
 
   const registerWithApple = () => {
-    navigation.navigate(RouteNavigators.WithSafeAreaNavigator);
+    setOpenModal(true);
   };
 
   const registerWithGoogle = () => {
-    navigation.navigate(RouteNavigators.WithSafeAreaNavigator);
+    setOpenModal(true);
   };
 
   const registerWithEmail = () => {
-    navigation.navigate(RouteNavigators.WithSafeAreaNavigator);
+    setOpenModal(true);
   };
 
   const handleLoginPress = () => {
@@ -85,7 +87,7 @@ export const Register = ({ navigation }) => {
         <Spacer.sm />
         <View style={styles.container}>
           <Checkbox.Item
-            label=''
+            label=""
             mode="android"
             uncheckedColor={theme.colors.white}
             color={theme.colors.background}
@@ -120,6 +122,22 @@ export const Register = ({ navigation }) => {
           {'FAQ'}
         </Button>
       </View>
+      <ConfirmationModal
+        show={openModal}
+        dismissText={null}
+        confirmText="Continue"
+        onConfirm={() => {
+          setOpenModal(false);
+          navigation.navigate(RouteNavigators.WithSafeAreaNavigator);
+        }}
+        onDismiss={() => setOpenModal(false)}
+        headline="Hello!"
+      >
+        <StyledText style={{ textAlign: 'center' }}>
+          Thank you for registering. You will receive the confirmation email
+          soon.
+        </StyledText>
+      </ConfirmationModal>
     </BackgroundLayout>
   );
 };
