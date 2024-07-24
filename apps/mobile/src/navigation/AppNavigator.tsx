@@ -12,6 +12,7 @@ import {
   Register,
   OnBoardingNavigation,
   ForgotPassword,
+  HomeNavigation,
 } from '../screens';
 import { theme } from '../theme';
 
@@ -34,6 +35,12 @@ const WithSafeAreaNavigator = () => {
           options={noHeader}
           component={OnBoardingNavigation}
           name={Routes.OnBoarding}
+        />
+
+        <StackWithSafeArea.Screen
+          options={noHeader}
+          component={HomeNavigation}
+          name={Routes.Home}
         />
         {/* Add more screens with SafeAreaView here */}
       </StackWithSafeArea.Navigator>

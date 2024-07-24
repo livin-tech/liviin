@@ -8,6 +8,7 @@ import { RightArrow } from './RightArrow';
 import { LiviinLogo } from './LiviinLogo';
 import { MeasureTape } from './MeasureTape';
 import { ArrowDownSmall } from './ArrowDownSmall';
+import { CalendarLogo } from './CalendarLogo';
 
 export const Icons = {
   Bed,
@@ -17,6 +18,7 @@ export const Icons = {
   LeftArrow,
   GoogleLogo,
   LiviinLogo,
+  CalendarLogo,
   RightArrow,
   MeasureTape,
   ArrowDownSmall,

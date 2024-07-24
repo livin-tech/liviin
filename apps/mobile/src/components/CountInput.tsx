@@ -1,15 +1,25 @@
 import { TouchableOpacity, View, Text } from 'react-native';
 import { StyleSheet, TextInput } from 'react-native';
 import { theme } from '../theme';
+import { useEffect, useState } from 'react';
 
-export const CountInput = () => {
+export const CountInput = ({ onValueChange }: any) => {
+  const [count, setCount] = useState('0');
+
+  useEffect(() => {
+    onValueChange && onValueChange(count);
+  }, [count]);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => {
+        const val  = Number.parseInt(count);
+        !!val && setCount((val - 1).toString())
+      }}>
         <Text style={{ color: '#FFF' }}>-</Text>
       </TouchableOpacity>
-      <TextInput style={styles.input} defaultValue="0" />
-      <TouchableOpacity style={styles.button}>
+      <TextInput onBlur={() => !count && setCount('0')} maxLength={3} keyboardType="numeric" style={styles.input} value={count} onChangeText={(e) => setCount(e)} />
+      <TouchableOpacity style={styles.button} onPress={() => setCount((Number.parseInt(count) + 1).toString())}>
         <Text style={{ color: '#FFF' }}>+</Text>
       </TouchableOpacity>
     </View>

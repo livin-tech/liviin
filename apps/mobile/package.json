@@ -2,6 +2,9 @@
   "name": "mobile",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "fix-lint": "npx prettier --write src"
+  },
   "dependencies": {
     "@nx/react": "*",
     "@nx/webpack": "*",
@@ -15,6 +18,8 @@
     "add": "^2.0.6",
     "i18next": "*",
     "intl-pluralrules": "^2.0.1",
+    "lottie-ios": "4.4.1",
+    "lottie-react-native": "^6.7.2",
     "metro-config": "*",
     "react": "*",
     "react-dom": "*",

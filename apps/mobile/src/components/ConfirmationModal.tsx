@@ -1,12 +1,16 @@
 import React from 'react';
 import { Button, Divider, Headline, Modal, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
+import { HorizontalLayout } from '../layouts/HorizontalLayout';
 
 export function ConfirmationModal({
   show,
   onDismiss,
   onConfirm,
   children,
+  dismissText = 'Cancel',
+  confirmText = 'Confirm',
+  headline = 'Ready!',
 }: any) {
   return (
     <Modal
@@ -15,17 +19,28 @@ export function ConfirmationModal({
       contentContainerStyle={styles.container}
     >
       <Headline style={{ textAlign: 'center', fontFamily: 'Baskervville' }}>
-        Ready!
+        {headline}
       </Headline>
       <Divider style={{ marginVertical: 8 }} />
       {children}
-      <Button
-        mode="contained"
-        style={{ borderRadius: 20, marginTop: 16 }}
-        onPress={onConfirm}
-      >
-        Continue
-      </Button>
+      <HorizontalLayout style={{ justifyContent: 'space-evenly' }}>
+        {dismissText && (
+          <Button
+            mode="contained"
+            style={{ borderRadius: 20, marginTop: 16 }}
+            onPress={onDismiss}
+          >
+            {dismissText}
+          </Button>
+        )}
+        <Button
+          mode="contained"
+          style={{ borderRadius: 20, marginTop: 16 }}
+          onPress={onConfirm}
+        >
+          {confirmText}
+        </Button>
+      </HorizontalLayout>
     </Modal>
   );
 }
