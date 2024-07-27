@@ -1,31 +1,36 @@
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Touchable, TouchableOpacity, View } from 'react-native';
 import { ScreenLayout } from '../../layouts';
-import { Text } from 'react-native-paper';
+import { Caption, Paragraph, Subheading, Text } from 'react-native-paper';
 import React, { useState } from 'react';
 import { Icons } from '../../assets';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { HorizontalLayout } from '../../layouts/HorizontalLayout';
-import { ConfirmationModal } from '../../components/ConfirmationModal';
+import { ConfirmationModal } from '../../components';
 import { CenterContainer } from '../../components';
+import { PropertyList } from './property-list/PropertyList';
+import { Routes } from '../../navigation';
 
 export function Home({ navigation }) {
+  // const navigation = useNavigation();
   const [openModal, setOpenModal] = useState(true);
 
   return (
     <ScreenLayout headerTitle="">
-      <KeyboardAwareScrollView>
-        <View style={styles.mainContainer}>
-          <CenterContainer>
-            <HorizontalLayout>
-              <Icons.CalendarLogo />
-              <View style={styles.calenderTitle}>
-                <Text style={styles.header}>View Calendar</Text>
-                <Text>{`(for all your properties)`}</Text>
-              </View>
-            </HorizontalLayout>
-          </CenterContainer>
-        </View>
-      </KeyboardAwareScrollView>
+      <CenterContainer direction='vertical'>
+
+        <TouchableOpacity onPress={() => navigation.navigate(Routes.Calendar)}>
+          <HorizontalLayout style={styles.calender}>
+            <Icons.CalendarLogo/>
+            <View style={styles.calenderTitle}>
+              <Subheading>View Calendar</Subheading>
+              <Caption>{`(for all your properties)`}</Caption>
+            </View>
+          </HorizontalLayout>
+        </TouchableOpacity>
+
+        <PropertyList />
+
+      </CenterContainer>
+
       <ConfirmationModal
         show={openModal}
         dismissText={null}
@@ -34,7 +39,7 @@ export function Home({ navigation }) {
         onDismiss={() => setOpenModal(false)}
         headline="Done!"
       >
-        <Text style={{ textAlign: 'center' }}>Property created!</Text>
+        <Text style={{textAlign: 'center'}}>Property created!</Text>
       </ConfirmationModal>
     </ScreenLayout>
   );
@@ -49,7 +54,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  calender: {
+    marginVertical: 16,
+  },
   calenderTitle: {
     marginLeft: 10,
+    alignItems: 'center',
   },
 });

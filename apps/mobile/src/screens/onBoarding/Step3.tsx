@@ -1,5 +1,4 @@
 import {
-  Alert,
   Image,
   StyleSheet,
   Text,
@@ -7,9 +6,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ScreenLayout } from '../../layouts/ScreenLayout';
+import { ScreenLayout } from '../../layouts';
 import {
-  Button,
+  Button, Caption,
   Checkbox,
   Divider,
   Menu,
@@ -26,11 +25,11 @@ import { Icons, Images } from '../../assets';
 import QuestionItem from '../../components/QuestionItem';
 import { HorizontalLayout } from '../../layouts/HorizontalLayout';
 import DatePicker from 'react-native-date-picker';
-import { ConfirmationModal } from '../../components/ConfirmationModal';
+import { ConfirmationModal } from '../../components';
 import Sofa from '../../assets/icons/Sofa';
 import { LANGS } from '../../utils';
 
-export function Step3({ navigation }) {
+export function Step3({navigation}) {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const ref = useRef<TextInput>();
@@ -45,13 +44,13 @@ export function Step3({ navigation }) {
   return (
     <ScreenLayout headerTitle="Question 2">
       <KeyboardAwareScrollView>
-        <View style={{ alignItems: 'center' }}>
-          <View style={{ width: 200, marginVertical: 16 }}>
-            <ProgressBar progress={0.5} color={theme.colors.primary} />
+        <View style={{alignItems: 'center'}}>
+          <View style={{width: 200, marginVertical: 16}}>
+            <ProgressBar progress={0.5} color={theme.colors.primary}/>
           </View>
         </View>
-        <Image source={Images.Couch} />
-        <Subheading style={{ marginVertical: 16 }}>
+        <Image source={Images.Couch}/>
+        <Subheading style={{marginVertical: 16}}>
           This is the description about why cleaning of household items is
           important.
         </Subheading>
@@ -81,7 +80,7 @@ export function Step3({ navigation }) {
                   style={styles.buttonContainer}
                 >
                   <Text style={styles.marginRight}>{meter}</Text>
-                  <Icons.ArrowDownSmall />
+                  <Icons.ArrowDownSmall/>
                 </TouchableOpacity>
               }
             >
@@ -94,7 +93,7 @@ export function Step3({ navigation }) {
                     }}
                     title={lang}
                   />
-                  {index < LANGS.length - 1 && <Divider />}
+                  {index < LANGS.length - 1 && <Divider/>}
                 </React.Fragment>
               ))}
             </Menu>
@@ -115,12 +114,12 @@ export function Step3({ navigation }) {
           }
           heading="When was the last cleaning?"
         >
-          <HorizontalLayout style={{ marginTop: 24, marginBottom: 8 }}>
-            <Divider style={{ flex: 1 }} />
-            <Subheading style={{ marginHorizontal: 12 }}>OR</Subheading>
-            <Divider style={{ flex: 1 }} />
+          <HorizontalLayout style={{marginTop: 24, marginBottom: 8}}>
+            <Divider style={{flex: 1}}/>
+            <Subheading style={{marginHorizontal: 12}}>OR</Subheading>
+            <Divider style={{flex: 1}}/>
           </HorizontalLayout>
-          <HorizontalLayout style={{ justifyContent: 'center' }}>
+          <HorizontalLayout style={{justifyContent: 'center'}}>
             <Checkbox.Android
               color={theme.colors.primary}
               status={checkboxValue}
@@ -155,29 +154,33 @@ export function Step3({ navigation }) {
           mode="date"
         />
       </KeyboardAwareScrollView>
+
       <ConfirmationModal
         show={openModal}
         onDismiss={() => setOpenModal(false)}
         onConfirm={() => navigation.navigate('Home')}
         dismissText="Ignore"
         confirmText="Add"
+        headline="Add Contact"
       >
-        <Paragraph style={{ textAlign: 'center' }}>
+        <Paragraph>
           Please enter the phone number and name of the person who will be
           notified for this property.
         </Paragraph>
+        <Caption style={{ fontSize: 10 }}>The person will be notified via SMS or WhatsApp.</Caption>
         <TextInput
           style={{
-            backgroundColor: theme.colors.accent,
+            backgroundColor: theme.colors.accentLight,
             borderRadius: 10,
             padding: 8,
             marginVertical: 8,
+            marginTop: 16
           }}
           placeholder="+1 999-999-9999"
         />
         <TextInput
           style={{
-            backgroundColor: theme.colors.accent,
+            backgroundColor: theme.colors.accentLight,
             borderRadius: 10,
             padding: 8,
             marginVertical: 8,

@@ -2,7 +2,10 @@
   "name": "@liviin/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "pod": "nx run mobile:pod-install",
+    "start": "nx run mobile:start"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^10.0.2",

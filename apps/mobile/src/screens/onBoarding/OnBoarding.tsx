@@ -13,7 +13,7 @@ export function OnBoarding({ children }: OnBoardingProps) {
   return (
     <ScreenLayout headerTitle="Your property is...">
       {/*<KeyboardAwareScrollView>*/}
-      <View style={{ flex: 1, borderColor: 'red', borderWidth: 1 }}>
+      <View style={{ flex: 1 }}>
         <View style={{ alignItems: 'center' }}>
           <View style={{ width: 200, marginVertical: 16 }}>
             <ProgressBar progress={0.5} color={theme.colors.primary} />

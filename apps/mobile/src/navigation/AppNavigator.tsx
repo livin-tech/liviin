@@ -15,6 +15,9 @@ import {
   HomeNavigation,
 } from '../screens';
 import { theme } from '../theme';
+import { CalendarScreen } from '../screens/Calendar/Calendar';
+import { TasksScreen } from '../screens/Tasks/Tasks';
+// import { DrawerNavigation } from './DrawerNavigation';
 
 // Navigation Options
 const noHeader = {
@@ -41,6 +44,18 @@ const WithSafeAreaNavigator = () => {
           options={noHeader}
           component={HomeNavigation}
           name={Routes.Home}
+        />
+
+        <StackWithSafeArea.Screen
+          options={noHeader}
+          component={CalendarScreen}
+          name={Routes.Calendar}
+        />
+
+        <StackWithSafeArea.Screen
+          options={noHeader}
+          component={TasksScreen}
+          name={Routes.Tasks}
         />
         {/* Add more screens with SafeAreaView here */}
       </StackWithSafeArea.Navigator>

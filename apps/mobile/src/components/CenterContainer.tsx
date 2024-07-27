@@ -3,22 +3,20 @@ import { View, StyleSheet, ViewStyle } from 'react-native';
 
 interface CenterContainerProps {
   children: React.ReactNode;
-  horizontal?: boolean;
-  vertical?: boolean;
+  direction: 'horizontal' | 'vertical';
   style?: ViewStyle; // Additional style prop for flexibility
 }
 
 export const CenterContainer: React.FC<CenterContainerProps> = ({
   children,
-  horizontal = false,
-  vertical = false,
+  direction,
   style,
 }) => {
   // Conditionally apply justifyContent and alignItems based on props
   const containerStyles = [
     styles.container,
-    horizontal && { justifyContent: 'center' },
-    vertical && { alignItems: 'center' },
+    direction === 'horizontal' && { justifyContent: 'center' },
+    direction === 'vertical' && { alignItems: 'center' },
     ...(Array.isArray(style) ? style : [style]), // Handle both single and array styles
   ];
 
@@ -26,7 +24,5 @@ export const CenterContainer: React.FC<CenterContainerProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
 });

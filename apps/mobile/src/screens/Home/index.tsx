@@ -1,10 +1,10 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Home } from './Home';
-import React, { useEffect } from 'react';
 import LottieView from 'lottie-react-native';
-import { setTimeout } from '@testing-library/react-native/build/helpers/timers';
+import React, { useEffect } from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Home } from './Home';
+import { AppBar } from './AppBar';
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export const HomeNavigation = () => {
   const [visible, setVisibility] = React.useState(true);
@@ -24,12 +24,14 @@ export const HomeNavigation = () => {
   }
 
   return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Home"
-        component={Home}
-      />
-    </Stack.Navigator>
+    <Drawer.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        header: ({ navigation }) => <AppBar navigation={navigation} />,
+      }}
+    >
+      <Drawer.Screen name="Home" component={Home} />
+      {/*<Drawer.Screen name="Settings" component={SettingsScreen} />*/}
+    </Drawer.Navigator>
   );
 };

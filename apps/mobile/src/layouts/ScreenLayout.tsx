@@ -7,7 +7,7 @@ export const ScreenLayout = ({ headerTitle, children }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Header headerTitle={headerTitle} />
+        {headerTitle && <Header headerTitle={headerTitle} />}
       </View>
       {children}
     </View>

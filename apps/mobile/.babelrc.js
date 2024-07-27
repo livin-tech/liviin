@@ -6,6 +6,9 @@ module.exports = function (api) {
     presets: [
       ['module:@react-native/babel-preset', { useTransformReactJSX: true }],
     ],
+    plugins: [
+      'react-native-reanimated/plugin'
+    ],
     env: {
       production: {
         plugins: ['react-native-paper/babel'],
