@@ -7,7 +7,8 @@ import {
   Switch,
   TextInput as PaperInput,
   Checkbox,
-  Paragraph, Divider,
+  Paragraph,
+  Divider,
 } from 'react-native-paper';
 import React, { useRef, useState } from 'react';
 import { Images } from '../../assets';
@@ -24,7 +25,9 @@ export function Step2({ navigation }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<TextInput>();
   const [switchValue, setSwitchValue] = useState(false);
-  const [checkboxValue, setCheckboxValue] = useState<'checked' | 'unchecked'>('unchecked');
+  const [checkboxValue, setCheckboxValue] = useState<'checked' | 'unchecked'>(
+    'unchecked'
+  );
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -42,7 +45,13 @@ export function Step2({ navigation }) {
         <QuestionItem.Item
           icon={Wind}
           text="Do you have an AC?"
-          input={() => <Switch color={theme.colors.primary} value={switchValue} onValueChange={(val) => setSwitchValue(val)} />}
+          input={() => (
+            <Switch
+              color={theme.colors.primary}
+              value={switchValue}
+              onValueChange={(val) => setSwitchValue(val)}
+            />
+          )}
         />
 
         <QuestionItem.Item text="How many AC(s)?" />
@@ -67,7 +76,15 @@ export function Step2({ navigation }) {
             <Divider style={{ flex: 1 }} />
           </HorizontalLayout>
           <HorizontalLayout style={{ justifyContent: 'center' }}>
-            <Checkbox.Android color={theme.colors.primary} status={checkboxValue} onPress={() => setCheckboxValue(checkboxValue === 'checked' ? 'unchecked' : 'checked')} />
+            <Checkbox.Android
+              color={theme.colors.primary}
+              status={checkboxValue}
+              onPress={() =>
+                setCheckboxValue(
+                  checkboxValue === 'checked' ? 'unchecked' : 'checked'
+                )
+              }
+            />
             <Paragraph>Never</Paragraph>
           </HorizontalLayout>
         </QuestionItem.ItemTextInput>
@@ -98,7 +115,7 @@ export function Step2({ navigation }) {
         onDismiss={() => setOpenModal(false)}
         onConfirm={() => navigation.navigate('Step3')}
       >
-        <Paragraph style={{ textAlign: 'center'}}>
+        <Paragraph style={{ textAlign: 'center' }}>
           We’re almost done. Now let’s continue with cleanup and we’re done.
         </Paragraph>
       </ConfirmationModal>

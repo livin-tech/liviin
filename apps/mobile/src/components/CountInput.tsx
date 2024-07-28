@@ -12,14 +12,27 @@ export const CountInput = ({ onValueChange }: any) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={() => {
-        const val  = Number.parseInt(count);
-        !!val && setCount((val - 1).toString())
-      }}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          const val = Number.parseInt(count);
+          !!val && setCount((val - 1).toString());
+        }}
+      >
         <Text style={{ color: '#FFF' }}>-</Text>
       </TouchableOpacity>
-      <TextInput onBlur={() => !count && setCount('0')} maxLength={3} keyboardType="numeric" style={styles.input} value={count} onChangeText={(e) => setCount(e)} />
-      <TouchableOpacity style={styles.button} onPress={() => setCount((Number.parseInt(count) + 1).toString())}>
+      <TextInput
+        onBlur={() => !count && setCount('0')}
+        maxLength={3}
+        keyboardType="numeric"
+        style={styles.input}
+        value={count}
+        onChangeText={(e) => setCount(e)}
+      />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => setCount((Number.parseInt(count) + 1).toString())}
+      >
         <Text style={{ color: '#FFF' }}>+</Text>
       </TouchableOpacity>
     </View>

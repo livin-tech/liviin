@@ -15,11 +15,10 @@ export function Home({ navigation }) {
 
   return (
     <ScreenLayout headerTitle="">
-      <CenterContainer direction='vertical'>
-
+      <CenterContainer direction="vertical">
         <TouchableOpacity onPress={() => navigation.navigate(Routes.Calendar)}>
           <HorizontalLayout style={styles.calender}>
-            <Icons.CalendarLogo/>
+            <Icons.CalendarLogo />
             <View style={styles.calenderTitle}>
               <Subheading>View Calendar</Subheading>
               <Caption>{`(for all your properties)`}</Caption>
@@ -28,7 +27,6 @@ export function Home({ navigation }) {
         </TouchableOpacity>
 
         <PropertyList />
-
       </CenterContainer>
 
       <ConfirmationModal
@@ -39,7 +37,7 @@ export function Home({ navigation }) {
         onDismiss={() => setOpenModal(false)}
         headline="Done!"
       >
-        <Text style={{textAlign: 'center'}}>Property created!</Text>
+        <Text style={{ textAlign: 'center' }}>Property created!</Text>
       </ConfirmationModal>
     </ScreenLayout>
   );

@@ -43,7 +43,7 @@ export function Step1({ navigation }) {
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
+                  justifyContent: 'space-evenly',
                 }}
               >
                 <Checkbox.Item
@@ -52,6 +52,7 @@ export function Step1({ navigation }) {
                   label="House"
                   status={type === 'APT' ? 'checked' : 'unchecked'}
                   onPress={() => setType('APT')}
+                  position="leading"
                 />
                 <Checkbox.Item
                   mode="android"
@@ -59,6 +60,7 @@ export function Step1({ navigation }) {
                   label="Apartment"
                   status={type === 'HSE' ? 'checked' : 'unchecked'}
                   onPress={() => setType('HSE')}
+                  position="leading"
                 />
               </View>
             </Card.Content>

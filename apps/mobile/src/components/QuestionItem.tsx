@@ -40,14 +40,12 @@ function Item({
             <Paragraph style={styles.text}>{text}</Paragraph>
             {children}
           </View>
-          {
-            (Input.name === 'CountInput') ? (
-              // @ts-ignore
-              <Input onValueChange={onInputValueChange} />
-            ) : (
-              Input()
-            )
-          }
+          {Input.name === 'CountInput' ? (
+            // @ts-ignore
+            <Input onValueChange={onInputValueChange} />
+          ) : (
+            Input()
+          )}
         </View>
       </Card.Content>
     </Card>

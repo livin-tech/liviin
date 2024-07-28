@@ -16,28 +16,32 @@ export const OnBoardingNavigation = () => {
 
   if (visible) {
     return (
-      <LottieView style={{width: '100%', height: '100%'}} source={require('../../assets/animations/loading.json')}
-                  autoPlay loop/>
+      <LottieView
+        style={{ width: '100%', height: '100%' }}
+        source={require('../../assets/animations/loading.json')}
+        autoPlay
+        loop
+      />
     );
   }
 
   return (
     <Stack.Navigator initialRouteName="Step1">
       <Stack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="Step1"
         component={Step1}
       />
       <Stack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="Step2"
         component={Step2}
       />
       <Stack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="Step3"
         component={Step3}
       />
     </Stack.Navigator>
   );
-}
+};

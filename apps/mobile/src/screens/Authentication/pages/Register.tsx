@@ -202,5 +202,5 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });

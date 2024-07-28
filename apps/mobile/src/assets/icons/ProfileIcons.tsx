@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { G, Rect, Path, Defs, ClipPath } from "react-native-svg"
+import * as React from 'react';
+import Svg, { G, Rect, Path, Defs, ClipPath } from 'react-native-svg';
 
 function ProfileIcon(props) {
   return (
@@ -37,7 +37,7 @@ function ProfileIcon(props) {
         </ClipPath>
       </Defs>
     </Svg>
-  )
+  );
 }
 
 export default ProfileIcon;

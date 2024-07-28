@@ -75,7 +75,7 @@ export const StyledButton: React.FC<StyledButtonProps> = ({
   const combinedStyles = [
     styles[`${variant}Button` as keyof typeof styles], // Access variant styles dynamically
     props.style,
-  ]
+  ];
 
   return (
     <PaperButton

@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { Circle, Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Circle, Path } from 'react-native-svg';
 
 function CalendarRound(props) {
   return (
@@ -35,7 +35,7 @@ function CalendarRound(props) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
 export default CalendarRound;

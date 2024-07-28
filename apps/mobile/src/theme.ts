@@ -8,7 +8,7 @@ export const theme = {
     accent: '#D2D8BE',
     accentLight: 'rgba(78, 92, 79, 0.1)',
     background: '#FFFFFF',
-    white: '#FFFFFF'
+    white: '#FFFFFF',
   },
   fonts: configureFonts({
     ios: {
