@@ -34,8 +34,8 @@ export function Step2({ navigation }) {
     <ScreenLayout headerTitle="Question 1">
       <KeyboardAwareScrollView>
         <View style={{ alignItems: 'center' }}>
-          <View style={{ width: 200, marginVertical: 16 }}>
-            <ProgressBar progress={0.5} color={theme.colors.primary} />
+          <View style={{ width: 200, marginTop: 16, marginBottom: 32 }}>
+            <ProgressBar progress={0.33} color={theme.colors.primary} />
           </View>
         </View>
         <Image source={Images.AC} />

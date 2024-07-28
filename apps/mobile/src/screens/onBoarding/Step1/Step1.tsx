@@ -29,8 +29,8 @@ export function Step1({ navigation }) {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View>
           <View style={{ alignItems: 'center' }}>
-            <View style={{ width: 200, marginVertical: 16 }}>
-              <ProgressBar progress={0.5} color={theme.colors.primary} />
+            <View style={{ width: 200, marginTop: 16, marginBottom: 32 }}>
+              <ProgressBar progress={0} color={theme.colors.primary} />
             </View>
           </View>
           <Subheading>

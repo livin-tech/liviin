@@ -47,7 +47,7 @@ export function Step3({ navigation }) {
       <KeyboardAwareScrollView>
         <View style={{ alignItems: 'center' }}>
           <View style={{ width: 200, marginVertical: 16 }}>
-            <ProgressBar progress={0.5} color={theme.colors.primary} />
+            <ProgressBar progress={0.66} color={theme.colors.primary} />
           </View>
         </View>
         <Image source={Images.Couch} />
