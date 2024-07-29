@@ -5,7 +5,10 @@ import { Home } from './Home';
 import { AppBar } from './AppBar';
 import { Terms } from '../terms/Terms';
 import { Routes } from '../../navigation';
-import { Header } from '../../layouts';
+import { Drawer as PaperDrawer } from 'react-native-paper';
+import { theme } from '../../theme';
+import { Profile } from '../profile/Profile';
+import { FAQs } from '../FAQs/FAQs';
 
 const Drawer = createDrawerNavigator();
 
@@ -35,12 +38,13 @@ export const HomeNavigation = () => {
             return <AppBar navigation={navigation} />;
           }
           return null;
-          // return <Header headerTitle="" />;
         },
+        drawerActiveTintColor: theme.colors.primary,
       }}
     >
       <Drawer.Screen name={Routes.Home} component={Home} />
-      <Drawer.Screen name={Routes.Terms} component={Terms}  />
+      <Drawer.Screen name={Routes.Terms} component={Terms} />
+      <Drawer.Screen name={Routes.FAQs} component={FAQs} />
     </Drawer.Navigator>
   );
 };

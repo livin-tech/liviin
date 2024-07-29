@@ -2,6 +2,7 @@ import { Image, TouchableOpacity, View } from 'react-native';
 import { MenuIcon } from '../../assets/icons/MenuIcon';
 import ProfileIcon from '../../assets/icons/ProfileIcons';
 import { Images } from '../../assets';
+import { Routes } from '../../navigation';
 
 export function AppBar({ navigation }) {
   return (
@@ -17,8 +18,12 @@ export function AppBar({ navigation }) {
       <TouchableOpacity onPress={() => navigation.openDrawer()}>
         <MenuIcon />
       </TouchableOpacity>
+
       <Image source={Images.Logo} />
-      <ProfileIcon />
+
+      <TouchableOpacity onPress={() => navigation.navigate(Routes.Profile)}>
+        <ProfileIcon />
+      </TouchableOpacity>
     </View>
   );
 }

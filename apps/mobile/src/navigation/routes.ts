@@ -8,7 +8,9 @@ export const RoutesWithSafeAreaView = {
   Login: 'Login',
   Register: 'Register',
   ForgotPassword: 'ForgotPassword',
-  Terms: 'Terms'
+  Terms: 'Terms',
+  Profile: 'Profile',
+  FAQs: 'FAQs',
 };
 
 export const RoutesWithoutSafeAreaView = {
