@@ -42,7 +42,6 @@ export function CalendarScreen({ navigation }) {
     setSelected(PROPERTY_DATA_MOCK[selectProperty]);
   }, [selectProperty]);
 
-  console.log(markedDates);
 
   return (
     <ScreenLayout headerTitle="Maintenance calendar">

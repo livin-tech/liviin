@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-function Wind(props) {
+export function Wind(props) {
   return (
     <Svg
       width={33}

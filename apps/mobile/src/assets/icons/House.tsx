@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
-function House(props) {
+export const House = (props) => {
   return (
     <Svg
       width={45}
