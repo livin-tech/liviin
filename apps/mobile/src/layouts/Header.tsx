@@ -4,7 +4,7 @@ import { Headline } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-export const Header = ({ headerTitle }) => {
+export const Header = ({ headerTitle, right }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -15,6 +15,7 @@ export const Header = ({ headerTitle }) => {
         <Icons.LeftArrow />
       </TouchableOpacity>
       <Headline style={styles.heading}>{headerTitle}</Headline>
+      { right && right() }
     </View>
   );
 };

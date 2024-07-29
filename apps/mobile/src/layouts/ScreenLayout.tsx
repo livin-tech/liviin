@@ -1,13 +1,12 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Header } from './Header';
 import { theme } from '../theme';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-export const ScreenLayout = ({ headerTitle, children }) => {
+export const ScreenLayout = ({ headerTitle, children, right }: any) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {headerTitle && <Header headerTitle={headerTitle} />}
+        {headerTitle && <Header headerTitle={headerTitle} right={right} />}
       </View>
       {children}
     </View>
