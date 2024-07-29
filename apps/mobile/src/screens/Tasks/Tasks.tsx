@@ -9,6 +9,7 @@ import { TASKS_MOCK } from './mockData';
 
 // Components
 import { TaskCard } from './TaskCard';
+import { Routes } from '../../navigation';
 import { Spacer } from '../../components';
 import { ScreenLayout } from '../../layouts';
 
@@ -19,9 +20,7 @@ const TASK_TYPES = {
 
 const { MAINTENANCE, CLEANING } = TASK_TYPES;
 
-const renderItem = ({ item }) => <TaskCard card={item} />;
-
-export function TasksScreen({ route }) {
+export function TasksScreen({ navigation, route }) {
   const params = route.params as Record<string, string>;
   const headerTitle = params?.propertyName || 'House 1';
 
@@ -33,7 +32,15 @@ export function TasksScreen({ route }) {
     }
   };
 
-  const onAddTask = () => {};
+  const onAddTask =
+    (task = '') =>
+    () => {
+      navigation.navigate(Routes.AddTask, { task });
+    };
+
+  const renderItem = ({ item }) => (
+    <TaskCard key={item.id} card={item} onPress={onAddTask(item)} />
+  );
 
   return (
     <ScreenLayout headerTitle={headerTitle}>

@@ -18,7 +18,7 @@ import { theme } from '../theme';
 import { CalendarScreen } from '../screens/Calendar/Calendar';
 import { TasksScreen } from '../screens/Tasks/Tasks';
 import { Profile } from '../screens/profile/Profile';
-// import { DrawerNavigation } from './DrawerNavigation';
+import { AddTask } from '../screens/Tasks/AddTask';
 
 // Navigation Options
 const noHeader = {
@@ -40,31 +40,31 @@ const WithSafeAreaNavigator = () => {
           component={OnBoardingNavigation}
           name={Routes.OnBoarding}
         />
-
         <StackWithSafeArea.Screen
           options={noHeader}
           component={HomeNavigation}
           name={Routes.Home}
         />
-
         <StackWithSafeArea.Screen
           options={noHeader}
           component={CalendarScreen}
           name={Routes.Calendar}
         />
-
         <StackWithSafeArea.Screen
           options={noHeader}
           component={TasksScreen}
           name={Routes.Tasks}
         />
-
+        <StackWithSafeArea.Screen
+          options={noHeader}
+          component={AddTask}
+          name={Routes.AddTask}
+        />
         <StackWithSafeArea.Screen
           options={noHeader}
           component={Profile}
           name={Routes.Profile}
         />
-        {/* Add more screens with SafeAreaView here */}
       </StackWithSafeArea.Navigator>
     </SafeAreaView>
   );
@@ -95,7 +95,6 @@ const WithoutSafeAreaNavigator = () => {
         component={ForgotPassword}
         name={Routes.ForgotPassword}
       />
-      {/* Add more screens without SafeAreaView here */}
     </StackWithoutSafeArea.Navigator>
   );
 };

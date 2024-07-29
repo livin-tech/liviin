@@ -11,13 +11,14 @@ export const RoutesWithSafeAreaView = {
   Terms: 'Terms',
   Profile: 'Profile',
   FAQs: 'FAQs',
+  Tasks: 'Tasks',
+  AddTask: 'AddTask',
 };
 
 export const RoutesWithoutSafeAreaView = {
   OnBoarding: 'OnBoarding',
   Home: 'Home',
   Calendar: 'Calender',
-  Tasks: 'Tasks',
 };
 
 export const Routes = {

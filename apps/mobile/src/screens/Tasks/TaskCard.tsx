@@ -7,9 +7,10 @@ import { HorizontalLayout } from '../../layouts/HorizontalLayout';
 
 export const TaskCard = ({
   card: { title, createdAt, duration, isMaintenance },
+  onPress,
 }) => {
   return (
-    <Card style={styles.card}>
+    <Card style={styles.card} onPress={onPress}>
       <HorizontalLayout>
         <View style={styles.iconContainer}>
           <Icons.Clock />
@@ -30,8 +31,8 @@ export const TaskCard = ({
           <IconButton
             size={30}
             icon={Icons.Edit}
+            onPress={onPress}
             style={styles.editButton}
-            onPress={() => console.log('Edit pressed')}
           />
         </View>
       </HorizontalLayout>
