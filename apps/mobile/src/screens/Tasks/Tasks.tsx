@@ -33,7 +33,7 @@ export function TasksScreen({ navigation, route }) {
   };
 
   const onAddTask =
-    (task = '') =>
+    (task = {}) =>
     () => {
       navigation.navigate(Routes.AddTask, { task });
     };
@@ -89,7 +89,7 @@ export function TasksScreen({ navigation, route }) {
         keyExtractor={(item) => item?.id}
         showsVerticalScrollIndicator={false}
       />
-      <FAB style={styles.fab} icon={'plus'} onPress={onAddTask} />
+      <FAB style={styles.fab} icon={'plus'} onPress={onAddTask({})} />
     </ScreenLayout>
   );
 }

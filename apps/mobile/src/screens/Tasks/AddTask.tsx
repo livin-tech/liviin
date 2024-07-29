@@ -9,7 +9,7 @@ import { View } from 'react-native';
 export const AddTask = ({ route }) => {
   const task = route?.params?.task || {};
   return (
-    <ScreenLayout headerTitle={task?.title}>
+    <ScreenLayout headerTitle={task?.title || 'House 1'}>
       <View style={styles.headerIconContainer}>
         <Icons.HouseRound />
       </View>
