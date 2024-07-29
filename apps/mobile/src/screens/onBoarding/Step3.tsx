@@ -44,7 +44,7 @@ export function Step3({ navigation }) {
 
   return (
     <ScreenLayout headerTitle="Question 2">
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View style={{ alignItems: 'center' }}>
           <View style={{ width: 200, marginVertical: 16 }}>
             <ProgressBar progress={0.66} color={theme.colors.primary} />

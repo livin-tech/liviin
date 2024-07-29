@@ -1,23 +1,15 @@
-import {
-  Text,
-  Card,
-  Headline,
-  Paragraph,
-  TextInput,
-  TextInputProps,
-  DefaultTheme,
-} from 'react-native-paper';
+import { Card, Paragraph, TextInput, TextInputProps } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import { CountInput } from './CountInput';
 import React from 'react';
 import { theme as AppTheme } from '../theme';
-import { StyledText } from './StyledText';
 
 interface ItemProps {
-  icon?: React.ElementType;
-  text: string;
   children?: React.ReactNode;
-  input?: () => React.JSX.Element;
+  icon?: React.ElementType;
+  input?: React.FC;
+  onInputValueChange?: (value: string) => void;
+  text: string;
 }
 
 function Item({
@@ -26,7 +18,7 @@ function Item({
   input: Input = CountInput,
   onInputValueChange,
   children,
-}: any) {
+}: ItemProps) {
   return (
     <Card style={styles.card}>
       <Card.Content>
@@ -44,7 +36,7 @@ function Item({
             // @ts-ignore
             <Input onValueChange={onInputValueChange} />
           ) : (
-            Input()
+            <Input />
           )}
         </View>
       </Card.Content>

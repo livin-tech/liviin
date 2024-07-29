@@ -1,4 +1,10 @@
-import { StyleSheet, Image, View, type TextInput } from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  View,
+  type TextInput,
+  ScrollView,
+} from 'react-native';
 import { ScreenLayout } from '../../layouts';
 import {
   Button,
@@ -9,6 +15,7 @@ import {
   Checkbox,
   Paragraph,
   Divider,
+  Chip,
 } from 'react-native-paper';
 import React, { useRef, useState } from 'react';
 import { Images } from '../../assets';
@@ -29,10 +36,13 @@ export function Step2({ navigation }) {
     'unchecked'
   );
   const [openModal, setOpenModal] = useState(false);
+  const [roomCounter, setRoomCounter] = useState(0);
+  const [roomInput, setRoomInput] = useState('');
+  const [roomNames, setRoomNames] = useState<string[]>([]);
 
   return (
     <ScreenLayout headerTitle="Question 1">
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View style={{ alignItems: 'center' }}>
           <View style={{ width: 200, marginTop: 16, marginBottom: 32 }}>
             <ProgressBar progress={0.33} color={theme.colors.primary} />
@@ -54,7 +64,42 @@ export function Step2({ navigation }) {
           )}
         />
 
-        <QuestionItem.Item text="How many AC(s)?" />
+        <QuestionItem.Item
+          text="How many AC(s)?"
+          onInputValueChange={(count) => setRoomCounter(parseInt(count))}
+        />
+
+        {roomCounter > 1 ? (
+          <QuestionItem.ItemTextInput
+            placeholder="(optional)"
+            heading="Name of the room where your AC unit belongs to"
+            value={roomInput}
+            onChangeText={(val) => setRoomInput(val)}
+            onSubmitEditing={(e) => {
+              setRoomInput('');
+              setRoomNames([...roomNames, roomInput]);
+            }}
+          >
+            <ScrollView
+              horizontal
+              style={{ marginTop: 12 }}
+              showsHorizontalScrollIndicator={false}
+            >
+              {roomNames.map((item, i) => (
+                <Chip
+                  style={{ marginRight: 4 }}
+                  onPress={() => console.log('Pressed')}
+                  onClose={() =>
+                    setRoomNames(roomNames.filter((_, j) => j !== i))
+                  }
+                >
+                  {item}
+                </Chip>
+              ))}
+            </ScrollView>
+            <HorizontalLayout></HorizontalLayout>
+          </QuestionItem.ItemTextInput>
+        ) : null}
 
         <QuestionItem.ItemTextInput
           ref={ref}

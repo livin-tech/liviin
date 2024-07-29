@@ -23,9 +23,9 @@ export function PropertyList() {
       style={{ marginBottom: Dimensions.get('screen').height * 0.1 }}
     >
       {[1, 2, 3, 4, 5].map((x) => (
-        // @ts-ignore
         <TouchableOpacity
           onPress={() =>
+            // @ts-ignore
             navigation.navigate(Routes.Tasks, { propertyName: `Property ${x}` })
           }
         >
