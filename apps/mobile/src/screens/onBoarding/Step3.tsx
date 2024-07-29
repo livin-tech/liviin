@@ -159,7 +159,7 @@ export function Step3({ navigation }) {
       <ConfirmationModal
         show={openModal}
         onDismiss={() => setOpenModal(false)}
-        onConfirm={() => navigation.navigate('Home')}
+        onConfirm={() => navigation.replace('Home')}
         dismissText="Ignore"
         confirmText="Add"
         headline="Add Contact"
