@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
   },
   fab: {
     margin: 16,
-    right: 10,
-    bottom: 80,
+    right: 0,
+    bottom: 0,
     position: 'absolute',
     backgroundColor: theme.colors.primary,
   },

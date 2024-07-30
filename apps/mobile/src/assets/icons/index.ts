@@ -19,6 +19,7 @@ import { ApartmentIcon } from './ApartmentIcon';
 import { ArrowDownSmall } from './ArrowDownSmall';
 import { CleaningFilled } from './CleaningFilled';
 import { CleaningOutline } from './CleaningOutline';
+import { CheckmarkCircle } from './CheckmarkCircle';
 import { MaintenaceFilled } from './MaintenaceFilled';
 import { MaintenaceOutline } from './MaintenaceOutline';
 
@@ -43,6 +44,7 @@ export const Icons = {
   ArrowDownSmall,
   ApartmentIcon,
   CleaningFilled,
+  CheckmarkCircle,
   CleaningOutline,
   MaintenaceFilled,
   MaintenaceOutline,

@@ -11,6 +11,7 @@ export function ConfirmationModal({
   dismissText = 'Cancel',
   confirmText = 'Confirm',
   headline = 'Ready!',
+  showDivider = true,
 }: any) {
   return (
     <Modal
@@ -18,10 +19,12 @@ export function ConfirmationModal({
       onDismiss={onDismiss}
       contentContainerStyle={styles.container}
     >
-      <Headline style={{ textAlign: 'center', fontFamily: 'Baskervville' }}>
-        {headline}
-      </Headline>
-      <Divider style={{ marginVertical: 8 }} />
+      {headline ? (
+        <Headline style={{ textAlign: 'center', fontFamily: 'Baskervville' }}>
+          {headline}
+        </Headline>
+      ) : null}
+      {showDivider ? <Divider style={{ marginVertical: 8 }} /> : null}
       {children}
       <HorizontalLayout style={{ justifyContent: 'space-evenly' }}>
         {dismissText && (
