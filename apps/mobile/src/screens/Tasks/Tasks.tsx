@@ -44,9 +44,9 @@ export function TasksScreen({ navigation, route }) {
 
   return (
     <ScreenLayout headerTitle={headerTitle}>
-      <View style={styles.headerIconContainer}>
-        <Icons.HouseRound />
-      </View>
+      {/*<View style={styles.headerIconContainer}>*/}
+      {/*  <Icons.HouseRound />*/}
+      {/*</View>*/}
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
           <View style={styles.iconContainer}>
@@ -65,13 +65,15 @@ export function TasksScreen({ navigation, route }) {
           <View style={styles.divider} />
           <View style={styles.iconContainer}>
             <IconButton
+              // icon="water-check-outline"
               icon={
                 selectedType === CLEANING
-                  ? Icons.CleaningFilled
-                  : Icons.CleaningOutline
+                  ? 'water-check-outline'
+                  : 'water-check'
               }
+              color={selectedType === CLEANING ? 'white' : 'rgba(78, 92, 79, 0.5)'}
               size={40}
-              style={styles.cleaningButton}
+              style={[styles.cleaningButton, selectedType === CLEANING ? { backgroundColor: theme.colors.primary } : { borderWidth: .5, borderColor: 'rgba(78, 92, 79, 0.5)' }]}
               onPress={onChangeType(CLEANING)}
             />
             <Text style={styles.buttonText}>Cleaning</Text>
