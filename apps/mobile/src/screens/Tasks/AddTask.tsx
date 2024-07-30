@@ -44,9 +44,9 @@ export const AddTask = ({ route, navigation }) => {
   return (
     <ScreenLayout headerTitle={task?.title || 'House 1'}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.headerIconContainer}>
+        {/* <View style={styles.headerIconContainer}>
           <Icons.HouseRound />
-        </View>
+        </View> */}
         <Card style={styles.card}>
           <Card.Content>
             <Subheading style={{ textAlign: 'center' }}>
