@@ -9,7 +9,6 @@ import { AppleLogo } from './AppleLogo';
 import { WindRound } from './WindRound';
 import { LeftArrow } from './LeftArrow';
 import { CouchRound } from './CouchRound';
-import { HouseRound } from './HouseRound';
 import { GoogleLogo } from './GoogleLogo';
 import { RightArrow } from './RightArrow';
 import { LiviinLogo } from './LiviinLogo';
@@ -40,7 +39,6 @@ export const Icons = {
   CalendarLogo,
   RightArrow,
   MeasureTape,
-  HouseRound,
   ArrowDownSmall,
   ApartmentIcon,
   CleaningFilled,

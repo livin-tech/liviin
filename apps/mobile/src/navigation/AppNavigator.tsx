@@ -16,9 +16,8 @@ import {
 } from '../screens';
 import { theme } from '../theme';
 import { CalendarScreen } from '../screens/Calendar/Calendar';
-import { TasksScreen } from '../screens/Tasks/Tasks';
 import { Profile } from '../screens/profile/Profile';
-import { AddTask } from '../screens/Tasks/AddTask';
+import { Tasks, AddTask } from '../screens/Tasks';
 
 // Navigation Options
 const noHeader = {
@@ -52,7 +51,7 @@ const WithSafeAreaNavigator = () => {
         />
         <StackWithSafeArea.Screen
           options={noHeader}
-          component={TasksScreen}
+          component={Tasks}
           name={Routes.Tasks}
         />
         <StackWithSafeArea.Screen

@@ -2,8 +2,8 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Avatar, Card, IconButton } from 'react-native-paper';
 
 // Components
-import { Icons } from '../../assets';
-import { HorizontalLayout } from '../../layouts/HorizontalLayout';
+import { Icons } from '../../../assets';
+import { HorizontalLayout } from '../../../layouts/HorizontalLayout';
 
 export const TaskCard = ({
   card: { title, createdAt, duration, isMaintenance },

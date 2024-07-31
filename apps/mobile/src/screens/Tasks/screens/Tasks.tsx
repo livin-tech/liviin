@@ -3,15 +3,15 @@ import { FAB, IconButton } from 'react-native-paper';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
 
 // Utils
-import { theme } from '../../theme';
-import { Icons } from '../../assets';
-import { TASKS_MOCK } from './mockData';
+import { theme } from '../../../theme';
+import { Icons } from '../../../assets';
+import { TASKS_MOCK } from '../mocks/mockData';
 
 // Components
-import { TaskCard } from './TaskCard';
-import { Routes } from '../../navigation';
-import { Spacer } from '../../components';
-import { ScreenLayout } from '../../layouts';
+import { TaskCard } from '../components';
+import { Routes } from '../../../navigation';
+import { Spacer } from '../../../components';
+import { ScreenLayout } from '../../../layouts';
 
 const TASK_TYPES = {
   MAINTENANCE: 'MAINTENANCE',
@@ -20,7 +20,7 @@ const TASK_TYPES = {
 
 const { MAINTENANCE, CLEANING } = TASK_TYPES;
 
-export function TasksScreen({ navigation, route }) {
+export const Tasks = ({ navigation, route }) => {
   const params = route.params as Record<string, string>;
   const headerTitle = params?.propertyName || 'House 1';
 
@@ -44,9 +44,6 @@ export function TasksScreen({ navigation, route }) {
 
   return (
     <ScreenLayout headerTitle={headerTitle}>
-      {/*<View style={styles.headerIconContainer}>*/}
-      {/*  <Icons.HouseRound />*/}
-      {/*</View>*/}
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
           <View style={styles.iconContainer}>
@@ -71,9 +68,16 @@ export function TasksScreen({ navigation, route }) {
                   ? 'water-check-outline'
                   : 'water-check'
               }
-              color={selectedType === CLEANING ? 'white' : 'rgba(78, 92, 79, 0.5)'}
+              color={
+                selectedType === CLEANING ? 'white' : 'rgba(78, 92, 79, 0.5)'
+              }
               size={40}
-              style={[styles.cleaningButton, selectedType === CLEANING ? { backgroundColor: theme.colors.primary } : { borderWidth: .5, borderColor: 'rgba(78, 92, 79, 0.5)' }]}
+              style={[
+                styles.cleaningButton,
+                selectedType === CLEANING
+                  ? { backgroundColor: theme.colors.primary }
+                  : { borderWidth: 0.5, borderColor: 'rgba(78, 92, 79, 0.5)' },
+              ]}
               onPress={onChangeType(CLEANING)}
             />
             <Text style={styles.buttonText}>Cleaning</Text>
@@ -94,7 +98,7 @@ export function TasksScreen({ navigation, route }) {
       <FAB style={styles.fab} icon={'plus'} onPress={onAddTask({})} />
     </ScreenLayout>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

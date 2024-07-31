@@ -39,8 +39,10 @@ export function Step3({ navigation }) {
     'unchecked'
   );
   const [openModal, setOpenModal] = useState(false);
-  const [meter, setMeter] = React.useState('Leather');
+  const [meter, setMeter] = React.useState('Select Material');
   const [visible, setVisibility] = React.useState(false);
+
+  const options = ['Leather', 'Fabric', 'Raxeen'];
 
   return (
     <ScreenLayout headerTitle="Question 2">
@@ -70,34 +72,36 @@ export function Step3({ navigation }) {
         <QuestionItem.Item
           text="Couch material?"
           input={() => (
-            <Menu
-              visible={visible}
-              onDismiss={() => setVisibility(false)}
-              anchor={
-                <TouchableOpacity
-                  // mode="outlined"
-                  onPress={() => setVisibility(true)}
-                  // color={theme.colors.background}
-                  style={styles.buttonContainer}
-                >
-                  <Text style={styles.marginRight}>{meter}</Text>
-                  <Icons.ArrowDownSmall />
-                </TouchableOpacity>
-              }
-            >
-              {['Leather', 'Fabric', 'Raxeen'].map((lang, index) => (
-                <React.Fragment key={index}>
-                  <Menu.Item
-                    onPress={() => {
-                      setMeter(lang);
-                      setVisibility(false);
-                    }}
-                    title={lang}
-                  />
-                  {index < LANGS.length - 1 && <Divider />}
-                </React.Fragment>
-              ))}
-            </Menu>
+            <View>
+              <TouchableOpacity
+                onPress={() => setVisibility((visible) => !visible)}
+                style={styles.buttonContainer}
+              >
+                <Text style={styles.marginRight}>{meter}</Text>
+                <Icons.ArrowDownSmall />
+              </TouchableOpacity>
+              {visible ? (
+                <View style={styles.menuContainer}>
+                  {options.map((lang, index) => (
+                    <React.Fragment key={index}>
+                      <Menu.Item
+                        titleStyle={{
+                          color: 'white',
+                        }}
+                        onPress={() => {
+                          setMeter(lang);
+                          setVisibility(false);
+                        }}
+                        title={lang}
+                      />
+                      {index < options.length - 1 && (
+                        <Divider style={{ backgroundColor: 'grey' }} />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </View>
+              ) : null}
+            </View>
           )}
         />
 
@@ -213,5 +217,16 @@ const styles = StyleSheet.create({
   marginRight: {
     marginRight: 10,
     fontSize: 12,
+  },
+  menuContainer: {
+    position: 'absolute',
+    top: -150, // Adjust based on your layout
+    backgroundColor: 'rgba(78, 92, 79, 1)',
+    borderWidth: 1,
+    opacity: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    zIndex: 1000,
+    right: 0,
   },
 });
