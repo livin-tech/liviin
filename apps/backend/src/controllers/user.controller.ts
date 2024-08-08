@@ -1,19 +1,20 @@
 import { Request, Response } from "express";
-import { userRepository } from "../repository/user.repository";
+import { UserRepository } from "../repository/user.repository";
 
 export class UserController {
+  constructor(private userRepository = new UserRepository()) {
+  }
   async createUser(req: Request, res: Response) {
     try {
       const { firstName, lastName, email, password } = req.body;
 
       // Check for existing user
-      const existingUser = await userRepository.findOneBy({ email });
+      const existingUser = await this.userRepository.findUserByEmail(email);
       if (existingUser) {
         return res.status(400).json({ message: "Email already exists" });
       }
 
-      const user = userRepository.create({ firstName, lastName, email, password });
-      await userRepository.save(user);
+      const user = await this.userRepository.createUser({ firstName, lastName, email, password });
 
       return res.status(201).json(user);
     } catch (error) {
@@ -23,7 +24,7 @@ export class UserController {
 
   async getUsers(req: Request, res: Response) {
     try {
-      const users = await userRepository.find();
+      const users = await this.userRepository.getAllUsers();
       return res.json(users);
     } catch (error) {
       return res.status(500).json({ message: "Internal Server Error", error });
@@ -32,7 +33,7 @@ export class UserController {
 
   async getUserById(req: Request, res: Response) {
     try {
-      const user = await userRepository.findOneBy({ id: parseInt(req.params.id) });
+      const user = await this.userRepository.findUserById(req.params.id);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -45,13 +46,12 @@ export class UserController {
   async updateUser(req: Request, res: Response) {
     try {
       const { firstName, lastName, email, password } = req.body;
-      const user = await userRepository.findOneBy({ id: parseInt(req.params.id) });
+      const user = await this.userRepository.findUserById(req.params.id);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
 
-      userRepository.merge(user, { firstName, lastName, email, password });
-      const result = await userRepository.save(user);
+      const result = await this.userRepository.updateUser(user.id, { firstName, lastName, email, password });
 
       return res.json(result);
     } catch (error) {
@@ -61,12 +61,12 @@ export class UserController {
 
   async deleteUser(req: Request, res: Response) {
     try {
-      const user = await userRepository.findOneBy({ id: parseInt(req.params.id) });
+      const user = await this.userRepository.findUserById(req.params.id);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
 
-      await userRepository.remove(user);
+      await this.userRepository.deleteUser(user.id);
 
       return res.status(204).send();
     } catch (error) {

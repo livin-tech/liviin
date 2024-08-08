@@ -1,17 +1,14 @@
-import { DataSource } from "typeorm";
-import { User } from "../models/user.model";
-import dotenv from "dotenv";
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  synchronize: true, // In production, set to false and use migrations
-  logging: true, // Set to false in production
-  entities: [User],
-});
+// Connect to MongoDB using Mongoose
+export const connectToDatabase = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/liviin_db');
+    console.log('Successfully connected to MongoDB!');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  }
+};
