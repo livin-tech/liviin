@@ -13,6 +13,7 @@ import Link from '@mui/joy/Link';
 import Input from '@mui/joy/Input';
 import Typography from '@mui/joy/Typography';
 import Stack from '@mui/joy/Stack';
+import { useNavigate } from 'react-router-dom';
 
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -48,6 +49,8 @@ function ColorSchemeToggle(props: IconButtonProps) {
 }
 
 export default function App() {
+  const navigate = useNavigate();
+
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
@@ -154,7 +157,8 @@ export default function App() {
                     password: formElements.password.value,
                     persistent: formElements.persistent.checked,
                   };
-                  alert(JSON.stringify(data, null, 2));
+                  navigate('/home');
+                  // alert(JSON.stringify(data, null, 2));
                 }}
               >
                 <FormControl required>
