@@ -5,14 +5,14 @@
 
 import express from 'express';
 import * as path from 'path';
-import userRoute from './routes/user.route';
 import { connectToDatabase } from './database/data-source';
+import apiRouter from './routes';
 
 const app = express();
 
 app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use("/api", userRoute);
+app.use("/api", apiRouter);
 
 connectToDatabase().then(() => {
   const port = process.env.PORT || 3333;
