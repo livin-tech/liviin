@@ -5,6 +5,15 @@
       "continueWithApple": "Continuar con Apple",
       "continueWithGoogle": "Continuar con Google",
       "continueWithEmail": "Continuar con Email"
+    },
+    "login": {
+      "heading": "Acceso"
+    },
+    "forgotPassword": {
+      "heading": "Has olvidado tu contraseña"
+    },
+    "signUp": {
+      "heading": "Inscribirse"
     }
   }
 }

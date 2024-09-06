@@ -8,6 +8,7 @@ import { RouteNavigators, Routes } from './routes';
 // Screens
 import {
   Login,
+  SignUp,
   Landing,
   Register,
   OnBoardingNavigation,
@@ -83,6 +84,11 @@ const WithoutSafeAreaNavigator = () => {
         options={noHeader}
         component={Login}
         name={Routes.Login}
+      />
+      <StackWithoutSafeArea.Screen
+        options={noHeader}
+        component={SignUp}
+        name={Routes.SignUp}
       />
       <StackWithoutSafeArea.Screen
         options={noHeader}

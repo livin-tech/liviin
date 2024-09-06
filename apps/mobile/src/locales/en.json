@@ -11,6 +11,9 @@
     },
     "forgotPassword": {
       "heading": "Forgot Password"
+    },
+    "signUp": {
+      "heading": "Sign Up"
     }
   }
 }
