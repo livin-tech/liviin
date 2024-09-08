@@ -5,16 +5,16 @@
 
 import express from 'express';
 import * as path from 'path';
-import userRoute from './routes/user.route';
-import { AppDataSource } from './database/data-source';
+import { connectToDatabase } from './database/data-source';
+import apiRouter from './routes';
 
 const app = express();
 
 app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use("/api", userRoute);
+app.use("/api", apiRouter);
 
-AppDataSource.initialize().then(() => {
+connectToDatabase().then(() => {
   const port = process.env.PORT || 3333;
   const server = app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}/api`);
