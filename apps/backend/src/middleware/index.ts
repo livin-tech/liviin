@@ -1,13 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
+
 import admin from '../config/firebase';
 
 export const verifyToken = async (req: Request & { user?: any }, res: Response, next: NextFunction): Promise<void> => {
-  const idToken = req.cookies.access_token;
+  const authHeader = req.headers.authorization;
 
-  if (!idToken) {
-    res.status(403).json({ error: 'No token provided' });
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    res.status(403).json({ error: 'No token provided or incorrect format' });
     return;
   }
+
+  const idToken = authHeader.split(' ')[1]; 
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
