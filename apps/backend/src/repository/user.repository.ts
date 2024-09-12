@@ -8,14 +8,14 @@ export class UserRepository {
     return await user.save();
   }
 
-  // Find a user by ID
-  async findUserById(userId: string): Promise<IUser | null> {
-    return UserModel.findById(userId);
+  // Find a user by userId
+  async findUserByUserId(userId: string): Promise<IUser | null> {
+    return UserModel.findOne({ userId });
   }
 
   // Find a user by email
   async findUserByEmail(email: string): Promise<IUser | null> {
-    return UserModel.findOne({email});
+    return UserModel.findOne({ email });
   }
 
   // Get all users
@@ -25,11 +25,11 @@ export class UserRepository {
 
   // Update a user
   async updateUser(userId: string, updateData: Partial<IUser>): Promise<IUser | null> {
-    return UserModel.findByIdAndUpdate(userId, updateData, { new: true });
+    return UserModel.findOneAndUpdate({ userId }, updateData, { new: true });
   }
 
   // Delete a user
   async deleteUser(userId: string): Promise<IUser | null> {
-    return UserModel.findByIdAndDelete(userId);
+    return UserModel.findOneAndDelete({ userId });
   }
 }
