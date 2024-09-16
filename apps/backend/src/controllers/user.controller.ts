@@ -117,4 +117,30 @@ export class UserController {
       return res.status(500).json({ message: "Internal Server Error", error });
     }
   }
+
+  // Check onboarding status
+  async checkOnboardingStatus(req: Request, res: Response): Promise<Response> {
+    try {
+      const user = await this.userRepository.findUserByUserId(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res.status(200).json({ hasOnboarded: user.hasOnboarded });
+    } catch (error) {
+      return res.status(500).json({ message: "Server error", error });
+    }
+  }
+
+  // Update onboarding status
+  async updateOnboardingStatus(req: Request, res: Response): Promise<Response> {
+    try {
+      const user = await this.userRepository.updateUser(req.params.id, { hasOnboarded: true });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res.status(200).json({ message: "Onboarding status updated", user });
+    } catch (error) {
+      return res.status(500).json({ message: "Server error", error });
+    }
+  }
 }

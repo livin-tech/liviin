@@ -9,6 +9,7 @@ export interface IUser extends Document {
   userId: string;
   address: string;
   subscriptionStatus: 'essential' | 'pro';
+  hasOnboarded: boolean;
 }
 
 const userSchema: Schema<IUser> = new mongoose.Schema({
@@ -47,6 +48,10 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
     type: String,
     enum: ['essential', 'pro'],
     default: 'essential',
+  },
+  hasOnboarded: {
+    type: Boolean,
+    default: false,
   },
 });
 

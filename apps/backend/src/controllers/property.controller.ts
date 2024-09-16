@@ -4,16 +4,49 @@ import { PropertyRepository } from "../repository/property.repository";
 export class PropertyController {
   constructor(private propertyRepository = new PropertyRepository()) {}
 
+  // Create a new property
   async createProperty(req: Request, res: Response) {
     try {
-      const { title, description, price, location, owner } = req.body;
-
-      const property = await this.propertyRepository.createProperty({
+      const {
+        name,
+        type,
+        rooms,
+        bathrooms,
+        livingRoom,
+        diningRoom,
+        familyRoom,
+        hallRoom,
+        kitchen,
+        serviceRoom,
+        laundryRoom,
+        balcony,
+        garden,
         title,
         description,
         price,
         location,
-        owner,
+        owner // The owner should be the user ID
+      } = req.body;
+
+      const property = await this.propertyRepository.createProperty({
+        name,
+        type,
+        rooms,
+        bathrooms,
+        livingRoom,
+        diningRoom,
+        familyRoom,
+        hallRoom,
+        kitchen,
+        serviceRoom,
+        laundryRoom,
+        balcony,
+        garden,
+        title,
+        description,
+        price,
+        location,
+        owner // Passing user ID as reference
       });
 
       return res.status(201).json(property);
@@ -22,6 +55,7 @@ export class PropertyController {
     }
   }
 
+  // Get all properties
   async getProperties(req: Request, res: Response) {
     try {
       const properties = await this.propertyRepository.getAllProperties();
@@ -31,6 +65,7 @@ export class PropertyController {
     }
   }
 
+  // Get property by ID
   async getPropertyById(req: Request, res: Response) {
     try {
       const property = await this.propertyRepository.findPropertyById(req.params.id);
@@ -43,16 +78,51 @@ export class PropertyController {
     }
   }
 
+  // Update a property
   async updateProperty(req: Request, res: Response) {
     try {
-      const { title, description, price, location, owner } = req.body;
-      const property = await this.propertyRepository.updateProperty(req.params.id, {
+      const {
+        name,
+        type,
+        rooms,
+        bathrooms,
+        livingRoom,
+        diningRoom,
+        familyRoom,
+        hallRoom,
+        kitchen,
+        serviceRoom,
+        laundryRoom,
+        balcony,
+        garden,
         title,
         description,
         price,
         location,
-        owner,
+        owner // The owner should be the user ID
+      } = req.body;
+
+      const property = await this.propertyRepository.updateProperty(req.params.id, {
+        name,
+        type,
+        rooms,
+        bathrooms,
+        livingRoom,
+        diningRoom,
+        familyRoom,
+        hallRoom,
+        kitchen,
+        serviceRoom,
+        laundryRoom,
+        balcony,
+        garden,
+        title,
+        description,
+        price,
+        location,
+        owner // Passing user ID as reference
       });
+
       if (!property) {
         return res.status(404).json({ message: "Property not found" });
       }
@@ -62,6 +132,7 @@ export class PropertyController {
     }
   }
 
+  // Delete a property
   async deleteProperty(req: Request, res: Response) {
     try {
       const property = await this.propertyRepository.deleteProperty(req.params.id);

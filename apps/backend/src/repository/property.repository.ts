@@ -1,4 +1,4 @@
-import { PropertyModel, IProperty } from '../models/property.model';
+import { IProperty, PropertyModel } from '../models/property.model';
 
 export class PropertyRepository {
   // Create a new property
