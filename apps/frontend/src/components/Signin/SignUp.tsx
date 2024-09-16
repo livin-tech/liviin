@@ -1,10 +1,8 @@
-import * as React from 'react';
+import React, { useState, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
@@ -14,9 +12,9 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
-// import AppTheme from '../shared-theme/AppTheme';
-// import ColorModeSelect from '../shared-theme/ColorModeSelect';
+import { SitemarkIcon } from './CustomIcons';
+import { useAppDispatch } from '../../hooks/hooks';
+import { signupUser } from '../../lib/redux/auth/authSlice';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -56,62 +54,30 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function SignUp(props: { disableCustomTheme?: boolean }) {
-  const [emailError, setEmailError] = React.useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+export default function SignUp() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-  const validateInputs = () => {
-    const email = document.getElementById('email') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
-
-    let isValid = true;
-
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
-      isValid = false;
-    } else {
-      setEmailError(false);
-      setEmailErrorMessage('');
-    }
-
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage('');
-    }
-
-    return isValid;
+  const onSubmit = (data: any) => {
+    const { email, password } = data;
+    dispatch(signupUser({ email, password }));
   };
 
   return (
     <>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
-        {/* <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} /> */}
         <Card variant="outlined">
           <SitemarkIcon />
           <Typography
@@ -123,7 +89,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             noValidate
             sx={{
               display: 'flex',
@@ -135,106 +101,74 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
-                error={emailError}
-                helperText={emailErrorMessage}
+                error={!!errors.email}
+                helperText={errors.email ? 'Please enter a valid email' : ''}
                 id="email"
                 type="email"
-                name="email"
                 placeholder="your@email.com"
                 autoComplete="email"
-                autoFocus
-                required
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: /\S+@\S+\.\S+/,
+                })}
                 fullWidth
                 variant="outlined"
-                color={emailError ? 'error' : 'primary'}
-                sx={{ ariaLabel: 'email' }}
               />
             </FormControl>
             <FormControl>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <FormLabel htmlFor="password">Password</FormLabel>
-              </Box>
+              <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
-                name="password"
-                placeholder="••••••"
-                type="password"
+                error={!!errors.password}
+                inputRef={passwordRef}
+                helperText={
+                  errors.password
+                    ? 'Password must be at least 6 characters long'
+                    : ''
+                }
                 id="password"
-                autoComplete="current-password"
-                autoFocus
-                required
+                type="password"
+                placeholder="••••••"
+                autoComplete="new-password"
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: 6,
+                })}
                 fullWidth
                 variant="outlined"
-                color={passwordError ? 'error' : 'primary'}
               />
             </FormControl>
             <FormControl>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <FormLabel htmlFor="confirm-password">Confirm Password</FormLabel>
-              </Box>
+              <FormLabel htmlFor="confirm-password">Confirm Password</FormLabel>
               <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
-                name="password"
-                placeholder="••••••"
-                type="password"
+                error={!!errors.confirmPassword}
+                helperText={
+                  errors.confirmPassword ? 'Passwords do not match' : ''
+                }
                 id="confirm-password"
-                autoComplete="current-password"
-                autoFocus
-                required
+                type="password"
+                placeholder="••••••"
+                autoComplete="new-password"
+                {...register('confirmPassword', {
+                  required: 'Confirm Password is required',
+                  validate: (value) =>
+                    value === passwordRef.current?.value ||
+                    'Passwords do not match',
+                })}
                 fullWidth
                 variant="outlined"
-                color={passwordError ? 'error' : 'primary'}
               />
             </FormControl>
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
             <ForgotPassword open={open} handleClose={handleClose} />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              onClick={validateInputs}
-            >
+            <Button type="submit" fullWidth variant="contained">
               Sign up
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
-              Don&apos;t have an account?{' '}
-              <span>
-                <Link
-                  href="/signin"
-                  variant="body2"
-                  sx={{ alignSelf: 'center' }}
-                >
-                  Sign in
-                </Link>
-              </span>
+              Already have an account?{' '}
+              <Link href="/signin" variant="body2">
+                Sign in
+              </Link>
             </Typography>
           </Box>
-          {/* <Divider>or</Divider>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign in with Google')}
-              startIcon={<GoogleIcon />}
-            >
-              Sign in with Google
-            </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              onClick={() => alert('Sign in with Facebook')}
-              startIcon={<FacebookIcon />}
-            >
-              Sign in with Facebook
-            </Button>
-          </Box> */}
         </Card>
       </SignInContainer>
     </>
