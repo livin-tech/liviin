@@ -1,6 +1,4 @@
-import React, { FC, ChangeEvent, useState } from 'react';
-import { format } from 'date-fns';
-import numeral from 'numeral';
+import React, { FC, ChangeEvent, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Tooltip,
@@ -40,10 +38,9 @@ import { CryptoOrder, CryptoOrderStatus } from '../../../models/crypto_order';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
-// import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
+import { fetchUsers } from '../../../lib/redux/auth/userSlice';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { RootState } from '../../../store';
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: CryptoOrder[];
@@ -103,6 +100,9 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
+  const { users, loading, error } = useAppSelector((state: RootState) => state.user);
+
+  const dispatch = useAppDispatch();
   const selectedBulkActions = selectedCryptoOrders.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
@@ -114,11 +114,11 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedValue, setSelectedValue] = useState(emails[1]);
 
-  // const [emailError, setEmailError] = React.useState(false);
-  // const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   const handleClickOpen = () => {
-    console.log('handleClickOpenhandleClickOpen')
     setOpen(true);
   };
 
@@ -128,7 +128,6 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   };
 
   const handleUserDeleteDialog = () => {
-    console.log('handleUserDeleteDialog-->.', openDeleteDialog)
     setOpenDeleteDialog(!openDeleteDialog)
   }
 
