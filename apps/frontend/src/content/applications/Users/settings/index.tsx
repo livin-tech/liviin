@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import PageHeader from './PageHeader';
 import PageTitleWrapper from '../../../../components/PageTitleWrapper';
 import { Container, Tabs, Tab, Grid } from '@mui/material';
-import Footer from '../../../../components/Footer';
 import { styled } from '@mui/material/styles';
 
 import ActivityTab from './ActivityTab';
@@ -71,7 +70,6 @@ function ManagementUserSettings() {
           </Grid>
         </Grid>
       </Container>
-      <Footer />
     </>
   );
 }
