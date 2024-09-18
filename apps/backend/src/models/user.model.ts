@@ -6,7 +6,7 @@ export interface IUser extends Document {
   email: string;
   phoneNumber: string;
   role: string;
-  userId: string;
+  firebaseID: string;
   address: string;
   subscriptionStatus: 'essential' | 'pro';
   hasOnboarded: boolean;
@@ -35,7 +35,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
-  userId: {
+  firebaseID: {
     type: String,
     required: true,
     unique: true,

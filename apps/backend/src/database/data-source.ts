@@ -6,7 +6,6 @@ dotenv.config();
 
 export const connectToDatabase = async () => {
   const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/liviin_db';
-  console.log(mongoURI)
 
   try {
     await mongoose.connect(mongoURI);

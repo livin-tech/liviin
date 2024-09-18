@@ -30,16 +30,16 @@ export class UserController {
         return res.status(400).json({ message: "Email already exists" });
       }
 
-      // Use the Firebase ID from the token as the userId
-      const userId = (req as any).user?.uid;
+      // Use the Firebase ID from the token as the firebaseID
+      const firebaseID = (req as any).user?.uid;
 
       // Create the new user
       const user = await this.userRepository.createUser({
         ...validatedData,
-        userId,
+        firebaseID,
       });
 
-      logger.info(`User created successfully with ID: ${userId}`);
+      logger.info(`User created successfully with Firebase ID: ${firebaseID}`);
       return res.status(201).json(user);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -64,32 +64,32 @@ export class UserController {
 
   async getUserById(req: Request, res: Response) {
     try {
-      const user = await this.userRepository.findUserByUserId(req.params.id);
+      const user = await this.userRepository.findUserByFirebaseID(req.params.id);
       if (!user) {
-        logger.warn(`User with ID ${req.params.id} not found`);
+        logger.warn(`User with Firebase ID ${req.params.id} not found`);
         return res.status(404).json({ message: "User not found" });
       }
-      logger.info(`User fetched successfully with ID: ${req.params.id}`);
+      logger.info(`User fetched successfully with Firebase ID: ${req.params.id}`);
       return res.json(user);
     } catch (error) {
-      logger.error(`Error fetching user with ID ${req.params.id}`, { error });
+      logger.error(`Error fetching user with Firebase ID ${req.params.id}`, { error });
       return res.status(500).json({ message: "Internal Server Error", error });
     }
   }
 
   async updateUser(req: Request, res: Response) {
     try {
-      const validatedData = userSchema.partial().parse(req.body); // Use `.partial()` for optional fields in updates
+      const validatedData = userSchema.partial().parse(req.body); // Use .partial() for optional fields in updates
 
-      const user = await this.userRepository.findUserByUserId(req.params.id);
+      const user = await this.userRepository.findUserByFirebaseID(req.params.id);
       if (!user) {
-        logger.warn(`User update failed. User ID ${req.params.id} not found`);
+        logger.warn(`User update failed. Firebase ID ${req.params.id} not found`);
         return res.status(404).json({ message: "User not found" });
       }
 
-      const updatedUser = await this.userRepository.updateUser(user.userId, validatedData);
+      const updatedUser = await this.userRepository.updateUser(user.firebaseID, validatedData);
 
-      logger.info(`User updated successfully with ID: ${user.userId}`);
+      logger.info(`User updated successfully with Firebase ID: ${user.firebaseID}`);
       return res.json(updatedUser);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -103,17 +103,17 @@ export class UserController {
 
   async deleteUser(req: Request, res: Response) {
     try {
-      const user = await this.userRepository.findUserByUserId(req.params.id);
+      const user = await this.userRepository.findUserByFirebaseID(req.params.id);
       if (!user) {
-        logger.warn(`User deletion failed. User ID ${req.params.id} not found`);
+        logger.warn(`User deletion failed. Firebase ID ${req.params.id} not found`);
         return res.status(404).json({ message: "User not found" });
       }
 
-      await this.userRepository.deleteUser(user.userId);
-      logger.info(`User deleted successfully with ID: ${user.userId}`);
+      await this.userRepository.deleteUser(user.firebaseID);
+      logger.info(`User deleted successfully with Firebase ID: ${user.firebaseID}`);
       return res.status(204).send();
     } catch (error) {
-      logger.error(`Error deleting user with ID ${req.params.id}`, { error });
+      logger.error(`Error deleting user with Firebase ID ${req.params.id}`, { error });
       return res.status(500).json({ message: "Internal Server Error", error });
     }
   }
@@ -121,12 +121,14 @@ export class UserController {
   // Check onboarding status
   async checkOnboardingStatus(req: Request, res: Response): Promise<Response> {
     try {
-      const user = await this.userRepository.findUserByUserId(req.params.id);
+      const user = await this.userRepository.findUserByFirebaseID(req.params.id);
       if (!user) {
+        logger.warn(`User with Firebase ID ${req.params.id} not found`);
         return res.status(404).json({ message: "User not found" });
       }
       return res.status(200).json({ hasOnboarded: user.hasOnboarded });
     } catch (error) {
+      logger.error(`Error checking onboarding status for user with Firebase ID ${req.params.id}`, { error });
       return res.status(500).json({ message: "Server error", error });
     }
   }
@@ -136,10 +138,12 @@ export class UserController {
     try {
       const user = await this.userRepository.updateUser(req.params.id, { hasOnboarded: true });
       if (!user) {
+        logger.warn(`User with Firebase ID ${req.params.id} not found`);
         return res.status(404).json({ message: "User not found" });
       }
       return res.status(200).json({ message: "Onboarding status updated", user });
     } catch (error) {
+      logger.error(`Error updating onboarding status for user with Firebase ID ${req.params.id}`, { error });
       return res.status(500).json({ message: "Server error", error });
     }
   }
