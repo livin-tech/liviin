@@ -1,5 +1,30 @@
 import { Request, Response } from "express";
+import { z } from "zod";
+
+import logger from "../config/logger";
+// Adjust the path as needed
 import { PropertyRepository } from "../repository/property.repository";
+
+// Define Zod schema for property validation
+const propertySchema = z.object({
+  type: z.string().min(1, "Type is required"),
+  rooms: z.number().min(0, "Rooms must be a non-negative number"),
+  bathrooms: z.number().min(0, "Bathrooms must be a non-negative number"),
+  hasLivingRoom: z.boolean(),
+  hasDiningRoom: z.boolean(),
+  hasFamilyRoom: z.boolean(),
+  hasHallRoom: z.boolean(),
+  hasKitchen: z.boolean(),
+  hasServiceRoom: z.boolean(),
+  hasLaundryRoom: z.boolean(),
+  hasBalcony: z.boolean(),
+  hasGarden: z.boolean(),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  price: z.number().positive("Price must be a positive number"),
+  location: z.string().min(1, "Location is required"),
+  owner: z.string().length(24, "Owner ID must be a valid ObjectId"),
+});
 
 export class PropertyController {
   constructor(private propertyRepository = new PropertyRepository()) {}
@@ -7,51 +32,17 @@ export class PropertyController {
   // Create a new property
   async createProperty(req: Request, res: Response) {
     try {
-      const {
-        name,
-        type,
-        rooms,
-        bathrooms,
-        livingRoom,
-        diningRoom,
-        familyRoom,
-        hallRoom,
-        kitchen,
-        serviceRoom,
-        laundryRoom,
-        balcony,
-        garden,
-        title,
-        description,
-        price,
-        location,
-        owner // The owner should be the user ID
-      } = req.body;
-
-      const property = await this.propertyRepository.createProperty({
-        name,
-        type,
-        rooms,
-        bathrooms,
-        livingRoom,
-        diningRoom,
-        familyRoom,
-        hallRoom,
-        kitchen,
-        serviceRoom,
-        laundryRoom,
-        balcony,
-        garden,
-        title,
-        description,
-        price,
-        location,
-        owner // Passing user ID as reference
-      });
-
+      const validatedData = propertySchema.parse(req.body);
+      const property = await this.propertyRepository.createProperty(validatedData);
+      logger.info(`Property created successfully: ${property._id}`);
       return res.status(201).json(property);
     } catch (error) {
-      return res.status(500).json({ message: "Internal Server Error", error });
+      if (error instanceof z.ZodError) {
+        logger.error("Validation error during property creation", { errors: error.errors });
+        return res.status(400).json({ message: "Validation Error", errors: error.errors });
+      }
+      logger.error("Error creating property", { error });
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   }
 
@@ -59,9 +50,11 @@ export class PropertyController {
   async getProperties(req: Request, res: Response) {
     try {
       const properties = await this.propertyRepository.getAllProperties();
+      logger.info("Fetched all properties");
       return res.json(properties);
     } catch (error) {
-      return res.status(500).json({ message: "Internal Server Error", error });
+      logger.error("Error fetching properties", { error });
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   }
 
@@ -70,65 +63,35 @@ export class PropertyController {
     try {
       const property = await this.propertyRepository.findPropertyById(req.params.id);
       if (!property) {
+        logger.warn(`Property not found: ${req.params.id}`);
         return res.status(404).json({ message: "Property not found" });
       }
+      logger.info(`Fetched property: ${property._id}`);
       return res.json(property);
     } catch (error) {
-      return res.status(500).json({ message: "Internal Server Error", error });
+      logger.error("Error fetching property", { error });
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   }
 
   // Update a property
   async updateProperty(req: Request, res: Response) {
     try {
-      const {
-        name,
-        type,
-        rooms,
-        bathrooms,
-        livingRoom,
-        diningRoom,
-        familyRoom,
-        hallRoom,
-        kitchen,
-        serviceRoom,
-        laundryRoom,
-        balcony,
-        garden,
-        title,
-        description,
-        price,
-        location,
-        owner // The owner should be the user ID
-      } = req.body;
-
-      const property = await this.propertyRepository.updateProperty(req.params.id, {
-        name,
-        type,
-        rooms,
-        bathrooms,
-        livingRoom,
-        diningRoom,
-        familyRoom,
-        hallRoom,
-        kitchen,
-        serviceRoom,
-        laundryRoom,
-        balcony,
-        garden,
-        title,
-        description,
-        price,
-        location,
-        owner // Passing user ID as reference
-      });
-
+      const validatedData = propertySchema.partial().parse(req.body); // Use .partial() for updates
+      const property = await this.propertyRepository.updateProperty(req.params.id, validatedData);
       if (!property) {
+        logger.warn(`Property not found for update: ${req.params.id}`);
         return res.status(404).json({ message: "Property not found" });
       }
+      logger.info(`Updated property: ${property._id}`);
       return res.json(property);
     } catch (error) {
-      return res.status(500).json({ message: "Internal Server Error", error });
+      if (error instanceof z.ZodError) {
+        logger.error("Validation error during property update", { errors: error.errors });
+        return res.status(400).json({ message: "Validation Error", errors: error.errors });
+      }
+      logger.error("Error updating property", { error });
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   }
 
@@ -137,11 +100,14 @@ export class PropertyController {
     try {
       const property = await this.propertyRepository.deleteProperty(req.params.id);
       if (!property) {
+        logger.warn(`Property not found for deletion: ${req.params.id}`);
         return res.status(404).json({ message: "Property not found" });
       }
+      logger.info(`Deleted property: ${property._id}`);
       return res.status(204).send();
     } catch (error) {
-      return res.status(500).json({ message: "Internal Server Error", error });
+      logger.error("Error deleting property", { error });
+      return res.status(500).json({ message: "Internal Server Error" });
     }
   }
 }

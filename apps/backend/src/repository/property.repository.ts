@@ -2,7 +2,7 @@ import { IProperty, PropertyModel } from '../models/property.model';
 
 export class PropertyRepository {
   // Create a new property
-  async createProperty(propertyData: Partial<IProperty>): Promise<IProperty> {
+  async createProperty(propertyData): Promise<IProperty> {
     const property = new PropertyModel(propertyData);
     return await property.save();
   }
@@ -18,7 +18,7 @@ export class PropertyRepository {
   }
 
   // Update a property
-  async updateProperty(propertyId: string, updateData: Partial<IProperty>): Promise<IProperty | null> {
+  async updateProperty(propertyId: string, updateData): Promise<IProperty | null> {
     return PropertyModel.findByIdAndUpdate(propertyId, updateData, { new: true }).populate('owner');
   }
 

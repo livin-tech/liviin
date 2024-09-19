@@ -1,31 +1,26 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema, Types } from 'mongoose';
 
 export interface IProperty extends Document {
-  name: string;
   type: string;
   rooms: number;
   bathrooms: number;
-  livingRoom: boolean;
-  diningRoom: boolean;
-  familyRoom: boolean;
-  hallRoom: boolean;
-  kitchen: boolean;
-  serviceRoom: boolean;
-  laundryRoom: boolean;
-  balcony: boolean;
-  garden: boolean;
+  hasLivingRoom: boolean;
+  hasDiningRoom: boolean;
+  hasFamilyRoom: boolean;
+  hasHallRoom: boolean;
+  hasKitchen: boolean;
+  hasServiceRoom: boolean;
+  hasLaundryRoom: boolean;
+  hasBalcony: boolean;
+  hasGarden: boolean;
   title: string;
   description: string;
   price: number;
   location: string;
-  owner: mongoose.Schema.Types.ObjectId; // reference to the User model
+  owner: Types.ObjectId; // reference to the User model
 }
 
 const propertySchema: Schema<IProperty> = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
   type: {
     type: String,
     required: true,
@@ -38,39 +33,39 @@ const propertySchema: Schema<IProperty> = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  livingRoom: {
+  hasLivingRoom: {
     type: Boolean,
     required: true,
   },
-  diningRoom: {
+  hasDiningRoom: {
     type: Boolean,
     required: true,
   },
-  familyRoom: {
+  hasFamilyRoom: {
     type: Boolean,
     required: true,
   },
-  hallRoom: {
+  hasHallRoom: {
     type: Boolean,
     required: true,
   },
-  kitchen: {
+  hasKitchen: {
     type: Boolean,
     required: true,
   },
-  serviceRoom: {
+  hasServiceRoom: {
     type: Boolean,
     required: true,
   },
-  laundryRoom: {
+  hasLaundryRoom: {
     type: Boolean,
     required: true,
   },
-  balcony: {
+  hasBalcony: {
     type: Boolean,
     required: true,
   },
-  garden: {
+  hasGarden: {
     type: Boolean,
     required: true,
   },
