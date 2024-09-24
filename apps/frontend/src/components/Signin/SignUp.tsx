@@ -15,6 +15,7 @@ import ForgotPassword from './ForgotPassword';
 import { SitemarkIcon } from './CustomIcons';
 import { useAppDispatch } from '../../hooks/hooks';
 import { signupUser } from '../../lib/redux/auth/authSlice';
+import { useTranslation } from 'react-i18next';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -64,6 +65,7 @@ export default function SignUp() {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const { t } = useTranslation();
 
   const handleClose = () => {
     setOpen(false);
@@ -85,7 +87,7 @@ export default function SignUp() {
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
           >
-            Sign up
+            {t('signUp')}
           </Typography>
           <Box
             component="form"
@@ -99,16 +101,16 @@ export default function SignUp() {
             }}
           >
             <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormLabel htmlFor="email">{t('email')}</FormLabel>
               <TextField
                 error={!!errors.email}
-                helperText={errors.email ? 'Please enter a valid email' : ''}
+                helperText={errors.email ? `${t('emailValid')}` : ''}
                 id="email"
                 type="email"
                 placeholder="your@email.com"
                 autoComplete="email"
                 {...register('email', {
-                  required: 'Email is required',
+                  required: `${t('emailReq')}`,
                   pattern: /\S+@\S+\.\S+/,
                 })}
                 fullWidth
@@ -116,13 +118,13 @@ export default function SignUp() {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password">{t('password')}</FormLabel>
               <TextField
                 error={!!errors.password}
                 inputRef={passwordRef}
                 helperText={
                   errors.password
-                    ? 'Password must be at least 6 characters long'
+                    ? `${t('passwordDesc')}`
                     : ''
                 }
                 id="password"
@@ -130,7 +132,7 @@ export default function SignUp() {
                 placeholder="••••••"
                 autoComplete="new-password"
                 {...register('password', {
-                  required: 'Password is required',
+                  required: `${t('emailValid')}`,
                   minLength: 6,
                 })}
                 fullWidth
@@ -138,21 +140,21 @@ export default function SignUp() {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="confirm-password">Confirm Password</FormLabel>
+              <FormLabel htmlFor="confirm-password">{t('confirmPassword')}</FormLabel>
               <TextField
                 error={!!errors.confirmPassword}
                 helperText={
-                  errors.confirmPassword ? 'Passwords do not match' : ''
+                  errors.confirmPassword ? `${t('passwordNotMatch')}` : ''
                 }
                 id="confirm-password"
                 type="password"
                 placeholder="••••••"
                 autoComplete="new-password"
                 {...register('confirmPassword', {
-                  required: 'Confirm Password is required',
+                  required: `${t('confirmPasswordReq')}`,
                   validate: (value) =>
                     value === passwordRef.current?.value ||
-                    'Passwords do not match',
+                    `${t('passwordNotMatch')}`,
                 })}
                 fullWidth
                 variant="outlined"
@@ -160,12 +162,12 @@ export default function SignUp() {
             </FormControl>
             <ForgotPassword open={open} handleClose={handleClose} />
             <Button type="submit" fullWidth variant="contained">
-              Sign up
+            {t('signUp')}
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
-              Already have an account?{' '}
+              {t('signupDesc')}{' '}
               <Link href="/signin" variant="body2">
-                Sign in
+              {t('signIn')}
               </Link>
             </Typography>
           </Box>

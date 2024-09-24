@@ -2,10 +2,10 @@ import { Typography, Button, Grid } from '@mui/material';
 
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useState } from 'react';
-import CreateUserModal from './CreateUserModal';
+// import CreateUserModal from './CreateUserModal';
 import { useTranslation } from 'react-i18next';
 
-function PageHeader() {
+function PageHeaderProperty() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
@@ -27,18 +27,19 @@ function PageHeader() {
 
   return (
     <>
-      <CreateUserModal
+      {/* <CreateUserModal
         selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
-      />
+      /> */}
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           <Typography variant="h3" component="h3" gutterBottom>
-            {t('usersTitleSidebar')}
+            {/* {t('usersTitleSidebar')} */}
+            Property
           </Typography>
           <Typography variant="subtitle2">
-            {user.name}, total joined users are here
+            {user.name}, total listed properties are here
           </Typography>
         </Grid>
         <Grid item>
@@ -48,7 +49,8 @@ function PageHeader() {
             onClick={handleClickOpen}
             startIcon={<AddTwoToneIcon fontSize="small" />}
           >
-            {t('createUser')}
+            {/* {t('createUser')} */}
+            Create Property
           </Button>
         </Grid>
       </Grid>
@@ -56,4 +58,4 @@ function PageHeader() {
   );
 }
 
-export default PageHeader;
+export default PageHeaderProperty;

@@ -1,18 +1,16 @@
 import { Helmet } from 'react-helmet-async';
-import PageHeader from './PageHeader';
+import PageHeaderProperty from './components/PageHeaderProperty';
 import PageTitleWrapper from '../../../components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
+import PropertyItems from './components/PropertyItems';
 
-import RecentOrders from './RecentOrders';
+// import RecentOrders from './RecentOrders';
 
-function ApplicationsTransactions() {
+function Property() {
   return (
     <>
-      {/* <Helmet>
-        <title>Transactions - Applications</title>
-      </Helmet> */}
       <PageTitleWrapper>
-        <PageHeader />
+        <PageHeaderProperty />
       </PageTitleWrapper>
       <Container maxWidth="lg">
         <Grid
@@ -23,7 +21,8 @@ function ApplicationsTransactions() {
           spacing={3}
         >
           <Grid item xs={12}>
-            <RecentOrders />
+            {/* <RecentOrders /> */}
+            <PropertyItems />
           </Grid>
         </Grid>
       </Container>
@@ -31,4 +30,4 @@ function ApplicationsTransactions() {
   );
 }
 
-export default ApplicationsTransactions;
+export default Property;

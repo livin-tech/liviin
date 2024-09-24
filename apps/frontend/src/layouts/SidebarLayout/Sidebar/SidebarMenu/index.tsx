@@ -13,7 +13,11 @@ import { NavLink as RouterLink } from 'react-router-dom';
 import { SidebarContext } from '../../../../contexts/SidebarContext';
 
 import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
+import Home from '@mui/icons-material/Home'; // Property icon
+import Quiz from '@mui/icons-material/Quiz'; // Questionnaires icon
+import PaymentIcon from '@mui/icons-material/Payment'; 
 import Group from '@mui/icons-material/Group';
+import { useTranslation } from 'react-i18next';
 
 const MenuWrapper = styled(Box)(
   ({ theme }) => `
@@ -159,6 +163,7 @@ const SubMenuWrapper = styled(Box)(
 
 function SidebarMenu() {
   const { closeSidebar } = useContext(SidebarContext);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -167,7 +172,7 @@ function SidebarMenu() {
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
-              Dashboards
+              {t('dashboardTitleSidebar')}
             </ListSubheader>
           }
         >
@@ -178,10 +183,10 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/overview"
+                  to="/overview"
                   startIcon={<DesignServicesTwoToneIcon />}
                 >
-                  Overview
+                  {t('overviewTitleSidebar')}
                 </Button>
               </ListItem>
             </List>
@@ -191,21 +196,54 @@ function SidebarMenu() {
           component="div"
           subheader={
             <ListSubheader component="div" disableSticky>
-              Management
+               {t('managementTitleSidebar')}
             </ListSubheader>
           }
         >
           <SubMenuWrapper>
             <List component="div">
-              <ListItem component="div">
+              <ListItem component="div" sx={{mb: 2}}>
                 <Button
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/users"
+                  to="/users"
                   startIcon={<Group />}
                 >
-                  Users
+                  {t('usersTitleSidebar')}
+                </Button>
+              </ListItem>
+              <ListItem component="div" sx={{mb: 2}}>
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/property"
+                  startIcon={<Home />}
+                >
+                  {t('propertyTitleSidebar')}
+                </Button>
+              </ListItem>
+              <ListItem component="div" sx={{mb: 2}}>
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/questionnaires"
+                  startIcon={<Quiz />}
+                >
+                  {t('questionnairesTitleSidebar')}
+                </Button>
+              </ListItem>
+              <ListItem component="div" sx={{mb: 2}}>
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/payment"
+                  startIcon={<PaymentIcon />}
+                >
+                  {t('paymentTitleSidebar')}
                 </Button>
               </ListItem>
             </List>

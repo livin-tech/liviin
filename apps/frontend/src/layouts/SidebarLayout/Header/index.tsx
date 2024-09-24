@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import {
   Box,
@@ -8,12 +8,19 @@ import {
   Tooltip,
   styled,
   useTheme,
+  FormControl,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
 } from '@mui/material';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import { SidebarContext } from '../../../contexts/SidebarContext';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 
 import HeaderUserbox from './Userbox';
+import { useTranslation } from 'react-i18next';
+// import i18n from 'apps/frontend/src/i18n';
+// const { i18n } = useTranslation();
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -36,6 +43,17 @@ const HeaderWrapper = styled(Box)(
 
 function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
+  const { i18n } = useTranslation();
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');  // Default is English
+
+  const handleLanguageChange = (event: SelectChangeEvent<string>) => {
+    const selectedLanguage = event.target.value;
+    console.log('selectedLanguage', selectedLanguage)
+    setLanguage(selectedLanguage);
+    localStorage.setItem('language', selectedLanguage);
+    i18n.changeLanguage(selectedLanguage);
+  };
+
   const theme = useTheme();
 
   return (
@@ -59,6 +77,17 @@ function Header() {
       }}
     >
       <Box display="flex" alignItems="center">
+      <FormControl sx={{ minWidth: 100, ml: 2, mr: 2 }}>
+          <Select
+            value={language}
+            onChange={handleLanguageChange}
+            displayEmpty
+            sx={{ height: '40px' }}
+          >
+            <MenuItem value="en">English</MenuItem>
+            <MenuItem value="es">Español</MenuItem>
+          </Select>
+        </FormControl>
         <HeaderUserbox />
         <Box
           component="span"

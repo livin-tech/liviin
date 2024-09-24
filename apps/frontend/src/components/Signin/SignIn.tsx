@@ -18,6 +18,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'; // Import React Hook Form
+import { useTranslation } from 'react-i18next';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -64,6 +65,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     formState: { errors },
   } = useForm();
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -102,7 +104,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             variant="h4"
             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
           >
-            Sign in
+            {t('signIn')}
           </Typography>
           <Box
             component="form"
@@ -116,15 +118,15 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             }}
           >
             <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormLabel htmlFor="email">{t('email')}</FormLabel>
               <TextField
                 {...register('email', {
-                  required: 'Email is required',
+                  required: `${t('emailReq')}`,
                   pattern: /\S+@\S+\.\S+/,
                 })}
                 error={Boolean(errors.email)}
                 helperText={
-                  errors.email ? 'Please enter a valid email address.' : ''
+                  errors.email ? `${t('emailValid')}` : ''
                 }
                 id="email"
                 type="email"
@@ -140,14 +142,14 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             </FormControl>
             <FormControl>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <FormLabel htmlFor="password">Password</FormLabel>
+                <FormLabel htmlFor="password">{t('password')}</FormLabel>
               </Box>
               <TextField
                 {...register('password', {
-                  required: 'Password is required',
+                  required: `${t('emailValid')}`,
                   minLength: {
                     value: 6,
-                    message: 'Password must be at least 6 characters long',
+                    message: `${t('passwordDesc')}`,
                   },
                 })}
                 error={Boolean(errors.password)}
@@ -165,21 +167,21 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             </FormControl>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label={t('rememberMe')}
             />
             <ForgotPassword open={open} handleClose={handleClose} />
             <Button type="submit" fullWidth variant="contained">
               Sign in
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
-              Don&apos;t have an account?{' '}
+              {t('signInDesc')}{' '}
               <span>
                 <Link
                   href="/signup"
                   variant="body2"
                   sx={{ alignSelf: 'center' }}
                 >
-                  Sign up
+                  {t('signUp')}
                 </Link>
               </span>
             </Typography>

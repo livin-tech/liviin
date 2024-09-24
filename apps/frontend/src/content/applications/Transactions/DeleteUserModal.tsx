@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { deleteUser } from '../../../lib/redux/auth/userSlice';
+import { useTranslation } from 'react-i18next';
 
 interface DeleteUserModalProps {
   onClose: (value?: string) => void;
@@ -19,6 +20,8 @@ interface DeleteUserModalProps {
 const DeleteUserModal: React.FC<DeleteUserModalProps> = (props) => {
   const { onClose, selectedValue, open } = props;
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +46,7 @@ const DeleteUserModal: React.FC<DeleteUserModalProps> = (props) => {
       <Box>
         <DialogTitle>
           <Typography variant="h3" component="div" fontWeight="bold">
-            Delete User
+          {t('deleteUser')}
           </Typography>
         </DialogTitle>
       </Box>
@@ -57,7 +60,7 @@ const DeleteUserModal: React.FC<DeleteUserModalProps> = (props) => {
         }}
       >
         <Typography variant="h6" component="div">
-          Are you sure you want to delete this user?
+        {t('deleteUserDesc')}
         </Typography>
       </Box>
       <Box
@@ -71,7 +74,7 @@ const DeleteUserModal: React.FC<DeleteUserModalProps> = (props) => {
         }}
       >
         <Button variant="outlined" color="inherit" onClick={handleClose}>
-          Cancel
+        {t('cancel')}
         </Button>
         <Button
           sx={{ marginLeft: 2 }}
@@ -80,7 +83,7 @@ const DeleteUserModal: React.FC<DeleteUserModalProps> = (props) => {
           onClick={handleDelete}
           disabled={isLoading}
         >
-          {isLoading ? 'Deleting...' : 'Confirm'}
+          {isLoading ? t('deleting') : t('confirm')}
         </Button>
       </Box>
     </Dialog>

@@ -24,74 +24,72 @@ import {
   TextField,
 } from '@mui/material';
 
-import { CryptoOrder, CryptoOrderStatus } from '../../../models/crypto_order';
+// import { CryptoOrder, CryptoOrderStatus } from '../../../models/crypto_order';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
-import { fetchUsers } from '../../../lib/redux/auth/userSlice';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { RootState } from '../../../store';
-import CreateUserModal from './CreateUserModal';
-import DeleteUserModal from './DeleteUserModal';
+// import { fetchUsers } from '../../../lib/redux/auth/userSlice';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+// import { RootState } from '../../../store';
+// import CreateUserModal from './CreateUserModal';
+// import DeleteUserModal from './DeleteUserModal';
 import { useTranslation } from 'react-i18next';
+import { PropertyItem } from 'apps/frontend/src/models/property_item';
+import { RootState } from 'apps/frontend/src/store';
 
-interface RecentOrdersTableProps {
+interface PropertyItemsTableProps {
   className?: string;
-  cryptoOrders: CryptoOrder[];
-}
-
-interface Filters {
-  status?: CryptoOrderStatus;
+  propertyItems: PropertyItem[];
 }
 
 const applyFilters = (
-  users: CryptoOrder[],
+  properties: PropertyItem[],
   searchQuery: string
-): CryptoOrder[] => {
-  return users.filter((cryptoOrder) =>
-    cryptoOrder.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    cryptoOrder.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    cryptoOrder.email.toLowerCase().includes(searchQuery.toLowerCase())
+): PropertyItem[] => {
+  return properties.filter((propertyItem) =>
+    propertyItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    propertyItem.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    propertyItem.address.toLowerCase().includes(searchQuery.toLowerCase())
   );
 };
 
 const applyPagination = (
-  users: CryptoOrder[],
+  properties: PropertyItem[],
   page: number,
   limit: number
-): CryptoOrder[] => {
-  return users.slice(page * limit, page * limit + limit);
+): PropertyItem[] => {
+  return properties.slice(page * limit, page * limit + limit);
 };
 
-const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
-  const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
+const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
+  const [selectedPropertyItems, setSelectedPropertyItems] = useState<string[]>(
     []
   );
-  const { users, loading, error } = useAppSelector(
-    (state: RootState) => state.user
-  );
+  // const { properties, loading, error } = useAppSelector(
+  //   (state: RootState) => state.property
+  // );
   const { t } = useTranslation();
 
 
   const dispatch = useAppDispatch();
-  const selectedBulkActions = selectedCryptoOrders.length > 0;
+  const selectedBulkActions = selectedPropertyItems.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [filters, setFilters] = useState<Filters>({
-    status: null,
-  });
+  // const [filters, setFilters] = useState<Filters>({
+  //   status: null,
+  // });
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchUsers());
+  // }, [dispatch]);
 
-  const handleClickOpen = (user: CryptoOrder) => {
+  const handleClickOpen = (property: PropertyItem) => {
     setOpen(true);
-    setSelectedValue(user);
+    setSelectedValue(property);
   };
 
   const handleClose = (value) => {
@@ -108,28 +106,28 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSelectAllCryptoOrders = (
+  const handleSelectAllPropertyItems = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedCryptoOrders(
+    setSelectedPropertyItems(
       event.target.checked
-        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
+        ? propertyItems.map((propertyItem) => propertyItem.id)
         : []
     );
   };
 
-  const handleSelectOneCryptoOrder = (
+  const handleSelectOnePropertyItem = (
     event: ChangeEvent<HTMLInputElement>,
-    cryptoOrderId: string
+    propertyItemId: string
   ): void => {
-    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
-      setSelectedCryptoOrders((prevSelected) => [
+    if (!selectedPropertyItems.includes(propertyItemId)) {
+      setSelectedPropertyItems((prevSelected) => [
         ...prevSelected,
-        cryptoOrderId,
+        propertyItemId,
       ]);
     } else {
-      setSelectedCryptoOrders((prevSelected) =>
-        prevSelected.filter((id) => id !== cryptoOrderId)
+      setSelectedPropertyItems((prevSelected) =>
+        prevSelected.filter((id) => id !== propertyItemId)
       );
     }
   };
@@ -142,31 +140,31 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredCryptoOrders = applyFilters(users, searchQuery);
-  const paginatedCryptoOrders = applyPagination(
-    filteredCryptoOrders,
+  // const filteredPropertyItems = applyFilters(properties, searchQuery);
+  const paginatedPropertyItems = applyPagination(
+    propertyItems,
     page,
     limit
   );
-  const selectedSomeCryptoOrders =
-    selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
-  const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
+  const selectedSomePropertyItems =
+    selectedPropertyItems.length > 0 &&
+    selectedPropertyItems.length < propertyItems.length;
+  const selectedAllPropertyItems =
+    selectedPropertyItems.length === propertyItems.length;
   const theme = useTheme();
 
   return (
     <Card>
-      <CreateUserModal
+      {/* <CreateUserModal
         selectedUser={selectedValue}
         open={open}
         onClose={handleClose}
-      />
-      <DeleteUserModal
+      /> */}
+      {/* <DeleteUserModal
         selectedValue={selectedValue}
         open={openDeleteDialog}
         onClose={handleUserDeleteDialog}
-      />
+      /> */}
       {selectedBulkActions && (
         <Box flex={1} p={2}>
           <BulkActions />
@@ -179,13 +177,15 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                <TextField
                 fullWidth
                 variant="outlined"
-                placeholder={t('searchUsers')}
+                placeholder="Search property..."
+                // placeholder={t('searchUsers')}
                 value={searchQuery}
                 onChange={handleSearchChange}
               />
             </Box>
           }
-          title={t('usersTitleSidebar')}
+          title="Properties"
+          // title={t('usersTitleSidebar')}
         />
       )}
       <Divider />
@@ -196,38 +196,38 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell padding="checkbox">
                 <Checkbox
                   color="primary"
-                  checked={selectedAllCryptoOrders}
-                  indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllCryptoOrders}
+                  checked={selectedAllPropertyItems}
+                  indeterminate={selectedSomePropertyItems}
+                  onChange={handleSelectAllPropertyItems}
                 />
               </TableCell>
-              <TableCell>{t('firstName')}</TableCell>
-              <TableCell>{t('lastName')}</TableCell>
-              <TableCell>{t('email')}</TableCell>
-              <TableCell align="right">{t('role')}</TableCell>
+              <TableCell>{t('name')}</TableCell>
+              <TableCell>{t('city')}</TableCell>
+              <TableCell>{t('address')}</TableCell>
+              {/* <TableCell align="right">{t('role')}</TableCell> */}
               {/* <TableCell align="right">Status</TableCell> */}
               <TableCell align="right">{t('actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedCryptoOrders.map((cryptoOrder) => {
-              const isCryptoOrderSelected = selectedCryptoOrders.includes(
-                cryptoOrder.id
+            {paginatedPropertyItems.map((propertyItem) => {
+              const isPropertyItemSelected = selectedPropertyItems.includes(
+                propertyItem.id
               );
               return (
                 <TableRow
                   hover
-                  key={cryptoOrder.id}
-                  selected={isCryptoOrderSelected}
+                  key={propertyItem.id}
+                  selected={isPropertyItemSelected}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isCryptoOrderSelected}
+                      checked={isPropertyItemSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneCryptoOrder(event, cryptoOrder.id)
+                        handleSelectOnePropertyItem(event, propertyItem.id)
                       }
-                      value={isCryptoOrderSelected}
+                      value={isPropertyItemSelected}
                     />
                   </TableCell>
                   <TableCell>
@@ -238,10 +238,10 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.firstName}
+                      {propertyItem.name}
                     </Typography>
                     {/* <Typography variant="body2" color="text.secondary" noWrap>
-                      {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
+                      {format(propertyItem.orderDate, 'MMMM dd yyyy')}
                     </Typography> */}
                   </TableCell>
                   <TableCell>
@@ -252,7 +252,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.lastName}
+                      {propertyItem.city}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -263,10 +263,10 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.email}
+                      {propertyItem.address}
                     </Typography>
                   </TableCell>
-                  <TableCell align="right">
+                  {/* <TableCell align="right">
                     <Typography
                       variant="body1"
                       fontWeight="bold"
@@ -274,13 +274,13 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.role}
+                      {propertyItem.role}
                     </Typography>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell align="right">
                     <Tooltip title={t('editUser')} arrow>
                       <IconButton
-                        onClick={() => handleClickOpen(cryptoOrder)}
+                        onClick={() => handleClickOpen(propertyItem)}
                         sx={{
                           '&:hover': {
                             background: theme.colors.primary.lighter,
@@ -295,7 +295,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     </Tooltip>
                     <Tooltip title={t('deleteUser')} arrow>
                       <IconButton
-                        onClick={() => handleUserDeleteDialog(cryptoOrder)}
+                        onClick={() => handleUserDeleteDialog(propertyItem)}
                         sx={{
                           '&:hover': { background: theme.colors.error.lighter },
                           color: theme.palette.error.main,
@@ -317,7 +317,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
         <TablePagination
           component="div"
           labelRowsPerPage={t('rowsPerPage')}
-          count={filteredCryptoOrders.length}
+          count={propertyItems.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -329,12 +329,12 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   );
 };
 
-RecentOrdersTable.propTypes = {
-  cryptoOrders: PropTypes.array.isRequired,
+PropertyItemsTable.propTypes = {
+  propertyItems: PropTypes.array.isRequired,
 };
 
-RecentOrdersTable.defaultProps = {
-  cryptoOrders: [],
+PropertyItemsTable.defaultProps = {
+  propertyItems: [],
 };
 
-export default RecentOrdersTable;
+export default PropertyItemsTable;

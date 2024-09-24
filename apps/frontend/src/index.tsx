@@ -8,6 +8,7 @@ import { SidebarProvider } from '../src/contexts/SidebarContext';
 import * as serviceWorker from '../src/serviceWorker';
 import { Provider } from 'react-redux';
 import store from './store';
+import './i18n';
 
 ReactDOM.render(
   <HelmetProvider>

@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { createUser, updateUser } from '../../../lib/redux/auth/userSlice';
+import { t } from 'i18next';
 
 interface User {
   id: string;
@@ -88,7 +89,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
       <Box sx={{ padding: 3 }}>
         <DialogTitle>
           <Typography variant="h3" component="div" fontWeight="bold">
-            {selectedUser ? 'Edit' : 'Create'} User
+            {selectedUser ? t('editUser') : t('createUser')}
           </Typography>
         </DialogTitle>
       </Box>
@@ -100,12 +101,12 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
             <Grid item xs={6}>
               <FormControl fullWidth variant="outlined" required>
                 <TextField
-                  label="First Name"
+                  label={t('firstName')}
                   variant="outlined"
                   error={!!errors.firstName}
-                  helperText={errors.firstName ? 'First name is required' : ''}
+                  helperText={errors.firstName ? t('firstNameReq') : ''}
                   {...register('firstName', {
-                    required: 'First name is required',
+                    required: t('firstNameReq'),
                   })}
                   fullWidth
                 />
@@ -115,12 +116,12 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
             <Grid item xs={6}>
               <FormControl fullWidth variant="outlined" required>
                 <TextField
-                  label="Last Name"
+                  label={t('lastName')}
                   variant="outlined"
                   error={!!errors.lastName}
-                  helperText={errors.lastName ? 'Last name is required' : ''}
+                  helperText={errors.lastName ? t('lastNameReq') : ''}
                   {...register('lastName', {
-                    required: 'Last name is required',
+                    required: t('lastNameReq'),
                   })}
                   fullWidth
                 />
@@ -130,16 +131,16 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
             <Grid item xs={12}>
               <FormControl fullWidth variant="outlined" required>
                 <TextField
-                  label="Email"
+                  label={t('email')}
                   type="email"
                   variant="outlined"
                   error={!!errors.email}
-                  helperText={errors.email ? 'Enter a valid email' : ''}
+                  helperText={errors.email ? t('emailValid') : ''}
                   {...register('email', {
-                    required: 'Email is required',
+                    required: t('emailReq'),
                     pattern: {
                       value: /\S+@\S+\.\S+/,
-                      message: 'Enter a valid email',
+                      message: t('emailValid'),
                     },
                   })}
                   fullWidth
@@ -157,7 +158,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
             }}
           >
             <Button variant="outlined" color="inherit" onClick={handleClose}>
-              Cancel
+              {t('cancel')}
             </Button>
             <Button
               sx={{ marginLeft: 2 }}
@@ -166,7 +167,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
               color="primary"
               disabled={loading}
             >
-              Done
+              {t('done')}
             </Button>
           </Box>
         </form>
