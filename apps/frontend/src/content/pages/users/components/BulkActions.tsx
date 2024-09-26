@@ -8,7 +8,7 @@ import {
   ListItemText,
   ListItem,
   List,
-  Typography
+  Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -70,11 +70,11 @@ function BulkActions() {
         onClose={closeMenu}
         anchorOrigin={{
           vertical: 'center',
-          horizontal: 'center'
+          horizontal: 'center',
         }}
         transformOrigin={{
           vertical: 'center',
-          horizontal: 'center'
+          horizontal: 'center',
         }}
       >
         <List sx={{ p: 1 }} component="nav">

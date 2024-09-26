@@ -7,8 +7,8 @@ import {
   DialogTitle,
   Button,
 } from '@mui/material';
-import { useAppDispatch } from '../../../hooks/hooks';
-import { deleteUser } from '../../../lib/redux/auth/userSlice';
+import { useAppDispatch } from '../../../../hooks/hooks';
+import { deleteUser } from '../../../../lib/redux/auth/userSlice';
 import { useTranslation } from 'react-i18next';
 
 interface DeleteUserModalProps {

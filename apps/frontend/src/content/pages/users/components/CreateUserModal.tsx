@@ -11,8 +11,8 @@ import {
   FormControl,
   TextField,
 } from '@mui/material';
-import { useAppDispatch } from '../../../hooks/hooks';
-import { createUser, updateUser } from '../../../lib/redux/auth/userSlice';
+import { useAppDispatch } from '../../../../hooks/hooks';
+import { createUser, updateUser } from '../../../../lib/redux/auth/userSlice';
 import { t } from 'i18next';
 
 interface User {

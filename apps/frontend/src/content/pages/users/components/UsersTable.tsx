@@ -4,8 +4,6 @@ import {
   Tooltip,
   Divider,
   Box,
-  FormControl,
-  InputLabel,
   Card,
   Checkbox,
   IconButton,
@@ -16,70 +14,51 @@ import {
   TablePagination,
   TableRow,
   TableContainer,
-  Select,
-  MenuItem,
   Typography,
   useTheme,
   CardHeader,
   TextField,
 } from '@mui/material';
 
-import { CryptoOrder, CryptoOrderStatus } from '../../../models/crypto_order';
+import { User } from '../../../../models/users';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import BulkActions from './BulkActions';
-import { fetchUsers } from '../../../lib/redux/auth/userSlice';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { RootState } from '../../../store';
+import { fetchUsers } from '../../../../lib/redux/auth/userSlice';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+import { RootState } from '../../../../store';
+import { useTranslation } from 'react-i18next';
 import CreateUserModal from './CreateUserModal';
 import DeleteUserModal from './DeleteUserModal';
-import { useTranslation } from 'react-i18next';
+import BulkActions from './BulkActions';
 
-interface RecentOrdersTableProps {
-  className?: string;
-  cryptoOrders: CryptoOrder[];
-}
-
-interface Filters {
-  status?: CryptoOrderStatus;
-}
-
-const applyFilters = (
-  users: CryptoOrder[],
-  searchQuery: string
-): CryptoOrder[] => {
-  return users.filter((cryptoOrder) =>
-    cryptoOrder.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    cryptoOrder.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    cryptoOrder.email.toLowerCase().includes(searchQuery.toLowerCase())
+const applyFilters = (users: User[], searchQuery: string): User[] => {
+  return users.filter(
+    (user) =>
+      user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 };
 
 const applyPagination = (
-  users: CryptoOrder[],
+  users: User[],
   page: number,
   limit: number
-): CryptoOrder[] => {
+): User[] => {
   return users.slice(page * limit, page * limit + limit);
 };
 
-const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
-  const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
-    []
-  );
+const UsersTable: FC = () => {
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const { users, loading, error } = useAppSelector(
     (state: RootState) => state.user
   );
   const { t } = useTranslation();
 
-
   const dispatch = useAppDispatch();
-  const selectedBulkActions = selectedCryptoOrders.length > 0;
+  const selectedBulkActions = selectedUsers.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
-  const [filters, setFilters] = useState<Filters>({
-    status: null,
-  });
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
@@ -89,7 +68,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  const handleClickOpen = (user: CryptoOrder) => {
+  const handleClickOpen = (user: User) => {
     setOpen(true);
     setSelectedValue(user);
   };
@@ -108,28 +87,19 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSelectAllCryptoOrders = (
-    event: ChangeEvent<HTMLInputElement>
-  ): void => {
-    setSelectedCryptoOrders(
-      event.target.checked
-        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
-        : []
-    );
+  const handleSelectAllUsers = (event: ChangeEvent<HTMLInputElement>): void => {
+    setSelectedUsers(event.target.checked ? users.map((user) => user.id) : []);
   };
 
-  const handleSelectOneCryptoOrder = (
+  const handleSelectOneUser = (
     event: ChangeEvent<HTMLInputElement>,
-    cryptoOrderId: string
+    userId: string
   ): void => {
-    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
-      setSelectedCryptoOrders((prevSelected) => [
-        ...prevSelected,
-        cryptoOrderId,
-      ]);
+    if (!selectedUsers.includes(userId)) {
+      setSelectedUsers((prevSelected) => [...prevSelected, userId]);
     } else {
-      setSelectedCryptoOrders((prevSelected) =>
-        prevSelected.filter((id) => id !== cryptoOrderId)
+      setSelectedUsers((prevSelected) =>
+        prevSelected.filter((id) => id !== userId)
       );
     }
   };
@@ -142,17 +112,11 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredCryptoOrders = applyFilters(users, searchQuery);
-  const paginatedCryptoOrders = applyPagination(
-    filteredCryptoOrders,
-    page,
-    limit
-  );
-  const selectedSomeCryptoOrders =
-    selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
-  const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
+  const filteredUsers = applyFilters(users, searchQuery);
+  const paginatedUsers = applyPagination(filteredUsers, page, limit);
+  const selectedSomeUsers =
+    selectedUsers.length > 0 && selectedUsers.length < users.length;
+  const selectedAllUsers = selectedUsers.length === users.length;
   const theme = useTheme();
 
   return (
@@ -176,7 +140,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
         <CardHeader
           action={
             <Box width={150}>
-               <TextField
+              <TextField
                 fullWidth
                 variant="outlined"
                 placeholder={t('searchUsers')}
@@ -196,9 +160,9 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell padding="checkbox">
                 <Checkbox
                   color="primary"
-                  checked={selectedAllCryptoOrders}
-                  indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllCryptoOrders}
+                  checked={selectedAllUsers}
+                  indeterminate={selectedSomeUsers}
+                  onChange={handleSelectAllUsers}
                 />
               </TableCell>
               <TableCell>{t('firstName')}</TableCell>
@@ -210,24 +174,18 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedCryptoOrders.map((cryptoOrder) => {
-              const isCryptoOrderSelected = selectedCryptoOrders.includes(
-                cryptoOrder.id
-              );
+            {paginatedUsers.map((user) => {
+              const isUserSelected = selectedUsers.includes(user.id);
               return (
-                <TableRow
-                  hover
-                  key={cryptoOrder.id}
-                  selected={isCryptoOrderSelected}
-                >
+                <TableRow hover key={user.id} selected={isUserSelected}>
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isCryptoOrderSelected}
+                      checked={isUserSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneCryptoOrder(event, cryptoOrder.id)
+                        handleSelectOneUser(event, user.id)
                       }
-                      value={isCryptoOrderSelected}
+                      value={isUserSelected}
                     />
                   </TableCell>
                   <TableCell>
@@ -238,7 +196,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.firstName}
+                      {user.firstName}
                     </Typography>
                     {/* <Typography variant="body2" color="text.secondary" noWrap>
                       {format(cryptoOrder.orderDate, 'MMMM dd yyyy')}
@@ -252,7 +210,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.lastName}
+                      {user.lastName}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -263,7 +221,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.email}
+                      {user.email}
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
@@ -274,13 +232,13 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.role}
+                      {user.role}
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
                     <Tooltip title={t('editUser')} arrow>
                       <IconButton
-                        onClick={() => handleClickOpen(cryptoOrder)}
+                        onClick={() => handleClickOpen(user)}
                         sx={{
                           '&:hover': {
                             background: theme.colors.primary.lighter,
@@ -295,7 +253,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     </Tooltip>
                     <Tooltip title={t('deleteUser')} arrow>
                       <IconButton
-                        onClick={() => handleUserDeleteDialog(cryptoOrder)}
+                        onClick={() => handleUserDeleteDialog(user)}
                         sx={{
                           '&:hover': { background: theme.colors.error.lighter },
                           color: theme.palette.error.main,
@@ -317,7 +275,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
         <TablePagination
           component="div"
           labelRowsPerPage={t('rowsPerPage')}
-          count={filteredCryptoOrders.length}
+          count={filteredUsers.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -329,12 +287,12 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   );
 };
 
-RecentOrdersTable.propTypes = {
-  cryptoOrders: PropTypes.array.isRequired,
+UsersTable.propTypes = {
+  users: PropTypes.array.isRequired,
 };
 
-RecentOrdersTable.defaultProps = {
-  cryptoOrders: [],
+UsersTable.defaultProps = {
+  users: [],
 };
 
-export default RecentOrdersTable;
+export default UsersTable;

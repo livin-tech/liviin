@@ -9,7 +9,7 @@ import Property from './content/pages/property';
 import StatusComingSoon from './content/pages/Status/ComingSoon';
 import Status404 from './content/pages/Status/Status404';
 import DashboardCrypto from './content/dashboards/Crypto';
-import ApplicationsTransactions from './content/applications/Transactions';
+import Users from './content/pages/users';
 
 const routes: RouteObject[] = [
   {
@@ -26,7 +26,7 @@ const routes: RouteObject[] = [
       },
       {
         path: 'users',
-        element: <ApplicationsTransactions />,
+        element: <Users />,
       },
       {
         path: 'property',
