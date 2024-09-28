@@ -4,8 +4,9 @@
   "license": "MIT",
   "scripts": {
     "pod": "nx run mobile:pod-install",
+    "backend": "nx serve backend",
     "mobile": "nx run mobile:start",
-    "backend": "nx serve backend"
+    "frontend": "nx run frontend:start"
   },
   "private": true,
   "dependencies": {
