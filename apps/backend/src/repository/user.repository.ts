@@ -1,4 +1,4 @@
-import { UserModel, IUser } from '../models/user.model';
+import { IUser, UserModel } from '../models/user.model';
 
 // Define a custom User repository
 export class UserRepository {
@@ -8,14 +8,14 @@ export class UserRepository {
     return await user.save();
   }
 
-  // Find a user by ID
-  async findUserById(userId: string): Promise<IUser | null> {
-    return UserModel.findById(userId);
+  // Find a user by firebaseID
+  async findUserByFirebaseID(firebaseID: string): Promise<IUser | null> {
+    return UserModel.findOne({ firebaseID });
   }
 
   // Find a user by email
   async findUserByEmail(email: string): Promise<IUser | null> {
-    return UserModel.findOne({email});
+    return UserModel.findOne({ email });
   }
 
   // Get all users
@@ -24,12 +24,12 @@ export class UserRepository {
   }
 
   // Update a user
-  async updateUser(userId: string, updateData: Partial<IUser>): Promise<IUser | null> {
-    return UserModel.findByIdAndUpdate(userId, updateData, { new: true });
+  async updateUser(firebaseID: string, updateData: Partial<IUser>): Promise<IUser | null> {
+    return UserModel.findOneAndUpdate({ firebaseID }, updateData, { new: true });
   }
 
   // Delete a user
-  async deleteUser(userId: string): Promise<IUser | null> {
-    return UserModel.findByIdAndDelete(userId);
+  async deleteUser(firebaseID: string): Promise<IUser | null> {
+    return UserModel.findOneAndDelete({ firebaseID });
   }
 }
