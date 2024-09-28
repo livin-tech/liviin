@@ -1,17 +1,17 @@
 import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
 
-import SidebarLayout from '../src/layouts/SidebarLayout';
+import SidebarLayout from '../layouts/SidebarLayout';
 
-import SignIn from './components/Signin/SignIn';
-import SignUp from './components/Signin/SignUp';
-import Property from './content/pages/property';
-import StatusComingSoon from './content/pages/Status/ComingSoon';
-import Status404 from './content/pages/Status/Status404';
-import DashboardCrypto from './content/dashboards/Crypto';
-import Users from './content/pages/users';
+import SignIn from '../components/Signin/SignIn';
+import SignUp from '../components/Signin/SignUp';
+import Property from '../content/pages/property';
+import StatusComingSoon from '../content/pages/Status/ComingSoon';
+import Status404 from '../content/pages/Status/Status404';
+import DashboardCrypto from '../content/dashboards/Crypto';
+import Users from '../content/pages/users';
 
-const routes: RouteObject[] = [
+export const Router: RouteObject[] = [
   {
     path: '/',
     element: <SidebarLayout />,
@@ -55,5 +55,3 @@ const routes: RouteObject[] = [
     ],
   },
 ];
-
-export default routes;

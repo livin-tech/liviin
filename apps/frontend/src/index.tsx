@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -10,7 +10,10 @@ import { Provider } from 'react-redux';
 import store from './store';
 import './i18n';
 
-ReactDOM.render(
+const container: any = document.getElementById('root');
+const root = createRoot(container!);
+
+root.render(
   <HelmetProvider>
     <Provider store={store}>
       <SidebarProvider>
@@ -19,8 +22,7 @@ ReactDOM.render(
         </BrowserRouter>
       </SidebarProvider>
     </Provider>
-  </HelmetProvider>,
-  document.getElementById('root')
+  </HelmetProvider>
 );
 
 serviceWorker.unregister();

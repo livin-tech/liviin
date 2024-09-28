@@ -60,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-redux": "^7.1.33",
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-config-react-app": "^7.0.1",
