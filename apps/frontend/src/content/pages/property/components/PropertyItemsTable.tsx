@@ -36,6 +36,10 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import { useTranslation } from 'react-i18next';
 import { PropertyItem } from 'apps/frontend/src/models/property_item';
 import { RootState } from 'apps/frontend/src/store';
+import CreatePropertyModal from './CreatePropertyModal';
+import DeletePropertyModal from './DeletePropertyModal';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface PropertyItemsTableProps {
   className?: string;
@@ -46,10 +50,10 @@ const applyFilters = (
   properties: PropertyItem[],
   searchQuery: string
 ): PropertyItem[] => {
-  return properties.filter((propertyItem) =>
-    propertyItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    propertyItem.city.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    propertyItem.address.toLowerCase().includes(searchQuery.toLowerCase())
+  return properties.filter(
+    (propertyItem) =>
+      propertyItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      propertyItem.type.toLowerCase().includes(searchQuery.toLowerCase())
   );
 };
 
@@ -65,11 +69,8 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
   const [selectedPropertyItems, setSelectedPropertyItems] = useState<string[]>(
     []
   );
-  // const { properties, loading, error } = useAppSelector(
-  //   (state: RootState) => state.property
-  // );
-  const { t } = useTranslation();
 
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
   const selectedBulkActions = selectedPropertyItems.length > 0;
@@ -141,11 +142,7 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
   };
 
   // const filteredPropertyItems = applyFilters(properties, searchQuery);
-  const paginatedPropertyItems = applyPagination(
-    propertyItems,
-    page,
-    limit
-  );
+  const paginatedPropertyItems = applyPagination(propertyItems, page, limit);
   const selectedSomePropertyItems =
     selectedPropertyItems.length > 0 &&
     selectedPropertyItems.length < propertyItems.length;
@@ -155,16 +152,16 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
 
   return (
     <Card>
-      {/* <CreateUserModal
-        selectedUser={selectedValue}
+      <CreatePropertyModal
+        selectedProperty={selectedValue}
         open={open}
         onClose={handleClose}
-      /> */}
-      {/* <DeleteUserModal
+      />
+      <DeletePropertyModal
         selectedValue={selectedValue}
         open={openDeleteDialog}
         onClose={handleUserDeleteDialog}
-      /> */}
+      />
       {selectedBulkActions && (
         <Box flex={1} p={2}>
           <BulkActions />
@@ -174,7 +171,7 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
         <CardHeader
           action={
             <Box width={150}>
-               <TextField
+              <TextField
                 fullWidth
                 variant="outlined"
                 placeholder="Search property..."
@@ -201,12 +198,19 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
                   onChange={handleSelectAllPropertyItems}
                 />
               </TableCell>
-              <TableCell>{t('name')}</TableCell>
-              <TableCell>{t('city')}</TableCell>
-              <TableCell>{t('address')}</TableCell>
-              {/* <TableCell align="right">{t('role')}</TableCell> */}
-              {/* <TableCell align="right">Status</TableCell> */}
-              <TableCell align="right">{t('actions')}</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Rooms</TableCell>
+              <TableCell>Bathrooms</TableCell>
+              <TableCell>Living Room</TableCell>
+              <TableCell>Dining Room</TableCell>
+              <TableCell>Hall Room</TableCell>
+              <TableCell>Family Room</TableCell>
+              <TableCell>Kitchen</TableCell>
+              <TableCell>Service Room</TableCell>
+              <TableCell>Laundry Room</TableCell>
+              <TableCell>Balcony</TableCell>
+              <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -227,85 +231,91 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
                         handleSelectOnePropertyItem(event, propertyItem.id)
                       }
-                      value={isPropertyItemSelected}
                     />
                   </TableCell>
+                  <TableCell>{propertyItem.name}</TableCell>
+                  <TableCell>{propertyItem.type}</TableCell>
+                  <TableCell>{propertyItem.rooms}</TableCell>
+                  <TableCell>{propertyItem.bathrooms}</TableCell>
                   <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {propertyItem.name}
-                    </Typography>
-                    {/* <Typography variant="body2" color="text.secondary" noWrap>
-                      {format(propertyItem.orderDate, 'MMMM dd yyyy')}
-                    </Typography> */}
+                    {propertyItem.livingRoom ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </TableCell>
                   <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {propertyItem.city}
-                    </Typography>
+                    {propertyItem.diningRoom ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </TableCell>
                   <TableCell>
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {propertyItem.address}
-                    </Typography>
+                    {propertyItem.hallRoom ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
                   </TableCell>
-                  {/* <TableCell align="right">
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {propertyItem.role}
-                    </Typography>
-                  </TableCell> */}
+                  <TableCell>
+                    {propertyItem.familyRoom ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {propertyItem.kitchen ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {propertyItem.serviceRoom ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {propertyItem.laundaryRoom ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {propertyItem.balcony ? (
+                      <CheckIcon color="success" />
+                    ) : (
+                      <CloseIcon color="error" />
+                    )}
+                  </TableCell>
                   <TableCell align="right">
-                    <Tooltip title={t('editUser')} arrow>
-                      <IconButton
-                        onClick={() => handleClickOpen(propertyItem)}
-                        sx={{
-                          '&:hover': {
-                            background: theme.colors.primary.lighter,
-                          },
-                          color: theme.palette.primary.main,
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <EditTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
-                    <Tooltip title={t('deleteUser')} arrow>
-                      <IconButton
-                        onClick={() => handleUserDeleteDialog(propertyItem)}
-                        sx={{
-                          '&:hover': { background: theme.colors.error.lighter },
-                          color: theme.palette.error.main,
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <DeleteTwoToneIcon fontSize="small" />
-                      </IconButton>
-                    </Tooltip>
+                    <IconButton
+                      sx={{
+                        '&:hover': {
+                          background: theme.colors.primary.lighter,
+                        },
+                        color: theme.palette.primary.main,
+                      }}
+                      color="inherit"
+                      size="small"
+                    >
+                      <EditTwoToneIcon fontSize="small" />
+                    </IconButton>
+                    <IconButton
+                      sx={{
+                        '&:hover': { background: theme.colors.error.lighter },
+                        color: theme.palette.error.main,
+                      }}
+                      color="inherit"
+                      size="small"
+                    >
+                      <DeleteTwoToneIcon fontSize="small" />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               );

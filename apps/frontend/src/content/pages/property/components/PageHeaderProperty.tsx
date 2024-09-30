@@ -4,6 +4,7 @@ import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useState } from 'react';
 // import CreateUserModal from './CreateUserModal';
 import { useTranslation } from 'react-i18next';
+import CreatePropertyModal from './CreatePropertyModal';
 
 function PageHeaderProperty() {
   const { t } = useTranslation();
@@ -27,11 +28,11 @@ function PageHeaderProperty() {
 
   return (
     <>
-      {/* <CreateUserModal
-        selectedValue={selectedValue}
+      <CreatePropertyModal
+        selectedProperty={selectedValue}
         open={open}
         onClose={handleClose}
-      /> */}
+      />
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           <Typography variant="h3" component="h3" gutterBottom>

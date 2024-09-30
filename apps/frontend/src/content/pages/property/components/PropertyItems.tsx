@@ -2,75 +2,90 @@ import { Card } from '@mui/material';
 import { PropertyItem } from '../../../../models/property_item';
 import RecentOrdersTable from './PropertyItemsTable';
 import { subDays } from 'date-fns';
+import PropertyItemsTable from './PropertyItemsTable';
 
 function PropertyItems() {
   const propertyItems: PropertyItem[] = [
     {
       id: '1',
-      name: 'John Doe',
-      city: 'New York',
-      address: '123 Main St',
+      name: 'Ocean View Apartment',
+      type: 'Apartment',
+      rooms: 3,
+      bathrooms: 2,
+      livingRoom: true,
+      diningRoom: true,
+      hallRoom: false,
+      familyRoom: false,
+      kitchen: true,
+      serviceRoom: false,
+      laundaryRoom: true,
+      balcony: true,
     },
     {
       id: '2',
-      name: 'Jane Smith',
-      city: 'Los Angeles',
-      address: '456 Elm St',
+      name: 'Downtown Loft',
+      type: 'Loft',
+      rooms: 2,
+      bathrooms: 1,
+      livingRoom: true,
+      diningRoom: false,
+      hallRoom: false,
+      familyRoom: false,
+      kitchen: true,
+      serviceRoom: false,
+      laundaryRoom: false,
+      balcony: false,
     },
     {
       id: '3',
-      name: 'Robert Johnson',
-      city: 'Chicago',
-      address: '789 Oak St',
+      name: 'Suburban House',
+      type: 'House',
+      rooms: 4,
+      bathrooms: 3,
+      livingRoom: true,
+      diningRoom: true,
+      hallRoom: true,
+      familyRoom: true,
+      kitchen: true,
+      serviceRoom: true,
+      laundaryRoom: true,
+      balcony: false,
     },
     {
       id: '4',
-      name: 'Emily Davis',
-      city: 'Houston',
-      address: '101 Maple Ave',
+      name: 'Mountain Cabin',
+      type: 'Cabin',
+      rooms: 2,
+      bathrooms: 1,
+      livingRoom: true,
+      diningRoom: false,
+      hallRoom: false,
+      familyRoom: false,
+      kitchen: true,
+      serviceRoom: false,
+      laundaryRoom: true,
+      balcony: true,
     },
     {
       id: '5',
-      name: 'Michael Brown',
-      city: 'Phoenix',
-      address: '202 Pine St',
+      name: 'Luxury Villa',
+      type: 'Villa',
+      rooms: 6,
+      bathrooms: 5,
+      livingRoom: true,
+      diningRoom: true,
+      hallRoom: true,
+      familyRoom: true,
+      kitchen: true,
+      serviceRoom: true,
+      laundaryRoom: true,
+      balcony: true,
     },
-    {
-      id: '6',
-      name: 'Linda Williams',
-      city: 'Philadelphia',
-      address: '303 Birch St',
-    },
-    {
-      id: '7',
-      name: 'David Wilson',
-      city: 'San Antonio',
-      address: '404 Cedar Rd',
-    },
-    {
-      id: '8',
-      name: 'Sarah Martinez',
-      city: 'San Diego',
-      address: '505 Spruce St',
-    },
-    {
-      id: '9',
-      name: 'James Taylor',
-      city: 'Dallas',
-      address: '606 Palm Ave',
-    },
-    {
-      id: '10',
-      name: 'Patricia Anderson',
-      city: 'San Jose',
-      address: '707 Oak Grove',
-    }
   ];
-  
 
   return (
     <Card>
-      <RecentOrdersTable propertyItems={propertyItems} />
+      <PropertyItemsTable propertyItems={propertyItems} />
     </Card>
   );
 }
