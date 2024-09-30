@@ -40,6 +40,11 @@ export const Router: RouteObject[] = [
         path: 'payment',
         element: <StatusComingSoon />,
       },
+    ],
+  },
+  {
+    path: '/',
+    children: [
       {
         path: 'signin',
         element: <SignIn />,

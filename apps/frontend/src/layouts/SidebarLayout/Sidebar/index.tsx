@@ -14,6 +14,7 @@ import {
 
 import SidebarMenu from './SidebarMenu';
 import Logo from '../../../components/LogoSign';
+import { ReactComponent as LogoLiviin } from '../../../assets/icons/livin-icon.svg';
 
 const SidebarWrapper = styled(Box)(
   ({ theme }) => `
@@ -55,8 +56,7 @@ function Sidebar() {
                 width: 52,
               }}
             >
-              {/* <Logo /> */}
-              {/* <Typography>Livin</Typography> */}
+              <LogoLiviin />
               <Typography variant="h3" component="h3" gutterBottom>
                 LIVIIN
               </Typography>

@@ -13,12 +13,12 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
-import { SitemarkIcon } from './CustomIcons';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'; // Import React Hook Form
 import { useTranslation } from 'react-i18next';
+import { ReactComponent as LogoLiviin } from '../../assets/icons/livin-icon.svg';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -98,7 +98,9 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
-          <SitemarkIcon />
+          <Box sx={{ textAlign: 'center' }}>
+            <LogoLiviin />
+          </Box>
           <Typography
             component="h1"
             variant="h4"
@@ -125,9 +127,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
                   pattern: /\S+@\S+\.\S+/,
                 })}
                 error={Boolean(errors.email)}
-                helperText={
-                  errors.email ? `${t('emailValid')}` : ''
-                }
+                helperText={errors.email ? `${t('emailValid')}` : ''}
                 id="email"
                 type="email"
                 name="email"

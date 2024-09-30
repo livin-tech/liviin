@@ -12,10 +12,10 @@ import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import ForgotPassword from './ForgotPassword';
-import { SitemarkIcon } from './CustomIcons';
 import { useAppDispatch } from '../../hooks/hooks';
 import { signupUser } from '../../lib/redux/auth/authSlice';
 import { useTranslation } from 'react-i18next';
+import { ReactComponent as LogoLiviin } from '../../assets/icons/livin-icon.svg';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -81,7 +81,9 @@ export default function SignUp() {
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
-          <SitemarkIcon />
+          <Box sx={{ textAlign: 'center' }}>
+            <LogoLiviin />
+          </Box>
           <Typography
             component="h1"
             variant="h4"
@@ -122,11 +124,7 @@ export default function SignUp() {
               <TextField
                 error={!!errors.password}
                 inputRef={passwordRef}
-                helperText={
-                  errors.password
-                    ? `${t('passwordDesc')}`
-                    : ''
-                }
+                helperText={errors.password ? `${t('passwordDesc')}` : ''}
                 id="password"
                 type="password"
                 placeholder="••••••"
@@ -140,7 +138,9 @@ export default function SignUp() {
               />
             </FormControl>
             <FormControl>
-              <FormLabel htmlFor="confirm-password">{t('confirmPassword')}</FormLabel>
+              <FormLabel htmlFor="confirm-password">
+                {t('confirmPassword')}
+              </FormLabel>
               <TextField
                 error={!!errors.confirmPassword}
                 helperText={
@@ -162,12 +162,12 @@ export default function SignUp() {
             </FormControl>
             <ForgotPassword open={open} handleClose={handleClose} />
             <Button type="submit" fullWidth variant="contained">
-            {t('signUp')}
+              {t('signUp')}
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
               {t('signupDesc')}{' '}
               <Link href="/signin" variant="body2">
-              {t('signIn')}
+                {t('signIn')}
               </Link>
             </Typography>
           </Box>
