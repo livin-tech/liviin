@@ -4,7 +4,10 @@
     "allowJs": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true
+    "outDir": "./lib/",
+    "strict": true,
+    "rootDir": "./src",
+    "resolveJsonModule": true,
   },
   "files": [],
   "include": [],
