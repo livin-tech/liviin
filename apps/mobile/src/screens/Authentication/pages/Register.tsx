@@ -35,7 +35,7 @@ export const Register = ({ navigation }) => {
   };
 
   const registerWithEmail = () => {
-    setOpenModal(true);
+    navigation.navigate(Routes.SignUp);
   };
 
   const handleLoginPress = () => {
