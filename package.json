@@ -9,7 +9,7 @@
     "fe": "nx run frontend:start",
     "i:fe": "cd apps/frontend; yarn; cd ../..",
     "i:mb": "cd apps/mobile; yarn; cd ../..",
-    "build:fe": "cd apps/frontend; yarn build; cd .."
+    "build:fe": "cd apps/frontend; yarn build; cd ../.."
   },
   "private": true,
   "dependencies": {
