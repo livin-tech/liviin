@@ -4,9 +4,11 @@
   "license": "MIT",
   "scripts": {
     "pod": "nx run mobile:pod-install",
-    "backend": "nx serve backend",
-    "mobile": "nx run mobile:start",
-    "frontend": "nx run frontend:start"
+    "be": "nx serve backend",
+    "mb": "nx run mobile:start",
+    "fe": "nx run frontend:start",
+    "i:fe": "cd apps/frontend; yarn; cd ../..",
+    "i:mb": "cd apps/mobile; yarn; cd ../.."
   },
   "private": true,
   "dependencies": {
