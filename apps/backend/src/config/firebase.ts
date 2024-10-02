@@ -6,4 +6,8 @@ import admin from 'firebase-admin';
 //   // credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
 // });
 
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+});
+
 export default admin
