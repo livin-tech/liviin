@@ -50,7 +50,7 @@ const applyPagination = (
 
 const UsersTable: FC = () => {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
-  const { users, loading, error } = useAppSelector(
+  const { users } = useAppSelector(
     (state: RootState) => state.user
   );
   const { t } = useTranslation();

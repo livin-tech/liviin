@@ -2,22 +2,10 @@ import { useEffect, useState } from 'react';
 import {
   Box,
   Typography,
-  Container,
-  Divider,
-  OutlinedInput,
-  IconButton,
-  Tooltip,
-  FormControl,
-  InputAdornment,
-  Button,
-  FormHelperText
+  Container
 } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import MailTwoToneIcon from '@mui/icons-material/MailTwoTone';
 import ComingSoonImage from '../../../../assets/images/coming-soon.svg'
 
 const MainContent = styled(Box)(
@@ -44,17 +32,17 @@ const TypographyH3 = styled(Typography)(
 `
 );
 
-const OutlinedInputWrapper = styled(OutlinedInput)(
-  ({ theme }) => `
-    background-color: ${theme.colors.alpha.white[100]};
-`
-);
+// const OutlinedInputWrapper = styled(OutlinedInput)(
+//   ({ theme }) => `
+//     background-color: ${theme.colors.alpha.white[100]};
+// `
+// );
 
-const ButtonNotify = styled(Button)(
-  ({ theme }) => `
-    margin-right: -${theme.spacing(1)};
-`
-);
+// const ButtonNotify = styled(Button)(
+//   ({ theme }) => `
+//     margin-right: -${theme.spacing(1)};
+// `
+// );
 
 function StatusComingSoon() {
   const calculateTimeLeft = () => {

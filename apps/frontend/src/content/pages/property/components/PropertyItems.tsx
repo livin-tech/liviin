@@ -1,7 +1,5 @@
 import { Card } from '@mui/material';
 import { PropertyItem } from '../../../../models/property_item';
-import RecentOrdersTable from './PropertyItemsTable';
-import { subDays } from 'date-fns';
 import PropertyItemsTable from './PropertyItemsTable';
 
 function PropertyItems() {
