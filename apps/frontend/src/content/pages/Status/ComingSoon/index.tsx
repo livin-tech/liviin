@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
-import {
-  Box,
-  Typography,
-  Container
-} from '@mui/material';
+import { Box, Typography, Container } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
-import ComingSoonImage from '../../../../assets/images/coming-soon.svg'
+import ComingSoonImage from '../../../../assets/images/coming-soon.svg';
 
 const MainContent = styled(Box)(
   () => `
@@ -20,30 +16,6 @@ const MainContent = styled(Box)(
 `
 );
 
-const TypographyH1 = styled(Typography)(
-  ({ theme }) => `
-  font-size: ${theme.typography.pxToRem(75)};
-`
-);
-
-const TypographyH3 = styled(Typography)(
-  ({ theme }) => `
-  color: ${theme.colors.alpha.black[50]};
-`
-);
-
-// const OutlinedInputWrapper = styled(OutlinedInput)(
-//   ({ theme }) => `
-//     background-color: ${theme.colors.alpha.white[100]};
-// `
-// );
-
-// const ButtonNotify = styled(Button)(
-//   ({ theme }) => `
-//     margin-right: -${theme.spacing(1)};
-// `
-// );
-
 function StatusComingSoon() {
   const calculateTimeLeft = () => {
     const difference = +new Date(`2023`) - +new Date();
@@ -54,35 +26,12 @@ function StatusComingSoon() {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
+        seconds: Math.floor((difference / 1000) % 60),
       };
     }
 
     return timeLeft;
   };
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-  useEffect(() => {
-    setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-  });
-
-  const timerComponents = [];
-
-  Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval]) {
-      return;
-    }
-
-    timerComponents.push(
-      <Box textAlign="center" px={3}>
-        <TypographyH1 variant="h1">{timeLeft[interval]}</TypographyH1>
-        <TypographyH3 variant="h3">{interval}</TypographyH3>
-      </Box>
-    );
-  });
 
   return (
     <>
@@ -107,11 +56,7 @@ function StatusComingSoon() {
                 launch!
               </Typography>
             </Container>
-            <img
-              alt="Coming Soon"
-              height={200}
-              src={ComingSoonImage}
-            />
+            <img alt="Coming Soon" height={200} src={ComingSoonImage} />
           </Box>
         </Container>
       </MainContent>

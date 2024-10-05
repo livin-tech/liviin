@@ -80,12 +80,12 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
   //   setSelectedValue(property);
   // };
 
-  const handleClose = (value) => {
+  const handleClose = (value: any) => {
     setOpen(false);
     setSelectedValue(value);
   };
 
-  const handleUserDeleteDialog = (value) => {
+  const handleUserDeleteDialog = (value: any) => {
     setOpenDeleteDialog(!openDeleteDialog);
     setSelectedValue(value);
   };
@@ -145,7 +145,7 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
         onClose={handleClose}
       />
       <DeletePropertyModal
-        selectedValue={selectedValue}
+        // selectedValue={selectedValue}
         open={openDeleteDialog}
         onClose={handleUserDeleteDialog}
       />

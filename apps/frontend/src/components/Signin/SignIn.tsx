@@ -20,6 +20,11 @@ import { useForm } from 'react-hook-form'; // Import React Hook Form
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as LogoLiviin } from '../../assets/icons/livin-icon.svg';
 
+interface FormData {
+  email: string;
+  password: string;
+}
+
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -63,7 +68,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
   const [open, setOpen] = React.useState(false);
   const { t } = useTranslation();
 
@@ -73,7 +78,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     setOpen(false);
   };
 
-  const onSubmit = async (data: { email: string; password: string }) => {
+  const onSubmit = async (data: FormData) => {
     const { email, password } = data;
 
     try {

@@ -20,7 +20,7 @@ function PageHeader() {
     setOpen(true);
   };
 
-  const handleClose = (value) => {
+  const handleClose = (value: any) => {
     setOpen(false);
     setSelectedValue(value);
   };
@@ -28,7 +28,7 @@ function PageHeader() {
   return (
     <>
       <CreateUserModal
-        selectedValue={selectedValue}
+        // selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
       />

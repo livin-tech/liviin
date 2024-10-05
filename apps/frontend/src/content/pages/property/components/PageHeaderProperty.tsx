@@ -18,7 +18,7 @@ function PageHeaderProperty() {
     setOpen(true);
   };
 
-  const handleClose = (value) => {
+  const handleClose = (value: any) => {
     setOpen(false);
     setSelectedValue(value);
   };
