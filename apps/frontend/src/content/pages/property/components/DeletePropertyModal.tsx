@@ -8,12 +8,12 @@ import {
   Button,
 } from '@mui/material';
 import { useAppDispatch } from '../../../../hooks/hooks';
-import { deleteUser } from '../../../../lib/redux/auth/userSlice'; // Update this import when you implement property deletion in the store
+// import { deleteUser } from '../../../../lib/redux/auth/userSlice'; // Update this import when you implement property deletion in the store
 import { useTranslation } from 'react-i18next';
 
 interface DeletePropertyModalProps {
   onClose: (value?: string) => void;
-  selectedValue: string | undefined; // ID of the property to delete
+  selectedValue?: string | undefined; // ID of the property to delete
   open: boolean;
 }
 
@@ -32,7 +32,7 @@ const DeletePropertyModal: React.FC<DeletePropertyModalProps> = (props) => {
     setIsLoading(true);
     try {
       // Replace deleteUser with the appropriate delete property action when you implement it
-      await dispatch(deleteUser(selectedValue)).unwrap();
+      // await dispatch(deleteUser(selectedValue)).unwrap();
       onClose(selectedValue);
     } catch (error) {
       console.error('Failed to delete property:', error);

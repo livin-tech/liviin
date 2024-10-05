@@ -50,7 +50,7 @@ const applyPagination = (
 
 const UsersTable: FC = () => {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
-  const { users, loading, error } = useAppSelector(
+  const { users } = useAppSelector(
     (state: RootState) => state.user
   );
   const { t } = useTranslation();
@@ -61,24 +61,26 @@ const UsersTable: FC = () => {
   const [limit, setLimit] = useState<number>(5);
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue, setSelectedValue] = useState('');;
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(fetchUsers())
   }, [dispatch]);
 
-  const handleClickOpen = (user: User) => {
-    setOpen(true);
-    setSelectedValue(user);
+  const handleClickOpen = (user: any) => {
+    if(user){
+      setOpen(true);
+      setSelectedValue(user);
+    }
   };
 
-  const handleClose = (value) => {
+  const handleClose = (value: any) => {
     setOpen(false);
     setSelectedValue(value);
   };
 
-  const handleUserDeleteDialog = (value) => {
+  const handleUserDeleteDialog = (value: any) => {
     setOpenDeleteDialog(!openDeleteDialog);
     setSelectedValue(value);
   };
@@ -122,7 +124,7 @@ const UsersTable: FC = () => {
   return (
     <Card>
       <CreateUserModal
-        selectedUser={selectedValue}
+        // selectedUser={selectedValue}
         open={open}
         onClose={handleClose}
       />

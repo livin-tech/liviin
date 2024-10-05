@@ -13,8 +13,8 @@ import {
   Switch,
   FormControlLabel,
 } from '@mui/material';
-import { useAppDispatch } from '../../../../hooks/hooks';
-import { createUser, updateUser } from '../../../../lib/redux/auth/userSlice';
+// import { useAppDispatch } from '../../../../hooks/hooks';
+// import { createUser, updateUser } from '../../../../lib/redux/auth/userSlice';
 import { t } from 'i18next';
 
 interface Property {
@@ -56,7 +56,7 @@ interface FormData {
 
 const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
   const { onClose, open, selectedProperty } = props;
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
   const {
@@ -80,6 +80,17 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
       balcony: selectedProperty?.balcony || false,
     },
   });
+
+  const rooms: { label: string; name: keyof FormData }[] = [
+    { label: t('livingRoom'), name: 'livingRoom' },
+    { label: t('diningRoom'), name: 'diningRoom' },
+    { label: t('hallRoom'), name: 'hallRoom' },
+    { label: t('familyRoom'), name: 'familyRoom' },
+    { label: t('kitchen'), name: 'kitchen' },
+    { label: t('serviceRoom'), name: 'serviceRoom' },
+    { label: t('laundaryRoom'), name: 'laundaryRoom' },
+    { label: t('balcony'), name: 'balcony' },
+  ];
 
   useEffect(() => {
     if (selectedProperty) {
@@ -108,11 +119,11 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
     setLoading(true);
     try {
       if (selectedProperty) {
-        await dispatch(
-          updateUser({ id: selectedProperty.id, updatedData: data })
-        ).unwrap();
+        // await dispatch(
+        //   updateUser({ id: selectedProperty.id, updatedData: data })
+        // ).unwrap();
       } else {
-        await dispatch(createUser(data)).unwrap();
+        // await dispatch(createUser(data)).unwrap();
       }
       onClose();
     } catch (error) {
@@ -190,22 +201,14 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
               </FormControl>
             </Grid>
 
-            {[
-              { label: t('livingRoom'), name: 'livingRoom' },
-              { label: t('diningRoom'), name: 'diningRoom' },
-              { label: t('hallRoom'), name: 'hallRoom' },
-              { label: t('familyRoom'), name: 'familyRoom' },
-              { label: t('kitchen'), name: 'kitchen' },
-              { label: t('serviceRoom'), name: 'serviceRoom' },
-              { label: t('laundaryRoom'), name: 'laundaryRoom' },
-              { label: t('balcony'), name: 'balcony' },
-            ].map((room, index) => (
+            {rooms.map((room, index) => (
               <Grid item xs={6} key={index}>
                 <FormControlLabel
                   control={
                     <Switch
                       {...register(room.name)}
-                      defaultChecked={!!selectedProperty?.[room.name]}
+                      // defaultChecked={!!selectedProperty?.[room.name]}
+                      defaultChecked={false}
                     />
                   }
                   label={room.label}

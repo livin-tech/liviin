@@ -2,12 +2,9 @@ import { Typography, Button, Grid } from '@mui/material';
 
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useState } from 'react';
-// import CreateUserModal from './CreateUserModal';
-import { useTranslation } from 'react-i18next';
 import CreatePropertyModal from './CreatePropertyModal';
 
 function PageHeaderProperty() {
-  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
 
@@ -21,7 +18,7 @@ function PageHeaderProperty() {
     setOpen(true);
   };
 
-  const handleClose = (value) => {
+  const handleClose = (value: any) => {
     setOpen(false);
     setSelectedValue(value);
   };

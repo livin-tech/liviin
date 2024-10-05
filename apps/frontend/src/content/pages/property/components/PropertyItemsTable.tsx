@@ -1,11 +1,8 @@
-import React, { FC, ChangeEvent, useState, useEffect } from 'react';
+import React, { FC, ChangeEvent, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Tooltip,
   Divider,
   Box,
-  FormControl,
-  InputLabel,
   Card,
   Checkbox,
   IconButton,
@@ -16,26 +13,17 @@ import {
   TablePagination,
   TableRow,
   TableContainer,
-  Select,
-  MenuItem,
-  Typography,
   useTheme,
   CardHeader,
   TextField,
 } from '@mui/material';
 
-// import { CryptoOrder, CryptoOrderStatus } from '../../../models/crypto_order';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
-// import { fetchUsers } from '../../../lib/redux/auth/userSlice';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
-// import { RootState } from '../../../store';
-// import CreateUserModal from './CreateUserModal';
-// import DeleteUserModal from './DeleteUserModal';
+// import { useAppDispatch } from '../../../../hooks/hooks';
 import { useTranslation } from 'react-i18next';
 import { PropertyItem } from 'apps/frontend/src/models/property_item';
-import { RootState } from 'apps/frontend/src/store';
 import CreatePropertyModal from './CreatePropertyModal';
 import DeletePropertyModal from './DeletePropertyModal';
 import CheckIcon from '@mui/icons-material/Check';
@@ -46,16 +34,16 @@ interface PropertyItemsTableProps {
   propertyItems: PropertyItem[];
 }
 
-const applyFilters = (
-  properties: PropertyItem[],
-  searchQuery: string
-): PropertyItem[] => {
-  return properties.filter(
-    (propertyItem) =>
-      propertyItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      propertyItem.type.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-};
+// const applyFilters = (
+//   properties: PropertyItem[],
+//   searchQuery: string
+// ): PropertyItem[] => {
+//   return properties.filter(
+//     (propertyItem) =>
+//       propertyItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+//       propertyItem.type.toLowerCase().includes(searchQuery.toLowerCase())
+//   );
+// };
 
 const applyPagination = (
   properties: PropertyItem[],
@@ -72,7 +60,6 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
 
   const { t } = useTranslation();
 
-  const dispatch = useAppDispatch();
   const selectedBulkActions = selectedPropertyItems.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
@@ -88,17 +75,17 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
   //   dispatch(fetchUsers());
   // }, [dispatch]);
 
-  const handleClickOpen = (property: PropertyItem) => {
-    setOpen(true);
-    setSelectedValue(property);
-  };
+  // const handleClickOpen = (property: PropertyItem) => {
+  //   setOpen(true);
+  //   setSelectedValue(property);
+  // };
 
-  const handleClose = (value) => {
+  const handleClose = (value: any) => {
     setOpen(false);
     setSelectedValue(value);
   };
 
-  const handleUserDeleteDialog = (value) => {
+  const handleUserDeleteDialog = (value: any) => {
     setOpenDeleteDialog(!openDeleteDialog);
     setSelectedValue(value);
   };
@@ -158,7 +145,7 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
         onClose={handleClose}
       />
       <DeletePropertyModal
-        selectedValue={selectedValue}
+        // selectedValue={selectedValue}
         open={openDeleteDialog}
         onClose={handleUserDeleteDialog}
       />

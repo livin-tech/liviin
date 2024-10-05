@@ -1,10 +1,8 @@
-import { Helmet } from 'react-helmet-async';
 import PageHeaderProperty from './components/PageHeaderProperty';
 import PageTitleWrapper from '../../../components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import PropertyItems from './components/PropertyItems';
 
-// import RecentOrders from './RecentOrders';
 
 function Property() {
   return (

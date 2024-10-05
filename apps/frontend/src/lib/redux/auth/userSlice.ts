@@ -9,10 +9,7 @@ interface User {
   firstName: string;
   lastName: string;
   email: string;
-  phoneNumber?: string;
-  address?: string;
-  subscriptionStatus?: 'essential' | 'pro';
-  role?: 'user' | 'admin';
+  role: string;
 }
 
 // Define the state type
