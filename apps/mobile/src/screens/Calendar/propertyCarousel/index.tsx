@@ -1,23 +1,20 @@
 import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  StyleSheet,
   FlatList,
-  ViewStyle,
+  StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 import { HorizontalLayout } from '../../../layouts/HorizontalLayout';
-import { Colors, IconButton, Subheading } from 'react-native-paper';
+import { IconButton, Subheading } from 'react-native-paper';
 import ApartmentIcon from '../../../assets/icons/ApartmentIcon';
 import House from '../../../assets/icons/House';
 import { theme } from '../../../theme';
 import { useRef, useState } from 'react';
 
-export function PropertyCarousel({
+export const PropertyCarousel = ({
   count = 5,
   selectedProperty,
   onPropertySelect,
-}) {
+}) => {
   const listRef = useRef();
   const [currentIndex, setCurrentIndex] = useState(2);
 
@@ -69,7 +66,7 @@ export function PropertyCarousel({
       />
     </HorizontalLayout>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -50,9 +50,13 @@ export const Login = ({ navigation }) => {
     navigation.navigate(RouteNavigators.WithSafeAreaNavigator);
   };
 
-  const onPressFaq = () => {};
-
-  const onPressHelp = () => {};
+  const onPressFaq = () => {
+    navigation.navigate(Routes.FAQs);
+  };
+  
+  const onPressHelp = () => {
+    navigation.navigate(Routes.Help);
+  };
 
   return (
     <BackgroundLayout>

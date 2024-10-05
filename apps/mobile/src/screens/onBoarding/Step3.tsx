@@ -44,6 +44,8 @@ export function Step3({ navigation }) {
 
   const options = ['Leather', 'Fabric', 'Raxeen'];
 
+  const isSubmitDisabled = switchValue && meter === 'Select Material';
+
   return (
     <ScreenLayout headerTitle="Question 2">
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -69,82 +71,89 @@ export function Step3({ navigation }) {
           )}
         />
 
-        <QuestionItem.Item
-          text="Couch material?"
-          input={() => (
-            <View>
-              <TouchableOpacity
-                onPress={() => setVisibility((visible) => !visible)}
-                style={styles.buttonContainer}
-              >
-                <Text style={styles.marginRight}>{meter}</Text>
-                <Icons.ArrowDownSmall />
-              </TouchableOpacity>
-              {visible ? (
-                <View style={styles.menuContainer}>
-                  {options.map((lang, index) => (
-                    <React.Fragment key={index}>
-                      <Menu.Item
-                        titleStyle={{
-                          color: 'white',
-                        }}
-                        onPress={() => {
-                          setMeter(lang);
-                          setVisibility(false);
-                        }}
-                        title={lang}
-                      />
-                      {index < options.length - 1 && (
-                        <Divider style={{ backgroundColor: 'grey' }} />
-                      )}
-                    </React.Fragment>
-                  ))}
+        {switchValue ? (
+          <>
+            <QuestionItem.Item
+              text="Couch material?"
+              input={() => (
+                <View>
+                  <TouchableOpacity
+                    onPress={() => setVisibility((visible) => !visible)}
+                    style={styles.buttonContainer}
+                  >
+                    <Text style={styles.marginRight}>{meter}</Text>
+                    <Icons.ArrowDownSmall />
+                  </TouchableOpacity>
+                  {visible ? (
+                    <View style={styles.menuContainer}>
+                      {options.map((lang, index) => (
+                        <React.Fragment key={index}>
+                          <Menu.Item
+                            titleStyle={{
+                              color: 'white',
+                            }}
+                            onPress={() => {
+                              setMeter(lang);
+                              setVisibility(false);
+                            }}
+                            title={lang}
+                          />
+                          {index < options.length - 1 && (
+                            <Divider style={{ backgroundColor: 'grey' }} />
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </View>
+                  ) : null}
                 </View>
-              ) : null}
-            </View>
-          )}
-        />
+              )}
+            />
 
-        <QuestionItem.ItemTextInput
-          ref={ref}
-          label="Date"
-          placeholder="01/01/2024"
-          value={date.toLocaleDateString()}
-          right={
-            <PaperInput.Icon
-              icon="calendar"
-              onPress={() => setOpen(true)}
-              name="calendarIcon"
-            />
-          }
-          heading="When was the last cleaning?"
-        >
-          <HorizontalLayout style={{ marginTop: 24, marginBottom: 8 }}>
-            <Divider style={{ flex: 1 }} />
-            <Subheading style={{ marginHorizontal: 12 }}>OR</Subheading>
-            <Divider style={{ flex: 1 }} />
-          </HorizontalLayout>
-          <HorizontalLayout style={{ justifyContent: 'center' }}>
-            <Checkbox.Android
-              color={theme.colors.primary}
-              status={checkboxValue}
-              onPress={() =>
-                setCheckboxValue(
-                  checkboxValue === 'checked' ? 'unchecked' : 'checked'
-                )
+            <QuestionItem.ItemTextInput
+              ref={ref}
+              label="Date"
+              placeholder="01/01/2024"
+              value={date.toLocaleDateString()}
+              disabled={checkboxValue === 'checked'}
+              right={
+                <PaperInput.Icon
+                  icon="calendar"
+                  onPress={() => setOpen(true)}
+                  name="calendarIcon"
+                />
               }
-            />
-            <Paragraph>Never</Paragraph>
-          </HorizontalLayout>
-        </QuestionItem.ItemTextInput>
+              heading="When was the last cleaning?"
+            >
+              <HorizontalLayout style={{ marginTop: 24, marginBottom: 8 }}>
+                <Divider style={{ flex: 1 }} />
+                <Subheading style={{ marginHorizontal: 12 }}>OR</Subheading>
+                <Divider style={{ flex: 1 }} />
+              </HorizontalLayout>
+              <HorizontalLayout style={{ justifyContent: 'center' }}>
+                <Checkbox.Android
+                  color={theme.colors.primary}
+                  status={checkboxValue}
+                  onPress={() =>
+                    setCheckboxValue(
+                      checkboxValue === 'checked' ? 'unchecked' : 'checked'
+                    )
+                  }
+                />
+                <Paragraph>Never</Paragraph>
+              </HorizontalLayout>
+            </QuestionItem.ItemTextInput>
+          </>
+        ) : null}
 
         <Button
           mode="contained"
+          disabled={isSubmitDisabled}
           style={styles.submitButton}
           onPress={() => setOpenModal(true)}
         >
           Next
         </Button>
+
         <DatePicker
           modal
           open={open}
@@ -162,7 +171,7 @@ export function Step3({ navigation }) {
 
       <ConfirmationModal
         show={openModal}
-        onDismiss={() => setOpenModal(false)}
+        onDismiss={() => navigation.replace('Home')}
         onConfirm={() => navigation.replace('Home')}
         dismissText="Ignore"
         confirmText="Add"
@@ -201,6 +210,7 @@ export function Step3({ navigation }) {
 
 const styles = StyleSheet.create({
   submitButton: {
+    marginTop: 16,
     borderRadius: 20,
   },
   buttonContainer: {

@@ -14,6 +14,7 @@ export const RoutesWithSafeAreaView = {
   FAQs: 'FAQs',
   Tasks: 'Tasks',
   AddTask: 'AddTask',
+  Help: 'Help'
 };
 
 export const RoutesWithoutSafeAreaView = {

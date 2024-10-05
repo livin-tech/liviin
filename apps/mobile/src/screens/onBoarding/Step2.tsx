@@ -36,9 +36,13 @@ export function Step2({ navigation }) {
     'unchecked'
   );
   const [openModal, setOpenModal] = useState(false);
-  const [roomCounter, setRoomCounter] = useState(0);
+  const [roomCounter, setRoomCounter] = useState(1);
   const [roomInput, setRoomInput] = useState('');
   const [roomNames, setRoomNames] = useState<string[]>([]);
+
+  const isSubmitDisabled = switchValue
+    ? !roomCounter || (!date && checkboxValue === 'unchecked')
+    : false;
 
   return (
     <ScreenLayout headerTitle="Question 1">
@@ -64,78 +68,84 @@ export function Step2({ navigation }) {
           )}
         />
 
-        <QuestionItem.Item
-          text="How many AC(s)?"
-          onInputValueChange={(count) => setRoomCounter(parseInt(count))}
-        />
+        {switchValue ? (
+          <>
+            <QuestionItem.Item
+              text="How many AC(s)?"
+              onInputValueChange={(count) => setRoomCounter(parseInt(count))}
+            />
 
-        {roomCounter > 1 ? (
-          <QuestionItem.ItemTextInput
-            placeholder="(optional)"
-            heading="Name of the room where your AC unit belongs to"
-            value={roomInput}
-            onChangeText={(val) => setRoomInput(val)}
-            onSubmitEditing={(e) => {
-              setRoomInput('');
-              setRoomNames([...roomNames, roomInput]);
-            }}
-          >
-            <ScrollView
-              horizontal
-              style={{ marginTop: 12 }}
-              showsHorizontalScrollIndicator={false}
-            >
-              {roomNames.map((item, i) => (
-                <Chip
-                  style={{ marginRight: 4 }}
-                  onPress={() => console.log('Pressed')}
-                  onClose={() =>
-                    setRoomNames(roomNames.filter((_, j) => j !== i))
-                  }
+            {roomCounter > 1 ? (
+              <QuestionItem.ItemTextInput
+                placeholder="(optional)"
+                heading="Name of the room where your AC unit belongs to"
+                value={roomInput}
+                onChangeText={(val) => setRoomInput(val)}
+                onSubmitEditing={(e) => {
+                  setRoomInput('');
+                  setRoomNames([...roomNames, roomInput]);
+                }}
+              >
+                <ScrollView
+                  horizontal
+                  style={{ marginTop: 12 }}
+                  showsHorizontalScrollIndicator={false}
                 >
-                  {item}
-                </Chip>
-              ))}
-            </ScrollView>
-            <HorizontalLayout></HorizontalLayout>
-          </QuestionItem.ItemTextInput>
-        ) : null}
+                  {roomNames.map((item, i) => (
+                    <Chip
+                      style={{ marginRight: 4 }}
+                      onPress={() => console.log('Pressed')}
+                      onClose={() =>
+                        setRoomNames(roomNames.filter((_, j) => j !== i))
+                      }
+                    >
+                      {item}
+                    </Chip>
+                  ))}
+                </ScrollView>
+                <HorizontalLayout></HorizontalLayout>
+              </QuestionItem.ItemTextInput>
+            ) : null}
 
-        <QuestionItem.ItemTextInput
-          ref={ref}
-          label="Date"
-          placeholder="01/01/2024"
-          value={date.toLocaleDateString()}
-          right={
-            <PaperInput.Icon
-              icon="calendar"
-              onPress={() => setOpen(true)}
-              name="calendarIcon"
-            />
-          }
-          heading="When was the last maintenance?"
-        >
-          <HorizontalLayout style={{ marginTop: 24, marginBottom: 8 }}>
-            <Divider style={{ flex: 1 }} />
-            <Subheading style={{ marginHorizontal: 12 }}>OR</Subheading>
-            <Divider style={{ flex: 1 }} />
-          </HorizontalLayout>
-          <HorizontalLayout style={{ justifyContent: 'center' }}>
-            <Checkbox.Android
-              color={theme.colors.primary}
-              status={checkboxValue}
-              onPress={() =>
-                setCheckboxValue(
-                  checkboxValue === 'checked' ? 'unchecked' : 'checked'
-                )
+            <QuestionItem.ItemTextInput
+              ref={ref}
+              label="Date"
+              placeholder="01/01/2024"
+              disabled={checkboxValue === 'checked'}
+              value={date.toLocaleDateString()}
+              right={
+                <PaperInput.Icon
+                  icon="calendar"
+                  onPress={() => setOpen(true)}
+                  name="calendarIcon"
+                />
               }
-            />
-            <Paragraph>Never</Paragraph>
-          </HorizontalLayout>
-        </QuestionItem.ItemTextInput>
+              heading="When was the last maintenance?"
+            >
+              <HorizontalLayout style={{ marginTop: 24, marginBottom: 8 }}>
+                <Divider style={{ flex: 1 }} />
+                <Subheading style={{ marginHorizontal: 12 }}>OR</Subheading>
+                <Divider style={{ flex: 1 }} />
+              </HorizontalLayout>
+              <HorizontalLayout style={{ justifyContent: 'center' }}>
+                <Checkbox.Android
+                  color={theme.colors.primary}
+                  status={checkboxValue}
+                  onPress={() =>
+                    setCheckboxValue(
+                      checkboxValue === 'checked' ? 'unchecked' : 'checked'
+                    )
+                  }
+                />
+                <Paragraph>Never</Paragraph>
+              </HorizontalLayout>
+            </QuestionItem.ItemTextInput>
+          </>
+        ) : null}
 
         <Button
           mode="contained"
+          disabled={isSubmitDisabled}
           style={styles.submitButton}
           onPress={() => setOpenModal(true)}
         >
@@ -170,6 +180,7 @@ export function Step2({ navigation }) {
 
 const styles = StyleSheet.create({
   submitButton: {
+    marginTop: 16,
     borderRadius: 20,
   },
 });

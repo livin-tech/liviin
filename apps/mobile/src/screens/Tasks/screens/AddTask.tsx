@@ -63,37 +63,39 @@ export const AddTask = ({ route, navigation }) => {
   return (
     <ScreenLayout headerTitle={task?.title || 'House 1'}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <Card style={styles.card}>
-          <Card.Content>
-            <Subheading style={{ textAlign: 'center' }}>
-              Choose a type
-            </Subheading>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-              }}
-            >
-              <Checkbox.Item
-                mode="android"
-                color={theme.colors.primary}
-                label="Maintenance"
-                status={taskType === MAINTENANCE ? 'checked' : 'unchecked'}
-                onPress={() => setTaskType(MAINTENANCE)}
-                position="leading"
-              />
-              <Checkbox.Item
-                mode="android"
-                color={theme.colors.primary}
-                label="Cleaning"
-                status={taskType === CLEANING ? 'checked' : 'unchecked'}
-                onPress={() => setTaskType(CLEANING)}
-                position="leading"
-              />
-            </View>
-          </Card.Content>
-        </Card>
+        {!task?.id ? (
+          <Card style={styles.card}>
+            <Card.Content>
+              <Subheading style={{ textAlign: 'center' }}>
+                Choose a type
+              </Subheading>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}
+              >
+                <Checkbox.Item
+                  mode="android"
+                  color={theme.colors.primary}
+                  label="Maintenance"
+                  status={taskType === MAINTENANCE ? 'checked' : 'unchecked'}
+                  onPress={() => setTaskType(MAINTENANCE)}
+                  position="leading"
+                />
+                <Checkbox.Item
+                  mode="android"
+                  color={theme.colors.primary}
+                  label="Cleaning"
+                  status={taskType === CLEANING ? 'checked' : 'unchecked'}
+                  onPress={() => setTaskType(CLEANING)}
+                  position="leading"
+                />
+              </View>
+            </Card.Content>
+          </Card>
+        ) : null}
 
         <QuestionItem.ItemTextInput
           ref={ref}
@@ -145,7 +147,6 @@ export const AddTask = ({ route, navigation }) => {
             </View>
           )}
         />
-
         <QuestionItem.Item
           text="Reminder every?"
           input={() => (
@@ -182,39 +183,47 @@ export const AddTask = ({ route, navigation }) => {
           )}
         />
 
-        <QuestionItem.ItemTextInput
-          ref={ref}
-          label="Date"
-          placeholder="01/01/2024"
-          value={date.toLocaleDateString()}
-          disabled={checkboxValue === 'checked'}
-          right={
-            <PaperInput.Icon
-              icon="calendar"
-              onPress={() => setOpen(true)}
-              name="calendarIcon"
-            />
-          }
-          heading="When was the last maintenance?"
-        >
-          <HorizontalLayout style={{ marginTop: 24, marginBottom: 8 }}>
-            <Divider style={{ flex: 1 }} />
-            <Subheading style={{ marginHorizontal: 12 }}>OR</Subheading>
-            <Divider style={{ flex: 1 }} />
-          </HorizontalLayout>
-          <HorizontalLayout style={{ justifyContent: 'center' }}>
-            <Checkbox.Android
-              color={theme.colors.primary}
-              status={checkboxValue}
-              onPress={() =>
-                setCheckboxValue(
-                  checkboxValue === 'checked' ? 'unchecked' : 'checked'
-                )
-              }
-            />
-            <Paragraph>Never</Paragraph>
-          </HorizontalLayout>
-        </QuestionItem.ItemTextInput>
+        {!task?.id ? (
+          <QuestionItem.ItemTextInput
+            ref={ref}
+            label="Date"
+            placeholder="01/01/2024"
+            value={date.toLocaleDateString()}
+            disabled={!!task?.id || checkboxValue === 'checked'}
+            right={
+              <PaperInput.Icon
+                icon="calendar"
+                onPress={() => setOpen(true)}
+                name="calendarIcon"
+              />
+            }
+            heading={
+              task?.id
+                ? 'Last Maintaince date:'
+                : 'When was the last maintenance?'
+            }
+          >
+            <HorizontalLayout style={{ marginTop: 24, marginBottom: 8 }}>
+              <Divider style={{ flex: 1 }} />
+              <Subheading style={{ marginHorizontal: 12 }}>OR</Subheading>
+              <Divider style={{ flex: 1 }} />
+            </HorizontalLayout>
+            <HorizontalLayout style={{ justifyContent: 'center' }}>
+              <Checkbox.Android
+                color={theme.colors.primary}
+                status={checkboxValue}
+                disabled={task?.id}
+                onPress={() =>
+                  setCheckboxValue(
+                    checkboxValue === 'checked' ? 'unchecked' : 'checked'
+                  )
+                }
+              />
+              <Paragraph>Never</Paragraph>
+            </HorizontalLayout>
+          </QuestionItem.ItemTextInput>
+        ) : null}
+
         {!!task?.id ? (
           <View
             style={{
@@ -231,7 +240,7 @@ export const AddTask = ({ route, navigation }) => {
                 },
               ]}
               onPress={() => {
-                navigation?.goBack()
+                navigation?.goBack();
               }}
             >
               Done
@@ -246,7 +255,7 @@ export const AddTask = ({ route, navigation }) => {
                 },
               ]}
               onPress={() => {
-                navigation?.goBack()
+                navigation?.goBack();
               }}
             >
               Delete

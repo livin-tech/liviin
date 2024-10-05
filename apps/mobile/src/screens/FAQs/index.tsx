@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { ScreenLayout } from '../../layouts';
 import { List } from 'react-native-paper';
 
-export function FAQs() {
+export const FAQs = () => {
   return (
     <ScreenLayout headerTitle="FAQs">
       <List.Section>

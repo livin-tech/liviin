@@ -38,7 +38,6 @@ export function ConfirmationModal({
         )}
         <Button
           mode="contained"
-          uppercase={false}
           style={{ borderRadius: 20, marginTop: 16 }}
           onPress={onConfirm}
         >

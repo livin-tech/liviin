@@ -2,7 +2,7 @@ import { ScreenLayout } from '../../layouts';
 import { CenterContainer, Spacer } from '../../components';
 import CalendarRound from '../../assets/icons/CalendarRound';
 import { Headline } from 'react-native-paper';
-import { PropertyCarousel } from './property-carousel/PropertyCarousel';
+import { PropertyCarousel } from './propertyCarousel';
 import { Calendar, DateData } from 'react-native-calendars';
 import { theme } from '../../theme';
 import { View, StyleSheet } from 'react-native';
@@ -18,7 +18,7 @@ const PROPERTY_DATA_MOCK = {
   5: ['2024-07-01', '2024-07-02', '2024-07-03'],
 };
 
-export function CalendarScreen({ navigation }) {
+export const CalendarScreen = ({ navigation }) => {
   const [currentDate, setCurrentDate] = useState<DateData>({
     dateString: '2024-07-01',
     day: 1,

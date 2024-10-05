@@ -46,7 +46,9 @@ export const Register = ({ navigation }) => {
     Linking.openURL('https://your-terms-and-conditions-url.com');
   };
 
-  const onPressFaq = () => {};
+  const onPressFaq = () => {
+    navigation.navigate(Routes.FAQs);
+  };
 
   return (
     <BackgroundLayout>
@@ -125,7 +127,7 @@ export const Register = ({ navigation }) => {
       <ConfirmationModal
         show={openModal}
         dismissText={null}
-        confirmText="Continue"
+        confirmText="CONTINUE"
         onConfirm={() => {
           setOpenModal(false);
           navigation.navigate(RouteNavigators.WithSafeAreaNavigator);

@@ -1,4 +1,4 @@
-import { StyleSheet, Touchable, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import {
   Button,
   Card,
@@ -14,15 +14,21 @@ import QuestionItem from '../../../components/QuestionItem';
 import { Icons } from '../../../assets';
 import { ScreenLayout } from '../../../layouts';
 import React from 'react';
-import { LeftArrow } from '../../../assets/icons/LeftArrow';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { LANGS } from '../../../utils';
-// import {[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)} from 'react-native-calendars';
 
 export function Step1({ navigation }) {
   const [type, setType] = React.useState('');
   const [meter, setMeter] = React.useState('MTs');
   const [visible, setVisibility] = React.useState(false);
+
+  const [propertyName, setPropertyName] = React.useState('');
+  const [propertySize, setPropertySize] = React.useState(0);
+  const [roomsCount, setRoomsCount] = React.useState(0);
+  const [bathroomsCount, setBathroomsCount] = React.useState(0);
+
+  const isSubmitDisabled =
+    !type || !propertyName || !propertySize || !roomsCount || !bathroomsCount;
 
   return (
     <ScreenLayout headerTitle="Your property is...">
@@ -33,12 +39,12 @@ export function Step1({ navigation }) {
               <ProgressBar progress={0} color={theme.colors.primary} />
             </View>
           </View>
-          <Subheading>
+          <Subheading style={{ marginBottom: 16 }}>
             Answer the following questions and then proceed the next question
           </Subheading>
           <Card style={styles.card}>
             <Card.Content>
-              <Subheading>Is this a house or apartment?</Subheading>
+              <Subheading>Is this a house or an apartment?</Subheading>
               <View
                 style={{
                   flexDirection: 'row',
@@ -68,10 +74,15 @@ export function Step1({ navigation }) {
           <QuestionItem.ItemTextInput
             theme={theme}
             label="e.g beach house"
-            // placeholder="e.g beach house"
             heading="Name of the property"
+            value={propertyName}
+            onChangeText={(val) => setPropertyName(val)}
           />
-          <QuestionItem.Item icon={Icons.MeasureTape} text="How many">
+          <QuestionItem.Item
+            onInputValueChange={(val) => setPropertySize(+val)}
+            icon={Icons.MeasureTape}
+            text="How many"
+          >
             <Menu
               visible={visible}
               onDismiss={() => setVisibility(false)}
@@ -101,10 +112,19 @@ export function Step1({ navigation }) {
               ))}
             </Menu>
           </QuestionItem.Item>
-          <QuestionItem.Item icon={Icons.Bed} text="Rooms" />
-          <QuestionItem.Item icon={Icons.Bathroom} text="Bathrooms" />
+          <QuestionItem.Item
+            icon={Icons.Bed}
+            onInputValueChange={(val) => setRoomsCount(+val)}
+            text="Rooms"
+          />
+          <QuestionItem.Item
+            icon={Icons.Bathroom}
+            onInputValueChange={(val) => setBathroomsCount(+val)}
+            text="Bathrooms"
+          />
           <Button
             mode="contained"
+            disabled={isSubmitDisabled}
             style={styles.submitButton}
             onPress={() => navigation.navigate('Step2')}
           >

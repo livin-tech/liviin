@@ -3,22 +3,25 @@ import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Utils
+import { theme } from '../theme';
 import { RouteNavigators, Routes } from './routes';
 
 // Screens
 import {
+  FAQs,
+  Help,
   Login,
+  Tasks,
   SignUp,
+  AddTask,
   Landing,
   Register,
-  OnBoardingNavigation,
+  Profile,
   ForgotPassword,
+  CalendarScreen,
   HomeNavigation,
+  OnBoardingNavigation,
 } from '../screens';
-import { theme } from '../theme';
-import { CalendarScreen } from '../screens/Calendar/Calendar';
-import { Profile } from '../screens/profile/Profile';
-import { Tasks, AddTask } from '../screens/Tasks';
 
 // Navigation Options
 const noHeader = {
@@ -99,6 +102,16 @@ const WithoutSafeAreaNavigator = () => {
         options={noHeader}
         component={ForgotPassword}
         name={Routes.ForgotPassword}
+      />
+      <StackWithoutSafeArea.Screen
+        options={noHeader}
+        component={FAQs}
+        name={Routes.FAQs}
+      />
+      <StackWithoutSafeArea.Screen
+        options={noHeader}
+        component={Help}
+        name={Routes.Help}
       />
     </StackWithoutSafeArea.Navigator>
   );
