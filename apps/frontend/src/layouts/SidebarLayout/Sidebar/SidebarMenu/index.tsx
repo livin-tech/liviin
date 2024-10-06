@@ -229,7 +229,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/questionnaires"
+                  to="/questionnaire"
                   startIcon={<Quiz />}
                 >
                   {t('questionnairesTitleSidebar')}

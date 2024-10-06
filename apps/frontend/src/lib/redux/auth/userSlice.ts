@@ -29,7 +29,7 @@ const initialState: UserState = {
 const token = 'myauthtoken';
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await axios.get<User[]>(`/api/users`, {
+  const response = await axios.get<User[]>(`${API_BASE_URL}/users`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

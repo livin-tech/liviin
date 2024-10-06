@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 function PageHeader() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState();
+  // const [selectedValue, setSelectedValue] = useState();
 
   const user = {
     name: 'Catherine Pike',
@@ -22,7 +22,7 @@ function PageHeader() {
 
   const handleClose = (value: any) => {
     setOpen(false);
-    setSelectedValue(value);
+    // setSelectedValue(value);
   };
 
   return (

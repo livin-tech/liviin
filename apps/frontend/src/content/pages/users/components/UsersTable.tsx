@@ -1,5 +1,4 @@
 import React, { FC, ChangeEvent, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import {
   Tooltip,
   Divider,
@@ -31,28 +30,9 @@ import CreateUserModal from './CreateUserModal';
 import DeleteUserModal from './DeleteUserModal';
 import BulkActions from './BulkActions';
 
-const applyFilters = (users: User[], searchQuery: string): User[] => {
-  return users.filter(
-    (user) =>
-      user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-};
-
-const applyPagination = (
-  users: User[],
-  page: number,
-  limit: number
-): User[] => {
-  return users.slice(page * limit, page * limit + limit);
-};
-
 const UsersTable: FC = () => {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
-  const { users } = useAppSelector(
-    (state: RootState) => state.user
-  );
+  const { users } = useAppSelector((state: RootState) => state.user);
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
@@ -61,15 +41,37 @@ const UsersTable: FC = () => {
   const [limit, setLimit] = useState<number>(5);
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('');;
+  const [selectedValue, setSelectedValue] = useState('');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
+  const applyFilters = (
+    users: any[] = [],
+    searchQuery: string
+  ): User[] | [] => {
+    return users?.length > 0
+      ? users?.filter(
+          (user) =>
+            user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            user.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : [];
+  };
+
+  const applyPagination = (
+    users: User[],
+    page: number,
+    limit: number
+  ): User[] => {
+    return users?.slice(page * limit, page * limit + limit);
+  };
+
   useEffect(() => {
-    dispatch(fetchUsers())
+    dispatch(fetchUsers());
   }, [dispatch]);
 
   const handleClickOpen = (user: any) => {
-    if(user){
+    if (user) {
       setOpen(true);
       setSelectedValue(user);
     }
@@ -90,7 +92,9 @@ const UsersTable: FC = () => {
   };
 
   const handleSelectAllUsers = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSelectedUsers(event.target.checked ? users.map((user) => user.id) : []);
+    setSelectedUsers(
+      event.target.checked ? users?.map((user: any) => user._id) : []
+    );
   };
 
   const handleSelectOneUser = (
@@ -101,7 +105,7 @@ const UsersTable: FC = () => {
       setSelectedUsers((prevSelected) => [...prevSelected, userId]);
     } else {
       setSelectedUsers((prevSelected) =>
-        prevSelected.filter((id) => id !== userId)
+        prevSelected?.filter((id) => id !== userId)
       );
     }
   };
@@ -176,16 +180,16 @@ const UsersTable: FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedUsers.map((user) => {
-              const isUserSelected = selectedUsers.includes(user.id);
+            {paginatedUsers?.map((user) => {
+              const isUserSelected = selectedUsers.includes(user._id);
               return (
-                <TableRow hover key={user.id} selected={isUserSelected}>
+                <TableRow hover key={user._id} selected={isUserSelected}>
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
                       checked={isUserSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneUser(event, user.id)
+                        handleSelectOneUser(event, user._id)
                       }
                       value={isUserSelected}
                     />
@@ -287,14 +291,6 @@ const UsersTable: FC = () => {
       </Box>
     </Card>
   );
-};
-
-UsersTable.propTypes = {
-  users: PropTypes.array.isRequired,
-};
-
-UsersTable.defaultProps = {
-  users: [],
 };
 
 export default UsersTable;

@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import PageHeader from './PageHeader';
 import PageTitleWrapper from '../../../components/PageTitleWrapper';
 import { Container, Grid } from '@mui/material';
@@ -11,9 +10,7 @@ import WatchList from './WatchList';
 function DashboardCrypto() {
   return (
     <>
-      <Helmet>
-        <title>Crypto Dashboard</title>
-      </Helmet>
+      <title>Crypto Dashboard</title>
       <PageTitleWrapper>
         <PageHeader />
       </PageTitleWrapper>

@@ -4,7 +4,6 @@ import {
   Container,
   Button,
 } from '@mui/material';
-import { Helmet } from 'react-helmet-async';
 
 import { styled } from '@mui/material/styles';
 
@@ -23,9 +22,7 @@ const MainContent = styled(Box)(
 function Status404() {
   return (
     <>
-      <Helmet>
-        <title>Status - 404</title>
-      </Helmet>
+      <title>Status - 404</title>
       <MainContent>
         <Container
           maxWidth="md"

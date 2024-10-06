@@ -99,7 +99,7 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
   ): void => {
     setSelectedPropertyItems(
       event.target.checked
-        ? propertyItems.map((propertyItem) => propertyItem.id)
+        ? propertyItems?.map((propertyItem) => propertyItem.id)
         : []
     );
   };
@@ -131,10 +131,10 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
   // const filteredPropertyItems = applyFilters(properties, searchQuery);
   const paginatedPropertyItems = applyPagination(propertyItems, page, limit);
   const selectedSomePropertyItems =
-    selectedPropertyItems.length > 0 &&
-    selectedPropertyItems.length < propertyItems.length;
+    selectedPropertyItems?.length > 0 &&
+    selectedPropertyItems?.length < propertyItems?.length;
   const selectedAllPropertyItems =
-    selectedPropertyItems.length === propertyItems.length;
+    selectedPropertyItems?.length === propertyItems?.length;
   const theme = useTheme();
 
   return (
@@ -314,7 +314,7 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
         <TablePagination
           component="div"
           labelRowsPerPage={t('rowsPerPage')}
-          count={propertyItems.length}
+          count={propertyItems?.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -328,10 +328,6 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
 
 PropertyItemsTable.propTypes = {
   propertyItems: PropTypes.array.isRequired,
-};
-
-PropertyItemsTable.defaultProps = {
-  propertyItems: [],
 };
 
 export default PropertyItemsTable;

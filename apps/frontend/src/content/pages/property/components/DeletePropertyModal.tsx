@@ -7,7 +7,7 @@ import {
   DialogTitle,
   Button,
 } from '@mui/material';
-import { useAppDispatch } from '../../../../hooks/hooks';
+// import { useAppDispatch } from '../../../../hooks/hooks';
 // import { deleteUser } from '../../../../lib/redux/auth/userSlice'; // Update this import when you implement property deletion in the store
 import { useTranslation } from 'react-i18next';
 
@@ -19,7 +19,7 @@ interface DeletePropertyModalProps {
 
 const DeletePropertyModal: React.FC<DeletePropertyModalProps> = (props) => {
   const { onClose, selectedValue, open } = props;
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);

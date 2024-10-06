@@ -6,6 +6,7 @@ import * as dotenv from 'dotenv';
 
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 
 import { connectToDatabase } from './database/data-source';
 import apiRouter from './routes';
@@ -14,6 +15,9 @@ import apiRouter from './routes';
 dotenv.config();
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Middleware to parse JSON requests
 app.use(express.json());

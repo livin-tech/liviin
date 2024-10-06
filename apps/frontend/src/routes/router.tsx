@@ -33,7 +33,7 @@ export const Router: RouteObject[] = [
         element: <Property />,
       },
       {
-        path: 'questionnaires',
+        path: 'questionnaire',
         element: <StatusComingSoon />,
       },
       {

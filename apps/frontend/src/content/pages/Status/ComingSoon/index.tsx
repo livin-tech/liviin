@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Box, Typography, Container } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
@@ -17,27 +16,8 @@ const MainContent = styled(Box)(
 );
 
 function StatusComingSoon() {
-  const calculateTimeLeft = () => {
-    const difference = +new Date(`2023`) - +new Date();
-    let timeLeft = {};
-
-    if (difference > 0) {
-      timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    }
-
-    return timeLeft;
-  };
-
   return (
     <>
-      {/* <Helmet>
-        <title>Status - Coming Soon</title>
-      </Helmet> */}
       <MainContent>
         <Container maxWidth="md">
           {/* <Logo /> */}
