@@ -24,6 +24,7 @@
     "metro-config": "*",
     "react": "*",
     "react-dom": "*",
+    "react-hook-form": "^7.53.0",
     "react-i18next": "*",
     "react-native": "*",
     "react-native-calendars": "^1.1305.0",
