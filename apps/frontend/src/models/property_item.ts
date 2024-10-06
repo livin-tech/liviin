@@ -1,15 +1,21 @@
 export interface PropertyItem {
-  id: string;
+  _id?: string;
   name: string;
   type: string;
   rooms: number;
   bathrooms: number;
-  livingRoom: boolean;
-  diningRoom: boolean;
-  hallRoom: boolean;
-  familyRoom: boolean;
-  kitchen: boolean;
-  serviceRoom: boolean;
-  laundaryRoom: boolean;
-  balcony: boolean;
+  hasLivingRoom: boolean;
+  hasDiningRoom: boolean;
+  hasHallRoom: boolean;
+  hasFamilyRoom: boolean;
+  hasKitchen: boolean;
+  hasServiceRoom: boolean;
+  hasLaundryRoom: boolean;
+  hasBalcony: boolean;
+  hasGarden: boolean;
+  title: string;
+  description: string;
+  price: number;
+  location: string;
+  ownerId: string;
 }

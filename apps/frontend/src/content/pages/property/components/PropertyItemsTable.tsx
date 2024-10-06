@@ -1,5 +1,4 @@
-import React, { FC, ChangeEvent, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 import {
   Divider,
   Box,
@@ -21,27 +20,23 @@ import {
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
-// import { useAppDispatch } from '../../../../hooks/hooks';
 import { useTranslation } from 'react-i18next';
-import { PropertyItem } from 'apps/frontend/src/models/property_item';
-import CreatePropertyModal from './CreatePropertyModal';
-import DeletePropertyModal from './DeletePropertyModal';
+import CreatepropertiesModal from './CreatePropertyModal';
+import DeletepropertiesModal from './DeletePropertyModal';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-
-interface PropertyItemsTableProps {
-  className?: string;
-  propertyItems: PropertyItem[];
-}
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+import { PropertyItem } from '../../../../models/property_item';
+import { fetchProperties } from '../../../../lib/redux/property/propertySlice';
 
 // const applyFilters = (
-//   properties: PropertyItem[],
+//   properties: propertiesItem[],
 //   searchQuery: string
-// ): PropertyItem[] => {
+// ): propertiesItem[] => {
 //   return properties.filter(
-//     (propertyItem) =>
-//       propertyItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//       propertyItem.type.toLowerCase().includes(searchQuery.toLowerCase())
+//     (propertiesItem) =>
+//       propertiesItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+//       propertiesItem.type.toLowerCase().includes(searchQuery.toLowerCase())
 //   );
 // };
 
@@ -53,31 +48,34 @@ const applyPagination = (
   return properties.slice(page * limit, page * limit + limit);
 };
 
-const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
-  const [selectedPropertyItems, setSelectedPropertyItems] = useState<string[]>(
-    []
-  );
+const PropertiesItemsTable = () => {
+  const [selectedpropertiesItems, setSelectedpropertiesItems] = useState<
+    string[]
+  >([]);
 
   const { t } = useTranslation();
 
-  const selectedBulkActions = selectedPropertyItems.length > 0;
+  const selectedBulkActions = selectedpropertiesItems.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   // const [filters, setFilters] = useState<Filters>({
   //   status: null,
   // });
+  const dispatch = useAppDispatch();
+
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const { properties } = useAppSelector((state) => state.property);
 
-  // useEffect(() => {
-  //   dispatch(fetchUsers());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchProperties());
+  }, [dispatch]);
 
-  // const handleClickOpen = (property: PropertyItem) => {
+  // const handleClickOpen = (properties: propertiesItem) => {
   //   setOpen(true);
-  //   setSelectedValue(property);
+  //   setSelectedValue(properties);
   // };
 
   const handleClose = (value: any) => {
@@ -94,28 +92,30 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSelectAllPropertyItems = (
+  const handleSelectAllpropertiesItems = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setSelectedPropertyItems(
+    setSelectedpropertiesItems(
       event.target.checked
-        ? propertyItems?.map((propertyItem) => propertyItem.id)
+        ? (properties
+            .map((propertiesItem) => propertiesItem._id)
+            .filter(Boolean) as string[])
         : []
     );
   };
 
-  const handleSelectOnePropertyItem = (
+  const handleSelectOnepropertiesItem = (
     event: ChangeEvent<HTMLInputElement>,
-    propertyItemId: string
+    propertiesItemId: string
   ): void => {
-    if (!selectedPropertyItems.includes(propertyItemId)) {
-      setSelectedPropertyItems((prevSelected) => [
+    if (!selectedpropertiesItems.includes(propertiesItemId)) {
+      setSelectedpropertiesItems((prevSelected) => [
         ...prevSelected,
-        propertyItemId,
+        propertiesItemId,
       ]);
     } else {
-      setSelectedPropertyItems((prevSelected) =>
-        prevSelected.filter((id) => id !== propertyItemId)
+      setSelectedpropertiesItems((prevSelected) =>
+        prevSelected.filter((id) => id !== propertiesItemId)
       );
     }
   };
@@ -128,23 +128,23 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
     setLimit(parseInt(event.target.value));
   };
 
-  // const filteredPropertyItems = applyFilters(properties, searchQuery);
-  const paginatedPropertyItems = applyPagination(propertyItems, page, limit);
-  const selectedSomePropertyItems =
-    selectedPropertyItems?.length > 0 &&
-    selectedPropertyItems?.length < propertyItems?.length;
-  const selectedAllPropertyItems =
-    selectedPropertyItems?.length === propertyItems?.length;
+  // const filteredpropertiesItems = applyFilters(properties, searchQuery);
+  const paginatedpropertiesItems = applyPagination(properties, page, limit);
+  const selectedSomepropertiesItems =
+    selectedpropertiesItems.length > 0 &&
+    selectedpropertiesItems.length < properties.length;
+  const selectedAllpropertiesItems =
+    selectedpropertiesItems.length === properties.length;
   const theme = useTheme();
 
   return (
     <Card>
-      <CreatePropertyModal
-        selectedProperty={selectedValue}
+      <CreatepropertiesModal
+        // selectedproperties={selectedValue}
         open={open}
         onClose={handleClose}
       />
-      <DeletePropertyModal
+      <DeletepropertiesModal
         // selectedValue={selectedValue}
         open={openDeleteDialog}
         onClose={handleUserDeleteDialog}
@@ -161,7 +161,7 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Search property..."
+                placeholder="Search properties..."
                 // placeholder={t('searchUsers')}
                 value={searchQuery}
                 onChange={handleSearchChange}
@@ -180,9 +180,13 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
               <TableCell padding="checkbox">
                 <Checkbox
                   color="primary"
-                  checked={selectedAllPropertyItems}
-                  indeterminate={selectedSomePropertyItems}
-                  onChange={handleSelectAllPropertyItems}
+                  checked={selectedAllpropertiesItems}
+                  indeterminate={selectedSomepropertiesItems}
+                  onChange={
+                    // if (propertiesItem._id) {
+                    handleSelectAllpropertiesItems // Only call if _id is defined
+                    // }
+                  }
                 />
               </TableCell>
               <TableCell>Name</TableCell>
@@ -200,81 +204,83 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
-            {paginatedPropertyItems.map((propertyItem) => {
-              const isPropertyItemSelected = selectedPropertyItems.includes(
-                propertyItem.id
+            {paginatedpropertiesItems.map((propertiesItem) => {
+              const ispropertiesItemSelected = selectedpropertiesItems.includes(
+                propertiesItem._id // Changed to _id from id
               );
               return (
                 <TableRow
                   hover
-                  key={propertyItem.id}
-                  selected={isPropertyItemSelected}
+                  key={propertiesItem._id} // Changed to _id from id
+                  selected={ispropertiesItemSelected}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
                       color="primary"
-                      checked={isPropertyItemSelected}
+                      checked={ispropertiesItemSelected}
                       onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOnePropertyItem(event, propertyItem.id)
+                        handleSelectOnepropertiesItem(event, propertiesItem._id)
                       }
                     />
                   </TableCell>
-                  <TableCell>{propertyItem.name}</TableCell>
-                  <TableCell>{propertyItem.type}</TableCell>
-                  <TableCell>{propertyItem.rooms}</TableCell>
-                  <TableCell>{propertyItem.bathrooms}</TableCell>
+                  <TableCell>{propertiesItem.title}</TableCell>{' '}
+                  {/* Changed to title */}
+                  <TableCell>{propertiesItem.type}</TableCell>
+                  <TableCell>{propertiesItem.rooms}</TableCell>
+                  <TableCell>{propertiesItem.bathrooms}</TableCell>
                   <TableCell>
-                    {propertyItem.livingRoom ? (
+                    {propertiesItem.hasLivingRoom ? (
                       <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
                   </TableCell>
                   <TableCell>
-                    {propertyItem.diningRoom ? (
+                    {propertiesItem.hasDiningRoom ? (
                       <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
                   </TableCell>
                   <TableCell>
-                    {propertyItem.hallRoom ? (
+                    {propertiesItem.hasHallRoom ? (
                       <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
                   </TableCell>
                   <TableCell>
-                    {propertyItem.familyRoom ? (
+                    {propertiesItem.hasFamilyRoom ? (
                       <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
                   </TableCell>
                   <TableCell>
-                    {propertyItem.kitchen ? (
+                    {propertiesItem.hasKitchen ? (
                       <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
                   </TableCell>
                   <TableCell>
-                    {propertyItem.serviceRoom ? (
+                    {propertiesItem.hasServiceRoom ? (
                       <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
                   </TableCell>
                   <TableCell>
-                    {propertyItem.laundaryRoom ? (
+                    {propertiesItem.hasLaundryRoom ? (
                       <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
                     )}
                   </TableCell>
                   <TableCell>
-                    {propertyItem.balcony ? (
+                    {propertiesItem.hasBalcony ? (
                       <CheckIcon color="success" />
                     ) : (
                       <CloseIcon color="error" />
@@ -314,7 +320,7 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
         <TablePagination
           component="div"
           labelRowsPerPage={t('rowsPerPage')}
-          count={propertyItems?.length}
+          count={properties.length}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -326,8 +332,4 @@ const PropertyItemsTable: FC<PropertyItemsTableProps> = ({ propertyItems }) => {
   );
 };
 
-PropertyItemsTable.propTypes = {
-  propertyItems: PropTypes.array.isRequired,
-};
-
-export default PropertyItemsTable;
+export default PropertiesItemsTable;

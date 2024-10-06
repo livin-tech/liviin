@@ -1,7 +1,7 @@
 import PageHeaderProperty from './components/PageHeaderProperty';
 import PageTitleWrapper from '../../../components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
-import PropertyItems from './components/PropertyItems';
+import PropertyItemsTable from './components/PropertyItemsTable'
 
 
 function Property() {
@@ -19,8 +19,7 @@ function Property() {
           spacing={3}
         >
           <Grid item xs={12}>
-            {/* <RecentOrders /> */}
-            <PropertyItems />
+            <PropertyItemsTable />
           </Grid>
         </Grid>
       </Container>

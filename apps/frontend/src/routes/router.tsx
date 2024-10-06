@@ -8,8 +8,8 @@ import SignUp from '../components/Signin/SignUp';
 import Property from '../content/pages/property';
 import StatusComingSoon from '../content/pages/Status/ComingSoon';
 import Status404 from '../content/pages/Status/Status404';
-import DashboardCrypto from '../content/dashboards/Crypto';
 import Users from '../content/pages/users';
+import DashboardCrypto from '../content/dashboards/Crypto';
 
 export const Router: RouteObject[] = [
   {

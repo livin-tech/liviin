@@ -13,24 +13,30 @@ import {
   Switch,
   FormControlLabel,
 } from '@mui/material';
-// import { useAppDispatch } from '../../../../hooks/hooks';
-// import { createUser, updateUser } from '../../../../lib/redux/auth/userSlice';
+import { useAppDispatch } from '../../../../hooks/hooks';
 import { t } from 'i18next';
+import { createProperty } from '../../../../lib/redux/property/propertySlice';
 
 interface Property {
-  id: string;
+  id?: string;
   name: string;
   type: string;
   rooms: number;
   bathrooms: number;
-  livingRoom: boolean;
-  diningRoom: boolean;
-  hallRoom: boolean;
-  familyRoom: boolean;
-  kitchen: boolean;
-  serviceRoom: boolean;
-  laundaryRoom: boolean;
-  balcony: boolean;
+  hasLivingRoom: boolean;
+  hasDiningRoom: boolean;
+  hasHallRoom: boolean;
+  hasFamilyRoom: boolean;
+  hasKitchen: boolean;
+  hasServiceRoom: boolean;
+  hasLaundryRoom: boolean;
+  hasBalcony: boolean;
+  hasGarden: boolean;
+  title: string;
+  description: string;
+  price: number;
+  location: string;
+  ownerId: string; // New field
 }
 
 interface CreatePropertyModalProps {
@@ -44,19 +50,25 @@ interface FormData {
   type: string;
   rooms: number;
   bathrooms: number;
-  livingRoom: boolean;
-  diningRoom: boolean;
-  hallRoom: boolean;
-  familyRoom: boolean;
-  kitchen: boolean;
-  serviceRoom: boolean;
-  laundaryRoom: boolean;
-  balcony: boolean;
+  hasLivingRoom: boolean;
+  hasDiningRoom: boolean;
+  hasHallRoom: boolean;
+  hasFamilyRoom: boolean;
+  hasKitchen: boolean;
+  hasServiceRoom: boolean;
+  hasLaundryRoom: boolean;
+  hasBalcony: boolean;
+  hasGarden: boolean;
+  title: string;
+  description: string;
+  price: number;
+  location: string;
+  ownerId: string; // New field
 }
 
 const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
   const { onClose, open, selectedProperty } = props;
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
   const {
@@ -70,26 +82,33 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
       type: selectedProperty?.type || '',
       rooms: selectedProperty?.rooms || 0,
       bathrooms: selectedProperty?.bathrooms || 0,
-      livingRoom: selectedProperty?.livingRoom || false,
-      diningRoom: selectedProperty?.diningRoom || false,
-      hallRoom: selectedProperty?.hallRoom || false,
-      familyRoom: selectedProperty?.familyRoom || false,
-      kitchen: selectedProperty?.kitchen || false,
-      serviceRoom: selectedProperty?.serviceRoom || false,
-      laundaryRoom: selectedProperty?.laundaryRoom || false,
-      balcony: selectedProperty?.balcony || false,
+      hasLivingRoom: selectedProperty?.hasLivingRoom || false,
+      hasGarden: selectedProperty?.hasGarden || false,
+      hasDiningRoom: selectedProperty?.hasDiningRoom || false,
+      hasHallRoom: selectedProperty?.hasHallRoom || false,
+      hasFamilyRoom: selectedProperty?.hasFamilyRoom || false,
+      hasKitchen: selectedProperty?.hasKitchen || false,
+      hasServiceRoom: selectedProperty?.hasServiceRoom || false,
+      hasLaundryRoom: selectedProperty?.hasLaundryRoom || false,
+      hasBalcony: selectedProperty?.hasBalcony || false,
+      title: selectedProperty?.title,
+      description: selectedProperty?.description || '',
+      price: selectedProperty?.price || 0,
+      location: selectedProperty?.location || '',
+      ownerId: selectedProperty?.ownerId || '', // New field
     },
   });
 
   const rooms: { label: string; name: keyof FormData }[] = [
-    { label: t('livingRoom'), name: 'livingRoom' },
-    { label: t('diningRoom'), name: 'diningRoom' },
-    { label: t('hallRoom'), name: 'hallRoom' },
-    { label: t('familyRoom'), name: 'familyRoom' },
-    { label: t('kitchen'), name: 'kitchen' },
-    { label: t('serviceRoom'), name: 'serviceRoom' },
-    { label: t('laundaryRoom'), name: 'laundaryRoom' },
-    { label: t('balcony'), name: 'balcony' },
+    { label: t('livingRoom'), name: 'hasLivingRoom' },
+    { label: t('diningRoom'), name: 'hasDiningRoom' },
+    { label: t('hallRoom'), name: 'hasHallRoom' },
+    { label: t('familyRoom'), name: 'hasFamilyRoom' },
+    { label: t('kitchen'), name: 'hasKitchen' },
+    { label: t('serviceRoom'), name: 'hasServiceRoom' },
+    { label: t('laundaryRoom'), name: 'hasLaundryRoom' },
+    { label: t('balcony'), name: 'hasBalcony' },
+    { label: t('garden'), name: 'hasGarden' }, // New field
   ];
 
   useEffect(() => {
@@ -97,16 +116,22 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
       reset({
         name: selectedProperty.name,
         type: selectedProperty.type,
-        rooms: selectedProperty.rooms,
-        bathrooms: selectedProperty.bathrooms,
-        livingRoom: selectedProperty.livingRoom,
-        diningRoom: selectedProperty.diningRoom,
-        hallRoom: selectedProperty.hallRoom,
-        familyRoom: selectedProperty.familyRoom,
-        kitchen: selectedProperty.kitchen,
-        serviceRoom: selectedProperty.serviceRoom,
-        laundaryRoom: selectedProperty.laundaryRoom,
-        balcony: selectedProperty.balcony,
+        rooms: Number(selectedProperty.rooms),
+        bathrooms: Number(selectedProperty.bathrooms),
+        hasLivingRoom: selectedProperty?.hasLivingRoom,
+        hasGarden: selectedProperty?.hasGarden,
+        hasDiningRoom: selectedProperty?.hasDiningRoom,
+        hasHallRoom: selectedProperty?.hasHallRoom,
+        hasFamilyRoom: selectedProperty?.hasFamilyRoom,
+        hasKitchen: selectedProperty?.hasKitchen,
+        hasServiceRoom: selectedProperty?.hasServiceRoom,
+        hasLaundryRoom: selectedProperty?.hasLaundryRoom,
+        hasBalcony: selectedProperty?.hasBalcony,
+        title: selectedProperty.name,
+        description: selectedProperty.description || 'My description',
+        price: selectedProperty.price || 10,
+        location: selectedProperty.location || 'THis will be the location',
+        ownerId: selectedProperty.ownerId,
       });
     }
   }, [selectedProperty, reset]);
@@ -118,13 +143,7 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setLoading(true);
     try {
-      if (selectedProperty) {
-        // await dispatch(
-        //   updateUser({ id: selectedProperty.id, updatedData: data })
-        // ).unwrap();
-      } else {
-        // await dispatch(createUser(data)).unwrap();
-      }
+      await dispatch(createProperty(data)).unwrap();
       onClose();
     } catch (error) {
       console.error('Failed to save property:', error);
@@ -163,11 +182,54 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
             <Grid item xs={12}>
               <FormControl fullWidth variant="outlined" required>
                 <TextField
+                  label={t('title')}
+                  variant="outlined"
+                  error={!!errors.title}
+                  helperText={errors.title ? t('titleReq') : ''}
+                  {...register('title', { required: t('titleReq') })}
+                  fullWidth
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined" required>
+                <TextField
+                  label={t('location')}
+                  variant="outlined"
+                  error={!!errors.location}
+                  helperText={errors.location ? t('locationReq') : ''}
+                  {...register('location', { required: t('locationReq') })}
+                  fullWidth
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined" required>
+                <TextField
                   label={t('type')}
                   variant="outlined"
                   error={!!errors.type}
                   helperText={errors.type ? t('typeReq') : ''}
                   {...register('type', { required: t('typeReq') })}
+                  fullWidth
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined" required>
+                <TextField
+                  label={t('description')}
+                  variant="outlined"
+                  multiline
+                  minRows={3}
+                  error={!!errors.description}
+                  helperText={errors.description ? t('descriptionReq') : ''}
+                  {...register('description', {
+                    required: t('descriptionReq'),
+                  })}
                   fullWidth
                 />
               </FormControl>
@@ -186,7 +248,6 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
                 />
               </FormControl>
             </Grid>
-
             <Grid item xs={6}>
               <FormControl fullWidth variant="outlined" required>
                 <TextField
@@ -201,15 +262,40 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
               </FormControl>
             </Grid>
 
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined" required>
+                <TextField
+                  label={t('price')}
+                  type="number"
+                  variant="outlined"
+                  error={!!errors.price}
+                  helperText={errors.price ? t('priceReq') : ''}
+                  {...register('price', {
+                    required: t('priceReq'),
+                    validate: (value) => value > 0 || t('priceGreaterThanZero'),
+                  })}
+                  fullWidth
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined" required>
+                <TextField
+                  label={t('ownerId')}
+                  variant="outlined"
+                  error={!!errors.ownerId}
+                  helperText={errors.ownerId ? t('ownerIdReq') : ''}
+                  {...register('ownerId', { required: t('ownerIdReq') })}
+                  fullWidth
+                />
+              </FormControl>
+            </Grid>
+
             {rooms.map((room, index) => (
               <Grid item xs={6} key={index}>
                 <FormControlLabel
                   control={
-                    <Switch
-                      {...register(room.name)}
-                      // defaultChecked={!!selectedProperty?.[room.name]}
-                      defaultChecked={false}
-                    />
+                    <Switch {...register(room.name)} defaultChecked={false} />
                   }
                   label={room.label}
                 />

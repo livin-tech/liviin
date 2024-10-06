@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 
 function PageHeader() {
   const user = {
-    name: 'Catherine Pike',
+    name: 'Admin',
     avatar: '/static/images/avatars/user-avatar-2.jpg'
   };
   const theme = useTheme();
@@ -27,7 +27,7 @@ function PageHeader() {
           Welcome, {user.name}!
         </Typography>
         <Typography variant="subtitle2">
-          Today is a good day to start trading crypto assets!
+          Start analysing users and properties to boost the revenue!
         </Typography>
       </Grid>
     </Grid>
