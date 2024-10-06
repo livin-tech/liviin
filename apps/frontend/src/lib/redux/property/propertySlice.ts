@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { PropertyItem } from 'apps/frontend/src/models/property_item';
 import axios from 'axios';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -13,31 +14,9 @@ interface Owner {
   email: string;
 }
 
-interface Property {
-    _id?: string;
-    name: string;
-    type: string;
-    rooms: number;
-    bathrooms: number;
-    hasLivingRoom: boolean;
-    hasDiningRoom: boolean;
-    hasHallRoom: boolean;
-    hasFamilyRoom: boolean;
-    hasKitchen: boolean;
-    hasServiceRoom: boolean;
-    hasLaundryRoom: boolean;
-    hasBalcony: boolean;
-  hasGarden: boolean;
-    title: string;
-    description: string;
-    price: number;
-    location: string;
-    ownerId: string;    // New field
-}
-
 // Define the state type
 interface PropertyState {
-  properties: Property[];
+  properties: PropertyItem[];
   loading: boolean;
   error: string | null;
 }
@@ -53,43 +32,114 @@ const initialState: PropertyState = {
 const token = 'myauthtoken';
 
 // Thunk to fetch properties
-export const fetchProperties = createAsyncThunk('properties/fetchProperties', async () => {
-  const response = await axios.get<Property[]>(`${API_BASE_URL}/properties`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
-});
+export const fetchProperties = createAsyncThunk(
+  'properties/fetchProperties',
+  async () => {
+    const response = await axios.get<PropertyItem[]>(
+      `${API_BASE_URL}/properties`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  }
+);
 
 export const createProperty = createAsyncThunk(
-    'properties/createProperty',
-    async (propertyData: Property) => {
-        const formattedData = {
-            ...propertyData,
-            rooms: Number(propertyData.rooms),
-            bathrooms: Number(propertyData.bathrooms),
-            price: Number(propertyData.price),
-            owner: propertyData.ownerId
-          };
-        try {
-            const response = await axios.post(`${API_BASE_URL}/properties`, formattedData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-            return response.data;
-        } catch (error: any) {
-            if (error.response) {
-                console.error('API Error:', error.response.data); // Log the error response
-            } else {
-                console.error('Error:', error.message);
-            }
-            throw error;
+  'properties/createProperty',
+  async (propertyData: PropertyItem) => {
+    const formattedData = {
+      ...propertyData,
+      rooms: Number(propertyData.rooms),
+      bathrooms: Number(propertyData.bathrooms),
+      price: Number(propertyData.price),
+      owner: propertyData.ownerId,
+    };
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/properties`,
+        formattedData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
         }
+      );
+      return response.data;
+    } catch (error: any) {
+      if (error.response) {
+        console.error('API Error:', error.response.data);
+      } else {
+        console.error('Error:', error.message);
+      }
+      throw error;
     }
-  );
+  }
+);
+
+export const editProperty = createAsyncThunk(
+  'properties/editProperty',
+  async ({
+    propertyData,
+    propertyId,
+  }: {
+    propertyData: PropertyItem;
+    propertyId: string;
+  }) => {
+    const formattedData = {
+      ...propertyData,
+      rooms: Number(propertyData.rooms),
+      bathrooms: Number(propertyData.bathrooms),
+      price: Number(propertyData.price),
+      owner: propertyData.owner?._id,
+    };
+
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}properties/${propertyId}`,
+        formattedData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      if (error.response) {
+        console.error('API Error:', error.response.data);
+      } else {
+        console.error('Error:', error.message);
+      }
+      throw error;
+    }
+  }
+);
+
+export const deleteProperty = createAsyncThunk(
+  'properties/deleteProperty',
+  async (propertyId: string) => {
+    try {
+      await axios.delete(`${API_BASE_URL}/properties/${propertyId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return propertyId;
+    } catch (error: any) {
+      if (error.response) {
+        console.error('API Error:', error.response.data);
+      } else {
+        console.error('Error:', error.message);
+      }
+      throw error;
+    }
+  }
+);
 
 // Create the slice
 const propertySlice = createSlice({
@@ -104,7 +154,7 @@ const propertySlice = createSlice({
     });
     builder.addCase(
       fetchProperties.fulfilled,
-      (state, action: PayloadAction<Property[]>) => {
+      (state, action: PayloadAction<PropertyItem[]>) => {
         state.loading = false;
         state.properties = action.payload;
       }
@@ -114,20 +164,63 @@ const propertySlice = createSlice({
       state.error = action.error.message || 'Failed to fetch properties';
     });
 
-
     //create property
     builder.addCase(createProperty.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      });
-      builder.addCase(createProperty.fulfilled, (state, action: PayloadAction<Property>) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(
+      createProperty.fulfilled,
+      (state, action: PayloadAction<PropertyItem>) => {
         state.loading = false;
-        state.properties.push(action.payload); // Add the newly created property to the list
-      });
-      builder.addCase(createProperty.rejected, (state, action) => {
+        state.properties.push(action.payload);
+      }
+    );
+    builder.addCase(createProperty.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || 'Failed to create property';
+    });
+
+    // Handle editProperty
+    builder.addCase(editProperty.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(
+      editProperty.fulfilled,
+      (state, action: PayloadAction<PropertyItem>) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to create property';
-      });
+        const index = state.properties.findIndex(
+          (property) => property._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.properties[index] = action.payload;
+        }
+      }
+    );
+    builder.addCase(editProperty.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || 'Failed to edit property';
+    });
+
+    // Delete property
+    builder.addCase(deleteProperty.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(
+      deleteProperty.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.loading = false;
+        state.properties = state.properties.filter(
+          (property) => property._id !== action.payload
+        );
+      }
+    );
+    builder.addCase(deleteProperty.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || 'Failed to delete property';
+    });
   },
 });
 

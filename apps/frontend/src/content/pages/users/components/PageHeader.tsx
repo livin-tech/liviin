@@ -11,7 +11,7 @@ function PageHeader() {
   // const [selectedValue, setSelectedValue] = useState();
 
   const user = {
-    name: 'Catherine Pike',
+    name: 'Admin',
     avatar: '/static/images/avatars/user-avatar-2.jpg',
   };
 

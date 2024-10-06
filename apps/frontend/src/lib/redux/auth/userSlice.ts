@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebase';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -66,14 +68,44 @@ export const deleteUser = createAsyncThunk(
 );
 
 export const createUser = createAsyncThunk(
-  'users/createUser',
-  async (newUser: Partial<User>) => {
-    const response = await axios.post<User>(`${API_BASE_URL}/users`, newUser, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
+  'auth/createUser',
+  async (
+    newUser: {
+      email: string;
+      firstName: string;
+      lastName: string;
+      phoneNumber?: string;
+      password: string;
+    },
+    { rejectWithValue }
+  ) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        newUser.email,
+        newUser.password
+      );
+      const user = userCredential.user;
+
+      if (user) {
+        const userPayload = {
+          email: newUser.email,
+          firstName: newUser.firstName,
+          lastName: newUser.lastName,
+          phoneNumber: newUser.phoneNumber || '',
+          // firebaseID: user.uid
+        };
+        const response = await axios.post(`${API_BASE_URL}users`, userPayload, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        return response.data;
+      }
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 

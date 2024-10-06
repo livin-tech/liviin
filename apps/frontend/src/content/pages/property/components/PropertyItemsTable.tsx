@@ -29,24 +29,6 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
 import { PropertyItem } from '../../../../models/property_item';
 import { fetchProperties } from '../../../../lib/redux/property/propertySlice';
 
-// const applyFilters = (
-//   properties: propertiesItem[],
-//   searchQuery: string
-// ): propertiesItem[] => {
-//   return properties.filter(
-//     (propertiesItem) =>
-//       propertiesItem.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//       propertiesItem.type.toLowerCase().includes(searchQuery.toLowerCase())
-//   );
-// };
-
-const applyPagination = (
-  properties: PropertyItem[],
-  page: number,
-  limit: number
-): PropertyItem[] => {
-  return properties.slice(page * limit, page * limit + limit);
-};
 
 const PropertiesItemsTable = () => {
   const [selectedpropertiesItems, setSelectedpropertiesItems] = useState<
@@ -65,9 +47,31 @@ const PropertiesItemsTable = () => {
 
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue, setSelectedValue] = useState<PropertyItem | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { properties } = useAppSelector((state) => state.property);
+
+  console.log('propertiesproperties', properties)
+
+
+const applyFilters = (
+  properties: PropertyItem[],
+  searchQuery: string
+): PropertyItem[] => {
+  return properties.filter(
+    (propertiesItem) =>
+      propertiesItem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      propertiesItem.type.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+};
+
+const applyPagination = (
+  properties: PropertyItem[],
+  page: number,
+  limit: number
+): PropertyItem[] => {
+  return properties.slice(page * limit, page * limit + limit);
+};
 
   useEffect(() => {
     dispatch(fetchProperties());
@@ -78,12 +82,13 @@ const PropertiesItemsTable = () => {
   //   setSelectedValue(properties);
   // };
 
-  const handleClose = (value: any) => {
+  const handleClose = () => {
     setOpen(false);
-    setSelectedValue(value);
+    setSelectedValue(null);
   };
 
-  const handleUserDeleteDialog = (value: any) => {
+  const handlePropertyDeleteDialog = (value: any) => {
+    console.log('handlePropertyDeleteDialog', value)
     setOpenDeleteDialog(!openDeleteDialog);
     setSelectedValue(value);
   };
@@ -128,8 +133,14 @@ const PropertiesItemsTable = () => {
     setLimit(parseInt(event.target.value));
   };
 
-  // const filteredpropertiesItems = applyFilters(properties, searchQuery);
-  const paginatedpropertiesItems = applyPagination(properties, page, limit);
+  const handleEditClick = (property: PropertyItem) => {
+    // console.log('handleEditClick->', property)
+    setSelectedValue(property); // Set the selected property
+    setOpen(true); // Open the modal
+  };
+
+  const filteredpropertiesItems = applyFilters(properties, searchQuery);
+  const paginatedpropertiesItems = applyPagination(filteredpropertiesItems, page, limit);
   const selectedSomepropertiesItems =
     selectedpropertiesItems.length > 0 &&
     selectedpropertiesItems.length < properties.length;
@@ -140,14 +151,14 @@ const PropertiesItemsTable = () => {
   return (
     <Card>
       <CreatepropertiesModal
-        // selectedproperties={selectedValue}
+        selectedProperty={selectedValue}
         open={open}
         onClose={handleClose}
       />
       <DeletepropertiesModal
-        // selectedValue={selectedValue}
+        selectedValue={selectedValue?._id}
         open={openDeleteDialog}
-        onClose={handleUserDeleteDialog}
+        onClose={handlePropertyDeleteDialog}
       />
       {selectedBulkActions && (
         <Box flex={1} p={2}>
@@ -189,7 +200,7 @@ const PropertiesItemsTable = () => {
                   }
                 />
               </TableCell>
-              <TableCell>Name</TableCell>
+              <TableCell>Title</TableCell>
               <TableCell>Type</TableCell>
               <TableCell>Rooms</TableCell>
               <TableCell>Bathrooms</TableCell>
@@ -294,12 +305,14 @@ const PropertiesItemsTable = () => {
                         },
                         color: theme.palette.primary.main,
                       }}
+                      onClick={() => handleEditClick(propertiesItem)} 
                       color="inherit"
                       size="small"
                     >
                       <EditTwoToneIcon fontSize="small" />
                     </IconButton>
                     <IconButton
+                    onClick={() => handlePropertyDeleteDialog(propertiesItem)}
                       sx={{
                         '&:hover': { background: theme.colors.error.lighter },
                         color: theme.palette.error.main,

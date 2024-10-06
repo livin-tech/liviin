@@ -7,9 +7,9 @@ import {
   DialogTitle,
   Button,
 } from '@mui/material';
-// import { useAppDispatch } from '../../../../hooks/hooks';
-// import { deleteUser } from '../../../../lib/redux/auth/userSlice'; // Update this import when you implement property deletion in the store
+import { useAppDispatch } from '../../../../hooks/hooks';
 import { useTranslation } from 'react-i18next';
+import { deleteProperty } from '../../../../lib/redux/property/propertySlice';
 
 interface DeletePropertyModalProps {
   onClose: (value?: string) => void;
@@ -19,7 +19,7 @@ interface DeletePropertyModalProps {
 
 const DeletePropertyModal: React.FC<DeletePropertyModalProps> = (props) => {
   const { onClose, selectedValue, open } = props;
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -29,11 +29,14 @@ const DeletePropertyModal: React.FC<DeletePropertyModalProps> = (props) => {
   };
 
   const handleDelete = async () => {
+    console.log('handleDeletehandleDelete', selectedValue)
     setIsLoading(true);
     try {
       // Replace deleteUser with the appropriate delete property action when you implement it
-      // await dispatch(deleteUser(selectedValue)).unwrap();
-      onClose(selectedValue);
+      if(selectedValue){
+        await dispatch(deleteProperty(selectedValue)).unwrap();
+        onClose();
+      }
     } catch (error) {
       console.error('Failed to delete property:', error);
     } finally {

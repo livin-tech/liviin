@@ -1,6 +1,5 @@
 export interface PropertyItem {
   _id?: string;
-  name: string;
   type: string;
   rooms: number;
   bathrooms: number;
@@ -17,5 +16,16 @@ export interface PropertyItem {
   description: string;
   price: number;
   location: string;
-  ownerId: string;
+  owner?: Owner;
+  ownerId?: string;
+}
+
+export interface Owner {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  hasOnboarded?: boolean;
+  role?: string;
+  subscriptionStatus?: string;
+  _id?: string;
 }

@@ -20,6 +20,7 @@ interface User {
   firstName: string;
   lastName: string;
   email: string;
+  phoneNumber?: string;
 }
 
 interface CreateUserModalProps {
@@ -32,6 +33,7 @@ interface FormData {
   firstName: string;
   lastName: string;
   email: string;
+  phoneNumber?: string;
 }
 
 const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
@@ -49,6 +51,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
       firstName: selectedUser?.firstName || '',
       lastName: selectedUser?.lastName || '',
       email: selectedUser?.email || '',
+      phoneNumber: selectedUser?.phoneNumber || '',
     },
   });
 
@@ -58,6 +61,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
         firstName: selectedUser.firstName,
         lastName: selectedUser.lastName,
         email: selectedUser.email,
+        phoneNumber: selectedUser.phoneNumber || '',
       });
     }
   }, [selectedUser, reset]);
@@ -74,8 +78,17 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
           updateUser({ id: selectedUser.id, updatedData: data })
         ).unwrap();
       } else {
-        await dispatch(createUser(data)).unwrap();
+        await dispatch(
+          createUser({
+            email: data.email,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            phoneNumber: data.phoneNumber || '',
+            password: 'defaultPassword123',
+          })
+        ).unwrap();
       }
+
       onClose();
     } catch (error) {
       console.error('Failed to save user:', error);
@@ -141,6 +154,24 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
                     pattern: {
                       value: /\S+@\S+\.\S+/,
                       message: t('emailValid'),
+                    },
+                  })}
+                  fullWidth
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined">
+                <TextField
+                  label={'Phone Number'}
+                  variant="outlined"
+                  error={!!errors.phoneNumber}
+                  helperText={errors.phoneNumber ? t('phoneNumberReq') : ''}
+                  {...register('phoneNumber', {
+                    pattern: {
+                      value: /^[0-9]*$/,
+                      message: t('invalidPhoneNumber'),
                     },
                   })}
                   fullWidth
