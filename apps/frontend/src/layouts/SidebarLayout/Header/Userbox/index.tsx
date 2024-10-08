@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react';
 
-import { NavLink } from 'react-router-dom';
-
 import {
   Avatar,
   Box,
@@ -9,17 +7,17 @@ import {
   Divider,
   Hidden,
   lighten,
-  List,
-  ListItem,
-  ListItemText,
   Popover,
   Typography,
 } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
+import { useNavigate } from 'react-router';
+import { SIGNIN } from '../../../../routes/routesConstants';
+import { useAppDispatch } from '../../../../hooks/hooks';
+import { clearUser } from '../../../../lib/redux/auth/authSlice';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -57,6 +55,9 @@ const UserBoxDescription = styled(Typography)(
 );
 
 function HeaderUserbox() {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const user = {
     name: 'Liviin Admin',
     avatar: '/static/images/avatars/user-avatar-2.jpg',
@@ -121,7 +122,15 @@ function HeaderUserbox() {
         </List>
         <Divider /> */}
         <Box sx={{ m: 1 }}>
-          <Button color="primary" fullWidth>
+          <Button
+            color="primary"
+            fullWidth
+            onClick={() => {
+              navigate(`${SIGNIN}`);
+              dispatch(clearUser());
+              localStorage.setItem('token', '');
+            }}
+          >
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sign out
           </Button>

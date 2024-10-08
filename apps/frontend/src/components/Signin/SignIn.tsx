@@ -19,6 +19,9 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'; // Import React Hook Form
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as LogoLiviin } from '../../assets/icons/livin-icon.svg';
+import { setUser } from '../../lib/redux/auth/authSlice';
+import { useAppDispatch } from '../../hooks/hooks';
+import { OVERVIEW } from '../../routes/routesConstants';
 
 interface FormData {
   email: string;
@@ -73,6 +76,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const { t } = useTranslation();
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleClose = () => {
     setOpen(false);
@@ -87,9 +91,19 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
         email,
         password
       );
+      const idToken = await userCredential?.user?.getIdToken();
       if (userCredential.user) {
+        localStorage.setItem('token', idToken);
+        dispatch(
+          setUser({
+            uid: userCredential?.user?.uid,
+            accessToken: idToken,
+            displayName: userCredential?.user?.displayName,
+            email: userCredential?.user?.email,
+          })
+        );
         setOpen(true);
-        navigate('/dashboards/crypto');
+        navigate(`${OVERVIEW}`);
       }
     } catch (error) {
       const errorCode = (error as any).code;
