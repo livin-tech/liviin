@@ -1,13 +1,13 @@
 import { Navigate, RouteObject } from 'react-router-dom';
 import SidebarLayout from '../layouts/SidebarLayout';
 
-import SignIn from '../components/Signin/SignIn';
-import SignUp from '../components/Signin/SignUp';
-import Property from '../content/pages/property';
-import StatusComingSoon from '../content/pages/Status/ComingSoon';
-import Status404 from '../content/pages/Status/Status404';
-import Users from '../content/pages/users';
-import DashboardCrypto from '../content/dashboards/Crypto';
+import SignIn from '../pages/signin/SignIn';
+import SignUp from '../pages/signup/SignUp';
+import Property from '../pages/property';
+import StatusComingSoon from '../pages/status/ComingSoon';
+import Status404 from '../pages/status/Status404';
+import Users from '../pages/users';
+import DashboardCrypto from '../pages/overview';
 import ProtectedRoute from './protectedRoutes'; // Import the ProtectedRoute component
 
 import {

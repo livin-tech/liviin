@@ -17,7 +17,7 @@ import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import { useNavigate } from 'react-router';
 import { SIGNIN } from '../../../../routes/routesConstants';
 import { useAppDispatch } from '../../../../hooks/hooks';
-import { clearUser } from '../../../../lib/redux/auth/authSlice';
+import { clearUser } from '../../../../redux/auth/authSlice';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
