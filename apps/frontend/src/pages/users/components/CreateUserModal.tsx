@@ -47,6 +47,8 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
     formState: { errors },
     reset,
   } = useForm<FormData>({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
     defaultValues: {
       firstName: selectedUser?.firstName || '',
       lastName: selectedUser?.lastName || '',

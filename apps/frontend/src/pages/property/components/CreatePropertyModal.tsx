@@ -16,7 +16,7 @@ import {
 import { useAppDispatch } from '../../../hooks/hooks';
 import { t } from 'i18next';
 import { createProperty, editProperty } from '../../../redux/property/propertySlice';
-import { PropertyItem } from '../../../models/property_item';
+import { PropertyItem } from '../../../models/propertyItem';
 
 interface CreatePropertyModalProps {
   onClose: (value?: any) => void;
@@ -59,6 +59,8 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
     reset,
     control,
   } = useForm<FormData>({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
     defaultValues: {
       // name: selectedProperty?.name || '',
       type: selectedProperty?.type || '',

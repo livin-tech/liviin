@@ -59,7 +59,10 @@ export default function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
+  });
 
   const dispatch = useAppDispatch();
   const passwordRef = useRef<HTMLInputElement | null>(null);

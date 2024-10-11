@@ -26,7 +26,7 @@ import DeletepropertiesModal from './DeletePropertyModal';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { PropertyItem } from '../../../models/property_item';
+import { PropertyItem } from '../../../models/propertyItem';
 import { fetchProperties } from '../../../redux/property/propertySlice';
 
 

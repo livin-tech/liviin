@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
-import axios from 'axios';
+// import axios from 'axios';
 
 interface AuthState {
   user: User | null;

@@ -1,18 +1,18 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { PropertyItem } from 'apps/frontend/src/models/property_item';
+import { PropertyItem } from 'apps/frontend/src/models/propertyItem';
 import axios from 'axios';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-interface Owner {
-  role: string;
-  subscriptionStatus: string;
-  hasOnboarded: boolean;
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-}
+// interface Owner {
+//   role: string;
+//   subscriptionStatus: string;
+//   hasOnboarded: boolean;
+//   _id: string;
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+// }
 
 // Define the state type
 interface PropertyState {

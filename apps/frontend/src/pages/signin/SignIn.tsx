@@ -70,7 +70,10 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
+  });
   const { t } = useTranslation();
 
   const navigate = useNavigate();
@@ -158,7 +161,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               </Box>
               <TextField
                 {...register('password', {
-                  required: `${t('emailValid')}`,
+                  required: `${t('passwordReq')}`,
                   minLength: {
                     value: 6,
                     message: `${t('passwordDesc')}`,
@@ -181,7 +184,12 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               control={<Checkbox value="remember" color="primary" />}
               label={t('rememberMe')}
             />
-            <Button type="submit" fullWidth variant="contained">
+            <Button
+              fullWidth
+              type="submit"
+              variant="contained"
+              disabled={!!errors.email || !!errors.password}
+            >
               Sign in
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
