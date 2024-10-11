@@ -3,7 +3,7 @@ import PageTitleWrapper from '../../components/PageTitleWrapper';
 import { Container, Grid } from '@mui/material';
 import WatchList from './WatchList';
 
-function DashboardCrypto() {
+function Dashboard() {
   return (
     <>
       <PageTitleWrapper>
@@ -35,4 +35,4 @@ function DashboardCrypto() {
   );
 }
 
-export default DashboardCrypto;
+export default Dashboard;

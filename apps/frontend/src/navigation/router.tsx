@@ -1,32 +1,37 @@
 import { Navigate, RouteObject } from 'react-router-dom';
-import SidebarLayout from '../layouts/SidebarLayout';
 
+// Pages
+import Users from '../pages/users';
+import Property from '../pages/property';
+import Dashboard from '../pages/overview';
 import SignIn from '../pages/signin/SignIn';
 import SignUp from '../pages/signup/SignUp';
-import Property from '../pages/property';
-import StatusComingSoon from '../pages/status/ComingSoon';
 import Status404 from '../pages/status/Status404';
-import Users from '../pages/users';
-import DashboardCrypto from '../pages/overview';
-import ProtectedRoute from './protectedRoutes'; // Import the ProtectedRoute component
+import StatusComingSoon from '../pages/status/ComingSoon';
 
-import {
-  OVERVIEW,
-  USERS as USERS_ROUTE,
-  PROPERTY as PROPERTY_ROUTE,
-  QUESTIONNAIRE,
-  PAYMENT,
+// Utils
+import { APP_ROUTES } from './routes';
+import { ProtectedRoutes } from './protectedRoutes';
+import SidebarLayout from '../layouts/SidebarLayout';
+
+const {
+  MISC,
+  USERS,
   SIGNIN,
   SIGNUP,
-} from './routesConstants';
+  PAYMENT,
+  PROPERTY,
+  OVERVIEW,
+  QUESTIONNAIRE,
+} = APP_ROUTES;
 
 export const Router: RouteObject[] = [
   {
     path: '/',
     element: (
-      <ProtectedRoute>
+      // <ProtectedRoutes>
         <SidebarLayout />
-      </ProtectedRoute>
+      // </ProtectedRoutes>
     ),
     children: [
       {
@@ -35,14 +40,14 @@ export const Router: RouteObject[] = [
       },
       {
         path: OVERVIEW,
-        element: <DashboardCrypto />,
+        element: <Dashboard />,
       },
       {
-        path: USERS_ROUTE,
+        path: USERS,
         element: <Users />,
       },
       {
-        path: PROPERTY_ROUTE,
+        path: PROPERTY,
         element: <Property />,
       },
       {
@@ -67,7 +72,7 @@ export const Router: RouteObject[] = [
         element: <SignUp />,
       },
       {
-        path: '*',
+        path: MISC,
         element: <Status404 />,
       },
     ],

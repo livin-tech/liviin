@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { ReactComponent as LogoLiviin } from '../../assets/icons/livin-icon.svg';
 import { setUser } from '../../redux/auth/authSlice';
 import { useAppDispatch } from '../../hooks/hooks';
-import { OVERVIEW } from '../../routes/routesConstants';
+import { APP_ROUTES } from '../../navigation';
 
 interface FormData {
   email: string;
@@ -99,7 +99,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             email: userCredential?.user?.email,
           })
         );
-        navigate(`${OVERVIEW}`);
+        navigate(APP_ROUTES.OVERVIEW);
       }
     } catch (error) {
       const errorCode = (error as any).code;

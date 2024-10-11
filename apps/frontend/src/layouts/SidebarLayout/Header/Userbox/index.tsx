@@ -15,7 +15,7 @@ import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import { useNavigate } from 'react-router';
-import { SIGNIN } from '../../../../routes/routesConstants';
+import { APP_ROUTES } from '../../../../navigation';
 import { useAppDispatch } from '../../../../hooks/hooks';
 import { clearUser } from '../../../../redux/auth/authSlice';
 
@@ -126,7 +126,7 @@ function HeaderUserbox() {
             color="primary"
             fullWidth
             onClick={() => {
-              navigate(`${SIGNIN}`);
+              navigate(APP_ROUTES.SIGNIN);
               dispatch(clearUser());
               localStorage.setItem('token', '');
             }}

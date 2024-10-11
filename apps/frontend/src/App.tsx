@@ -1,5 +1,5 @@
 import { useRoutes } from 'react-router-dom';
-import { Router } from './routes';
+import { Router } from './navigation';
 
 import { CssBaseline } from '@mui/material';
 import ThemeProvider from './theme/ThemeProvider';

@@ -50,8 +50,6 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
-  console.log('selectedPropertyselectedProperty', selectedProperty)
-
   const {
     register,
     handleSubmit,
@@ -128,11 +126,8 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
     setLoading(true);
     try {
       if(selectedProperty){
-        console.log('IM EDITING THE PROPERTY', data);
         await dispatch(editProperty({ propertyData: data, propertyId: selectedProperty._id })).unwrap();
       } else {
-        console.log('IM CREATING THE PROPERTY');
-
         await dispatch(createProperty(data)).unwrap();
       }
       onClose();
