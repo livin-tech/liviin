@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react';
 
-import { NavLink } from 'react-router-dom';
-
 import {
   Avatar,
   Box,
@@ -9,17 +7,17 @@ import {
   Divider,
   Hidden,
   lighten,
-  List,
-  ListItem,
-  ListItemText,
   Popover,
   Typography,
 } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
+import { useNavigate } from 'react-router';
+import { APP_ROUTES } from '../../../../navigation';
+import { useAppDispatch } from '../../../../hooks/hooks';
+import { clearUser } from '../../../../redux/auth/authSlice';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -57,10 +55,13 @@ const UserBoxDescription = styled(Typography)(
 );
 
 function HeaderUserbox() {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const user = {
-    name: 'Catherine Pike',
+    name: 'Liviin Admin',
     avatar: '/static/images/avatars/user-avatar-2.jpg',
-    jobtitle: 'Project Manager',
+    jobtitle: 'Admin',
   };
 
   const ref = useRef<any>(null);
@@ -113,15 +114,23 @@ function HeaderUserbox() {
           </UserBoxText>
         </MenuUserBox>
         <Divider sx={{ mb: 0 }} />
-        <List sx={{ p: 1 }} component="nav">
+        {/* <List sx={{ p: 1 }} component="nav">
           <ListItem button to="/management/profile/details" component={NavLink}>
             <AccountBoxTwoToneIcon fontSize="small" />
             <ListItemText primary="My Profile" />
           </ListItem>
         </List>
-        <Divider />
+        <Divider /> */}
         <Box sx={{ m: 1 }}>
-          <Button color="primary" fullWidth>
+          <Button
+            color="primary"
+            fullWidth
+            onClick={() => {
+              navigate(APP_ROUTES.SIGNIN);
+              dispatch(clearUser());
+              localStorage.setItem('token', '');
+            }}
+          >
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
             Sign out
           </Button>
