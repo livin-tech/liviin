@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { PropertyItem } from 'apps/frontend/src/models/property_item';
 import axios from 'axios';
+import { apiRequest } from '../../utils/api';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -35,15 +36,13 @@ const token = 'myauthtoken';
 export const fetchProperties = createAsyncThunk(
   'properties/fetchProperties',
   async () => {
-    const response = await axios.get<PropertyItem[]>(
-      `${API_BASE_URL}/properties`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+    const response = await apiRequest<PropertyItem[]>(
+      '/properties',
+      'GET',
+      null,
+      token
     );
-    return response.data;
+    return response;
   }
 );
 

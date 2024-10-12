@@ -11,13 +11,13 @@ import {
 // import Group from '@mui/icons-material/Group';
 import Home from '@mui/icons-material/Home'; // Property icon
 import Quiz from '@mui/icons-material/Quiz'; // Questionnaires icon
-
-// import Label from '../../../components/Label';
-// import Text from '../../../components/Text';
-// import Chart from 'react-apexcharts';
-// import type { ApexOptions } from 'apexcharts';
 import Text from '../../components/Text';
 import Label from '../../components/Label';
+
+interface WatchListColumnProps {
+  totalUsers: number;
+  totalProperties: number;
+}
 
 const AvatarWrapper = styled(Avatar)(
   ({ theme }) => `
@@ -47,7 +47,7 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-function WatchListColumn() {
+function WatchListColumn({ totalUsers, totalProperties }: WatchListColumnProps) {
   // const theme = useTheme();
 
   // const chartOptions: ApexOptions = {
@@ -199,13 +199,13 @@ function WatchListColumn() {
                   mb: 1,
                 }}
               >
-                56
+                {totalUsers}
               </Typography>
-              <Text color="success">
+              {/* <Text color="success">
                 <b>+12.5%</b>
-              </Text>
+              </Text> */}
             </Box>
-            <Box
+            {/* <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -222,7 +222,7 @@ function WatchListColumn() {
               >
                 last 24h
               </Typography>
-            </Box>
+            </Box> */}
           </Box>
           {/* <Chart
             options={chartOptions}
@@ -275,13 +275,13 @@ function WatchListColumn() {
                   mb: 1,
                 }}
               >
-                119
+                {totalProperties}
               </Typography>
-              <Text color="error">
+              {/* <Text color="error">
                 <b>-3.24%</b>
-              </Text>
+              </Text> */}
             </Box>
-            <Box
+            {/* <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -298,7 +298,7 @@ function WatchListColumn() {
               >
                 last 24h
               </Typography>
-            </Box>
+            </Box> */}
           </Box>
           {/* <Chart
             options={chartOptions}
@@ -347,13 +347,13 @@ function WatchListColumn() {
                   mb: 1,
                 }}
               >
-                13
+                0
               </Typography>
-              <Text color="error">
+              {/* <Text color="error">
                 <b>-1%</b>
-              </Text>
+              </Text> */}
             </Box>
-            <Box
+            {/* <Box
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -370,7 +370,7 @@ function WatchListColumn() {
               >
                 last 24h
               </Typography>
-            </Box>
+            </Box> */}
           </Box>
           {/* <Chart
             options={chartOptions}

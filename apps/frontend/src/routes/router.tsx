@@ -8,7 +8,7 @@ import StatusComingSoon from '../pages/status/ComingSoon';
 import Status404 from '../pages/status/Status404';
 import Users from '../pages/users';
 import DashboardCrypto from '../pages/overview';
-import ProtectedRoute from './protectedRoutes'; // Import the ProtectedRoute component
+import ProtectedRoute from './protectedRoutes';
 
 import {
   OVERVIEW,

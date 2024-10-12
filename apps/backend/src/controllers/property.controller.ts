@@ -32,7 +32,9 @@ export class PropertyController {
   // Create a new property
   async createProperty(req: Request, res: Response) {
     try {
+      console.log('REQQQ', req.body)
       const validatedData = propertySchema.parse(req.body);
+      console.log('validatedDatavalidatedData', validatedData)
       const property = await this.propertyRepository.createProperty(validatedData);
       logger.info(`Property created successfully: ${property._id}`);
       return res.status(201).json(property);

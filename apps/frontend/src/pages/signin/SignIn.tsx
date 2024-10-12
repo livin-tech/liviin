@@ -96,7 +96,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             email: userCredential?.user?.email,
           })
         );
-        navigate(`${OVERVIEW}`);
+        navigate(`/${OVERVIEW}`);
       }
     } catch (error) {
       const errorCode = (error as any).code;
