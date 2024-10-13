@@ -7,7 +7,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 // Define the User type
 interface User {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -142,7 +142,7 @@ const userSlice = createSlice({
         state.loading = false;
         const updatedUser = action.payload;
         const index = state.users.findIndex(
-          (user) => user.id === updatedUser.id
+          (user) => user._id === updatedUser._id
         );
         if (index !== -1) {
           state.users[index] = updatedUser;
@@ -163,7 +163,7 @@ const userSlice = createSlice({
       deleteUser.fulfilled,
       (state, action: PayloadAction<string>) => {
         state.loading = false;
-        state.users = state.users.filter((user) => user.id !== action.payload);
+        state.users = state.users.filter((user) => user._id !== action.payload);
       }
     );
     builder.addCase(deleteUser.rejected, (state, action) => {
