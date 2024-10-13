@@ -99,7 +99,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             email: userCredential?.user?.email,
           })
         );
-        navigate(APP_ROUTES.OVERVIEW);
+        navigate(`/${APP_ROUTES.OVERVIEW}`);
       }
     } catch (error) {
       const errorCode = (error as any).code;
