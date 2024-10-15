@@ -29,7 +29,6 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { PropertyItem } from '../../../models/propertyItem';
 import { fetchProperties } from '../../../redux/property/propertySlice';
 
-
 const PropertiesItemsTable = () => {
   const [selectedpropertiesItems, setSelectedpropertiesItems] = useState<
     string[]
@@ -51,27 +50,26 @@ const PropertiesItemsTable = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { properties } = useAppSelector((state) => state.property);
 
-  console.log('propertiesproperties', properties)
+  const applyFilters = (
+    properties: PropertyItem[],
+    searchQuery: string
+  ): PropertyItem[] => {
+    return properties.filter(
+      (propertiesItem) =>
+        propertiesItem.title
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        propertiesItem.type.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
 
-
-const applyFilters = (
-  properties: PropertyItem[],
-  searchQuery: string
-): PropertyItem[] => {
-  return properties.filter(
-    (propertiesItem) =>
-      propertiesItem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      propertiesItem.type.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-};
-
-const applyPagination = (
-  properties: PropertyItem[],
-  page: number,
-  limit: number
-): PropertyItem[] => {
-  return properties.slice(page * limit, page * limit + limit);
-};
+  const applyPagination = (
+    properties: PropertyItem[],
+    page: number,
+    limit: number
+  ): PropertyItem[] => {
+    return properties.slice(page * limit, page * limit + limit);
+  };
 
   useEffect(() => {
     dispatch(fetchProperties());
@@ -88,7 +86,6 @@ const applyPagination = (
   };
 
   const handlePropertyDeleteDialog = (value: any) => {
-    console.log('handlePropertyDeleteDialog', value)
     setOpenDeleteDialog(!openDeleteDialog);
     setSelectedValue(value);
   };
@@ -140,7 +137,11 @@ const applyPagination = (
   };
 
   const filteredpropertiesItems = applyFilters(properties, searchQuery);
-  const paginatedpropertiesItems = applyPagination(filteredpropertiesItems, page, limit);
+  const paginatedpropertiesItems = applyPagination(
+    filteredpropertiesItems,
+    page,
+    limit
+  );
   const selectedSomepropertiesItems =
     selectedpropertiesItems.length > 0 &&
     selectedpropertiesItems.length < properties.length;
@@ -305,14 +306,14 @@ const applyPagination = (
                         },
                         color: theme.palette.primary.main,
                       }}
-                      onClick={() => handleEditClick(propertiesItem)} 
+                      onClick={() => handleEditClick(propertiesItem)}
                       color="inherit"
                       size="small"
                     >
                       <EditTwoToneIcon fontSize="small" />
                     </IconButton>
                     <IconButton
-                    onClick={() => handlePropertyDeleteDialog(propertiesItem)}
+                      onClick={() => handlePropertyDeleteDialog(propertiesItem)}
                       sx={{
                         '&:hover': { background: theme.colors.error.lighter },
                         color: theme.palette.error.main,

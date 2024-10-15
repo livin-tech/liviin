@@ -1,9 +1,24 @@
-import PageHeader from './PageHeader';
+import PageHeader from './components/PageHeader';
 import PageTitleWrapper from '../../components/PageTitleWrapper';
 import { Container, Grid } from '@mui/material';
-import WatchList from './WatchList';
+import WatchList from './components/WatchList';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { fetchUsers } from '../../redux/user/userSlice';
+import { RootState } from '../../store';
+import { fetchProperties } from '../../redux/property/propertySlice';
 
-function Dashboard() {
+function DashboardCrypto() {
+  const { users } = useAppSelector((state: RootState) => state.user);
+  const { properties } = useAppSelector((state: RootState) => state.property);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    !(users.length) && dispatch(fetchUsers());
+    !(properties.length) && dispatch(fetchProperties());
+  }, [dispatch]);
+
   return (
     <>
       <PageTitleWrapper>
@@ -27,7 +42,10 @@ function Dashboard() {
             <AccountSecurity />
           </Grid> */}
           <Grid item xs={12}>
-            <WatchList />
+            <WatchList
+              totalUsers={users.length}
+              totalProperties={properties.length}
+            />
           </Grid>
         </Grid>
       </Container>
@@ -35,4 +53,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashboardCrypto;

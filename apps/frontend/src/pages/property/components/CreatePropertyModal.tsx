@@ -12,11 +12,18 @@ import {
   TextField,
   Switch,
   FormControlLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
-import { useAppDispatch } from '../../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { t } from 'i18next';
-import { createProperty, editProperty } from '../../../redux/property/propertySlice';
+import {
+  createProperty,
+  editProperty,
+} from '../../../redux/property/propertySlice';
 import { PropertyItem } from '../../../models/propertyItem';
+import { RootState } from '../../../store';
+import { fetchUsers } from '../../../redux/user/userSlice';
 
 interface CreatePropertyModalProps {
   onClose: (value?: any) => void;
@@ -47,8 +54,14 @@ interface FormData {
 
 const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
   const { onClose, open, selectedProperty } = props;
+  const { users } = useAppSelector((state: RootState) => state.user);
+
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    !users.length && dispatch(fetchUsers());
+  }, [dispatch]);
 
   const {
     register,
@@ -125,11 +138,14 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setLoading(true);
     try {
-      if(selectedProperty){
-        await dispatch(editProperty({ propertyData: data, propertyId: selectedProperty._id })).unwrap();
+      if (selectedProperty) {
+        await dispatch(
+          editProperty({ propertyData: data, propertyId: selectedProperty._id })
+        ).unwrap();
       } else {
         await dispatch(createProperty(data)).unwrap();
       }
+      reset();
       onClose();
     } catch (error) {
       console.error('Failed to save property:', error);
@@ -143,18 +159,21 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
     name: rooms.map((room) => room.name), // Watching specific room fields
   });
 
+  const watchedOwnerId = useWatch({
+    control, // control from useForm
+    name: 'ownerId', // watching the ownerId field
+  });
+
   return (
     <Dialog onClose={handleClose} open={open}>
       <Box sx={{ padding: 3 }}>
         <DialogTitle>
           <Typography variant="h3" component="div" fontWeight="bold">
-            {selectedProperty ? 
-            'Edit Property'
-            // t('editProperty') 
-            : 
-            // t('createProperty')
-            'Create Property'
-            }
+            {selectedProperty
+              ? 'Edit Property'
+              : // t('editProperty')
+                // t('createProperty')
+                'Create Property'}
           </Typography>
         </DialogTitle>
       </Box>
@@ -264,14 +283,27 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
             </Grid>
             <Grid item xs={6}>
               <FormControl fullWidth variant="outlined" required>
-                <TextField
-                  label={t('ownerId')}
+                <Select
+                  label={t('owner')}
                   variant="outlined"
                   error={!!errors.ownerId}
-                  helperText={errors.ownerId ? t('ownerIdReq') : ''}
-                  {...register('ownerId', { required: t('ownerIdReq') })}
-                  fullWidth
-                />
+                  value={watchedOwnerId || ''} // Bind value to react-hook-form
+                  {...register('ownerId', { required: t('ownerReq') })}
+                  displayEmpty
+                >
+                  <MenuItem value="">
+                    <em>{t('selectOwner')}</em>
+                  </MenuItem>
+                  {users.map((user) => (
+                    <MenuItem key={user._id} value={user._id}>
+                      {`${user.firstName} ${user.lastName}`}{' '}
+                      {/* Display user name */}
+                    </MenuItem>
+                  ))}
+                </Select>
+                {errors.ownerId && (
+                  <Typography color="error">{t('ownerReq')}</Typography>
+                )}
               </FormControl>
             </Grid>
 
@@ -280,10 +312,10 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
                 <FormControlLabel
                   control={
                     <Switch
-      {...register(room.name)}
-      checked={!!watchedFields[index]}  // Bind the checked state to the form data
-      // onChange={(e) => setValue(room.name, e.target.checked)} // Update value on change
-    />
+                      {...register(room.name)}
+                      checked={!!watchedFields[index]} // Bind the checked state to the form data
+                      // onChange={(e) => setValue(room.name, e.target.checked)} // Update value on change
+                    />
                   }
                   label={room.label}
                 />
