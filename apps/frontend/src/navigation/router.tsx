@@ -29,9 +29,9 @@ export const Router: RouteObject[] = [
   {
     path: '/',
     element: (
-      // <ProtectedRoutes>
+      <ProtectedRoutes>
         <SidebarLayout />
-      // </ProtectedRoutes>
+      </ProtectedRoutes>
     ),
     children: [
       {

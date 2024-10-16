@@ -173,15 +173,13 @@ const PropertiesItemsTable = () => {
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Search properties..."
-                // placeholder={t('searchUsers')}
+                placeholder={t('searchProperties')}
                 value={searchQuery}
                 onChange={handleSearchChange}
               />
             </Box>
           }
-          title="Properties"
-          // title={t('usersTitleSidebar')}
+          title={t('properties')}
         />
       )}
       <Divider />
@@ -201,19 +199,19 @@ const PropertiesItemsTable = () => {
                   }
                 />
               </TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Type</TableCell>
-              <TableCell>Rooms</TableCell>
-              <TableCell>Bathrooms</TableCell>
-              <TableCell>Living Room</TableCell>
-              <TableCell>Dining Room</TableCell>
-              <TableCell>Hall Room</TableCell>
-              <TableCell>Family Room</TableCell>
-              <TableCell>Kitchen</TableCell>
-              <TableCell>Service Room</TableCell>
-              <TableCell>Laundry Room</TableCell>
-              <TableCell>Balcony</TableCell>
-              <TableCell align="right">Actions</TableCell>
+              <TableCell>{t('title')}</TableCell>
+              <TableCell>{t('type')}</TableCell>
+              <TableCell>{t('rooms')}</TableCell>
+              <TableCell>{t('bathrooms')}</TableCell>
+              <TableCell>{t('livingRoom')}</TableCell>
+              <TableCell>{t('diningRoom')}</TableCell>
+              <TableCell>{t('hallRoom')}</TableCell>
+              <TableCell>{t('familyRoom')}</TableCell>
+              <TableCell>{t('kitchen')}</TableCell>
+              <TableCell>{t('serviceRoom')}</TableCell>
+              <TableCell>{t('laundryRoom')}</TableCell>
+              <TableCell>{t('balcony')}</TableCell>
+              <TableCell align="right">{t('actions')}</TableCell>
             </TableRow>
           </TableHead>
 
@@ -238,7 +236,6 @@ const PropertiesItemsTable = () => {
                     />
                   </TableCell>
                   <TableCell>{propertiesItem.title}</TableCell>{' '}
-                  {/* Changed to title */}
                   <TableCell>{propertiesItem.type}</TableCell>
                   <TableCell>{propertiesItem.rooms}</TableCell>
                   <TableCell>{propertiesItem.bathrooms}</TableCell>

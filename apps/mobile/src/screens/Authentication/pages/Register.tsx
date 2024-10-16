@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Checkbox, Text } from 'react-native-paper';
 import { View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
@@ -14,6 +14,8 @@ import {
   ConfirmationModal,
 } from '../../../components';
 import { RouteNavigators, Routes } from '../../../navigation';
+import { AuthContext } from 'apps/mobile/src/contexts';
+import { useAuth } from 'apps/mobile/src/contexts/AuthContext';
 
 // Fetches the translation for this particular page
 const getTransKey = (key) => `authentication.register.${key}`;
@@ -22,16 +24,20 @@ export const Register = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
+  // const { signInWithGoogle, signInWithApple, user } = useContext(AuthContext);
+  const { loginWithGoogle, loginWithApple } = useAuth()
   const goBack = () => {
     navigation.goBack();
   };
 
   const registerWithApple = () => {
-    setOpenModal(true);
+    loginWithApple();
+    // setOpenModal(true);
   };
 
   const registerWithGoogle = () => {
-    setOpenModal(true);
+    loginWithGoogle();
+    // setOpenModal(true);
   };
 
   const registerWithEmail = () => {
@@ -52,7 +58,7 @@ export const Register = ({ navigation }) => {
 
   return (
     <BackgroundLayout>
-      <BackButton onPress={goBack} />
+      {/* <BackButton onPress={goBack} /> */}
       <View style={styles.mainContainer}>
         <Spacer.md />
         <View style={styles.centerContainer}>

@@ -166,7 +166,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
             <Grid item xs={12}>
               <FormControl fullWidth variant="outlined">
                 <TextField
-                  label={'Phone Number'}
+                  label={t('phoneNumber')}
                   variant="outlined"
                   error={!!errors.phoneNumber}
                   helperText={errors.phoneNumber ? t('phoneNumberReq') : ''}

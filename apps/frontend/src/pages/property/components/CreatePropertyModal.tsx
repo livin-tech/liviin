@@ -61,7 +61,7 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
 
   useEffect(() => {
     !users.length && dispatch(fetchUsers());
-  }, [dispatch]);
+  }, [dispatch, users?.length]);
 
   const {
     register,
@@ -94,16 +94,16 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
     },
   });
 
-  const rooms: { label: string; name: keyof FormData }[] = [
-    { label: 'Living Room', name: 'hasLivingRoom' },
-    { label: 'Dining Room', name: 'hasDiningRoom' },
-    { label: 'Hall Room', name: 'hasHallRoom' },
-    { label: 'Family Room', name: 'hasFamilyRoom' },
-    { label: 'Kitchen', name: 'hasKitchen' },
-    { label: 'Service Room', name: 'hasServiceRoom' },
-    { label: 'Laundry Room', name: 'hasLaundryRoom' },
-    { label: 'Balcony', name: 'hasBalcony' },
-    { label: 'Garden', name: 'hasGarden' },
+  const PROPERTY_FEATURES: { label: string; name: keyof FormData }[] = [
+    { label: t('livingRoom'), name: 'hasLivingRoom' },
+    { label: t('diningRoom'), name: 'hasDiningRoom' },
+    { label: t('hallRoom'), name: 'hasHallRoom' },
+    { label: t('familyRoom'), name: 'hasFamilyRoom' },
+    { label: t('kitchen'), name: 'hasKitchen' },
+    { label: t('serviceRoom'), name: 'hasServiceRoom' },
+    { label: t('laundryRoom'), name: 'hasLaundryRoom' },
+    { label: t('balcony'), name: 'hasBalcony' },
+    { label: t('garden'), name: 'hasGarden' },
   ];
 
   useEffect(() => {
@@ -156,7 +156,7 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
 
   const watchedFields = useWatch({
     control, // from useForm
-    name: rooms.map((room) => room.name), // Watching specific room fields
+    name: PROPERTY_FEATURES.map((room) => room.name), // Watching specific room fields
   });
 
   const watchedOwnerId = useWatch({
@@ -169,11 +169,7 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
       <Box sx={{ padding: 3 }}>
         <DialogTitle>
           <Typography variant="h3" component="div" fontWeight="bold">
-            {selectedProperty
-              ? 'Edit Property'
-              : // t('editProperty')
-                // t('createProperty')
-                'Create Property'}
+            {selectedProperty ? t('editProperty') : t('createProperty')}
           </Typography>
         </DialogTitle>
       </Box>
@@ -291,13 +287,12 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
                   {...register('ownerId', { required: t('ownerReq') })}
                   displayEmpty
                 >
-                  <MenuItem value="">
+                  <MenuItem value="" disabled>
                     <em>{t('selectOwner')}</em>
                   </MenuItem>
                   {users.map((user) => (
                     <MenuItem key={user._id} value={user._id}>
                       {`${user.firstName} ${user.lastName}`}{' '}
-                      {/* Display user name */}
                     </MenuItem>
                   ))}
                 </Select>
@@ -307,7 +302,7 @@ const CreatePropertyModal: React.FC<CreatePropertyModalProps> = (props) => {
               </FormControl>
             </Grid>
 
-            {rooms.map((room, index) => (
+            {PROPERTY_FEATURES.map((room, index) => (
               <Grid item xs={6} key={index}>
                 <FormControlLabel
                   control={

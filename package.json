@@ -4,12 +4,15 @@
   "license": "MIT",
   "scripts": {
     "pod": "nx run mobile:pod-install",
+    "pod:update": "nx run mobile:pod-install --repo-update",
     "be": "nx serve backend",
     "mb": "nx run mobile:start",
+    "i:mb": "cd apps/mobile; yarn; cd ../..",
+    "gradle": "cd apps/mobile/android; ./gradlew clean; cd ../../../",
     "fe": "nx run frontend:start",
     "i:fe": "cd apps/frontend; yarn; cd ../..",
-    "i:mb": "cd apps/mobile; yarn; cd ../..",
-    "build:fe": "cd apps/frontend; yarn build; cd ../.."
+    "build:fe": "cd apps/frontend; yarn build; cd ../..",
+    "clean": "cd apps/mobile; npx react-native-clean-project; cd ../../"
   },
   "private": true,
   "dependencies": {

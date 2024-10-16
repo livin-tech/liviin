@@ -15,9 +15,9 @@ function DashboardCrypto() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    !(users.length) && dispatch(fetchUsers());
-    !(properties.length) && dispatch(fetchProperties());
-  }, [dispatch]);
+    !(users?.length) && dispatch(fetchUsers());
+    !(properties?.length) && dispatch(fetchProperties());
+  }, [dispatch, users?.length, properties?.length]);
 
   return (
     <>

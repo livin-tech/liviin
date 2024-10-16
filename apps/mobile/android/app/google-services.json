@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "518935595191",
+    "project_id": "liviin-36465",
+    "storage_bucket": "liviin-36465.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518935595191:android:4970f24d6c22d04213e532",
+        "android_client_info": {
+          "package_name": "com.liviin.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518935595191-lk7jnt6hcp5s3v497n3577cm31bhhrkh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.liviin.app",
+            "certificate_hash": "6b974b86b8cc6000b99bf8d9ede965cea4d83e42"
+          }
+        },
+        {
+          "client_id": "518935595191-gkmb50q93bta9tu4hilho1ccl8dkqc56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTC02avkhOU1k9IaZdPG-WxHqSshCdN7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518935595191-gkmb50q93bta9tu4hilho1ccl8dkqc56.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "518935595191-1enk2cuterb2vpvamou0mgcfccupdp6l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.liviin.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

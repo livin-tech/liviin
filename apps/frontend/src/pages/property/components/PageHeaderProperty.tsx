@@ -1,17 +1,14 @@
-import { Typography, Button, Grid } from '@mui/material';
-
-import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Typography, Button, Grid } from '@mui/material';
+import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
+
 import CreatePropertyModal from './CreatePropertyModal';
 
 function PageHeaderProperty() {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState();
-
-  const user = {
-    name: 'Admin',
-    avatar: '/static/images/avatars/user-avatar-2.jpg',
-  };
+  const { t } = useTranslation();
 
   const handleClickOpen = () => {
     console.log('handleClickOpenhandleClickOpen');
@@ -33,12 +30,9 @@ function PageHeaderProperty() {
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           <Typography variant="h3" component="h3" gutterBottom>
-            {/* {t('usersTitleSidebar')} */}
-            Property
+            {t('propertyTitleSidebar')}
           </Typography>
-          <Typography variant="subtitle2">
-            {user.name}, total listed properties are here
-          </Typography>
+          <Typography variant="subtitle2">{t('propertyDesc')}</Typography>
         </Grid>
         <Grid item>
           <Button
@@ -47,8 +41,7 @@ function PageHeaderProperty() {
             onClick={handleClickOpen}
             startIcon={<AddTwoToneIcon fontSize="small" />}
           >
-            {/* {t('createUser')} */}
-            Create Property
+            {t('createProperty')}
           </Button>
         </Grid>
       </Grid>

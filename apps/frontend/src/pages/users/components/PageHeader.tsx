@@ -37,9 +37,7 @@ function PageHeader() {
           <Typography variant="h3" component="h3" gutterBottom>
             {t('usersTitleSidebar')}
           </Typography>
-          <Typography variant="subtitle2">
-            {user.name}, total joined users are here
-          </Typography>
+          <Typography variant="subtitle2">{t('usersDesc')}</Typography>
         </Grid>
         <Grid item>
           <Button

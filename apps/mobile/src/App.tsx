@@ -8,6 +8,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 // Utils
 import i18n from './i18n';
 import { theme } from './theme';
+import { AuthProvider } from './contexts';
 import { AppNavigator } from './navigation';
 
 /**
@@ -15,6 +16,12 @@ import { AppNavigator } from './navigation';
  */
 i18n.changeLanguage('en'); /* English */
 // i18n.changeLanguage('es'); /* Español */
+
+/**
+ * React Native Debugger Support
+ */
+if (__DEV__) require('react-native-devsettings');
+
 
 export const App = () => {
   return (
@@ -25,7 +32,9 @@ export const App = () => {
       />
       <I18nextProvider i18n={i18n}>
         <PaperProvider theme={theme}>
-          <AppNavigator />
+          <AuthProvider>
+            <AppNavigator />
+          </AuthProvider>
         </PaperProvider>
       </I18nextProvider>
     </>
