@@ -18,6 +18,8 @@ import { useNavigate } from 'react-router';
 import { APP_ROUTES } from '../../../../navigation';
 import { useAppDispatch } from '../../../../hooks/hooks';
 import { clearUser } from '../../../../redux/auth/authSlice';
+import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -57,6 +59,7 @@ const UserBoxDescription = styled(Typography)(
 function HeaderUserbox() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const user = {
     name: 'Liviin Admin',
@@ -132,7 +135,7 @@ function HeaderUserbox() {
             }}
           >
             <LockOpenTwoToneIcon sx={{ mr: 1 }} />
-            Sign out
+            {t('signOut')}
           </Button>
         </Box>
       </Popover>

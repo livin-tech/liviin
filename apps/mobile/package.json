@@ -3,12 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "fix-lint": "npx prettier --write src"
+    "fix-lint": "npx prettier --write src",
+    "pod": "cd ios; pod install; cd .."
   },
   "dependencies": {
+    "@invertase/react-native-apple-authentication": "^2.4.0",
     "@nx/react": "*",
     "@nx/webpack": "*",
     "@os-team/i18next-react-native-language-detector": "^1.0.34",
+    "@react-native-firebase/app": "^21.0.0",
+    "@react-native-firebase/auth": "^21.0.0",
+    "@react-native-google-signin/google-signin": "^13.1.0",
     "@react-native/metro-config": "*",
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/material-top-tabs": "^6.6.13",
@@ -17,6 +22,7 @@
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
     "add": "^2.0.6",
+    "axios": "*",
     "i18next": "*",
     "intl-pluralrules": "^2.0.1",
     "lottie-ios": "4.4.1",
@@ -40,5 +46,7 @@
     "react-native-vector-icons": "^10.1.0",
     "yarn": "^1.22.22"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "react-native-devsettings": "^1.0.5"
+  }
 }

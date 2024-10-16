@@ -190,7 +190,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               variant="contained"
               disabled={!!errors.email || !!errors.password}
             >
-              Sign in
+              {t('signIn')}
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
               {t('signInDesc')}{' '}

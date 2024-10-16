@@ -11,6 +11,7 @@ import {
 // import Group from '@mui/icons-material/Group';
 import Home from '@mui/icons-material/Home'; // Property icon
 import Quiz from '@mui/icons-material/Quiz'; // Questionnaires icon
+import { useTranslation } from 'react-i18next';
 // import Text from '../../components/Text';
 // import Label from '../../components/Label';
 
@@ -151,6 +152,8 @@ function WatchListColumn({
   //   }
   // ];
 
+  const { t } = useTranslation()
+
   return (
     <Grid
       container
@@ -180,7 +183,7 @@ function WatchListColumn({
               </AvatarWrapper>
               <Box>
                 <Typography variant="h4" noWrap>
-                  Users
+                  {t('users')}
                 </Typography>
                 {/* <Typography variant="subtitle1" noWrap>
                   BTC
@@ -256,7 +259,7 @@ function WatchListColumn({
               </AvatarWrapper>
               <Box>
                 <Typography variant="h4" noWrap>
-                  Property
+                  {t('properties')}
                 </Typography>
                 {/* <Typography variant="subtitle1" noWrap>
                   ETH
@@ -328,7 +331,7 @@ function WatchListColumn({
               </AvatarWrapper>
               <Box>
                 <Typography variant="h4" noWrap>
-                  Questionnaire
+                  {t('questionnaires')}
                 </Typography>
                 {/* <Typography variant="subtitle1" noWrap>
                   ADA
