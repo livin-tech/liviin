@@ -95,7 +95,7 @@ export const createUser = createAsyncThunk(
           phoneNumber: newUser.phoneNumber || '',
           // firebaseID: user.uid
         };
-        const response = await axios.post(`${API_BASE_URL}users`, userPayload, {
+        const response = await axios.post(`${API_BASE_URL}/users`, userPayload, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

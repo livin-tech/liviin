@@ -2,6 +2,7 @@ import { Box, Typography, Container } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
 import ComingSoonImage from '../../../assets/images/coming-soon.svg';
+import { useTranslation } from 'react-i18next';
 
 const MainContent = styled(Box)(
   () => `
@@ -16,6 +17,7 @@ const MainContent = styled(Box)(
 );
 
 function StatusComingSoon() {
+  const { t } = useTranslation();
   return (
     <>
       <MainContent>
@@ -24,7 +26,7 @@ function StatusComingSoon() {
           <Box textAlign="center" mb={3}>
             <Container maxWidth="xs">
               <Typography variant="h1" sx={{ mt: 4, mb: 2 }}>
-                Coming Soon
+                {t('comingSoon')}
               </Typography>
               <Typography
                 variant="h3"
@@ -32,11 +34,10 @@ function StatusComingSoon() {
                 fontWeight="normal"
                 sx={{ mb: 4 }}
               >
-                We're working on implementing the last features before our
-                launch!
+                {t('maintenanceDesc')}
               </Typography>
             </Container>
-            <img alt="Coming Soon" height={200} src={ComingSoonImage} />
+            <img alt={t('comingSoon')} height={200} src={ComingSoonImage} />
           </Box>
         </Container>
       </MainContent>

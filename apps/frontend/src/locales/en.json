@@ -6,7 +6,7 @@
   "propertyTitleSidebar": "Property",
   "questionnairesTitleSidebar": "Questionnaire",
   "paymentTitleSidebar": "Payment",
-  "searchUsers": "Search users",
+  "searchUsers": "Search Users",
   "firstName": "First Name",
   "lastName": "Last Name",
   "email": "Email",
@@ -75,5 +75,8 @@
   "usersDesc": "The total joined users are here",
   "propertyDesc": "The total listed properties are here",
   "signOut": "Sign out",
-  "searchProperties": "Search Properties"
+  "searchProperties": "Search Properties",
+  "questions": "Questions",
+  "comingSoon": "Coming Soon",
+  "maintenanceDesc": "We're working on implementing the last features before our launch!"
 }

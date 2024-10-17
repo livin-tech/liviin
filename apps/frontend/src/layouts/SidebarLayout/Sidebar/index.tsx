@@ -9,7 +9,6 @@ import {
   Divider,
   useTheme,
   darken,
-  Typography,
 } from '@mui/material';
 
 import SidebarMenu from './SidebarMenu';
@@ -53,13 +52,11 @@ function Sidebar() {
             <Box
               mx={2}
               sx={{
-                width: 52,
+                display: 'flex',
+                justifyContent: 'center',
               }}
             >
               <LogoLiviin />
-              <Typography variant="h3" component="h3" gutterBottom>
-                LIVIIN
-              </Typography>
             </Box>
           </Box>
           <Divider

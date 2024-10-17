@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -15,7 +15,7 @@ import { styled } from '@mui/material/styles';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form'; // Import React Hook Form
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as LogoLiviin } from '../../assets/icons/livin-icon.svg';
 import { setUser } from '../../redux/auth/authSlice';
@@ -125,7 +125,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit(onSubmit)} // Use handleSubmit from useForm
+            onSubmit={handleSubmit(onSubmit)}
             noValidate
             sx={{
               display: 'flex',
@@ -192,8 +192,8 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             >
               {t('signIn')}
             </Button>
-            <Typography sx={{ textAlign: 'center' }}>
-              {t('signInDesc')}{' '}
+            {/* <Typography sx={{ textAlign: 'center' }}>
+              {t('signInDesc')}
               <span>
                 <Link
                   href="/signup"
@@ -203,7 +203,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
                   {t('signUp')}
                 </Link>
               </span>
-            </Typography>
+            </Typography> */}
           </Box>
         </Card>
       </SignInContainer>
