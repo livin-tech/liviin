@@ -1,6 +1,6 @@
-import { Typography, Button, Grid } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 
-import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
+// import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { useState } from 'react';
 import CreateUserModal from './CreateUserModal';
 import { useTranslation } from 'react-i18next';
@@ -10,15 +10,15 @@ function PageHeader() {
   const [open, setOpen] = useState(false);
   // const [selectedValue, setSelectedValue] = useState();
 
-  const user = {
-    name: 'Admin',
-    avatar: '/static/images/avatars/user-avatar-2.jpg',
-  };
+  // const user = {
+  //   name: 'Admin',
+  //   avatar: '/static/images/avatars/user-avatar-2.jpg',
+  // };
 
-  const handleClickOpen = () => {
-    console.log('handleClickOpenhandleClickOpen');
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   console.log('handleClickOpenhandleClickOpen');
+  //   setOpen(true);
+  // };
 
   const handleClose = (value: any) => {
     setOpen(false);
@@ -39,7 +39,7 @@ function PageHeader() {
           </Typography>
           <Typography variant="subtitle2">{t('usersDesc')}</Typography>
         </Grid>
-        <Grid item>
+        {/* <Grid item>
           <Button
             sx={{ mt: { xs: 2, md: 0 } }}
             variant="contained"
@@ -48,7 +48,7 @@ function PageHeader() {
           >
             {t('createUser')}
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );

@@ -230,7 +230,7 @@ import { RouteNavigators, Routes } from '../../../navigation';
 
 // Components
 import { Spacer, StyledText, BackButton } from '../../../components';
-import { AuthContext } from 'apps/mobile/src/contexts';
+// import { AuthContext } from 'apps/mobile/src/contexts';
 import { useAuth } from 'apps/mobile/src/contexts/AuthContext';
 
 // Fetches the translation for this particular page

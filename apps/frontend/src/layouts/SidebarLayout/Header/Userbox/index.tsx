@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router';
 import { APP_ROUTES } from '../../../../navigation';
 import { useAppDispatch } from '../../../../hooks/hooks';
 import { clearUser } from '../../../../redux/auth/authSlice';
-import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 const UserBoxButton = styled(Button)(

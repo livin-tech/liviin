@@ -41,7 +41,7 @@ const UsersTable: FC = () => {
   const [limit, setLimit] = useState<number>(5);
   const [open, setOpen] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState<any>();
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const applyFilters = (
@@ -128,7 +128,7 @@ const UsersTable: FC = () => {
   return (
     <Card>
       <CreateUserModal
-        // selectedUser={selectedValue}
+        selectedUser={selectedValue}
         open={open}
         onClose={handleClose}
       />

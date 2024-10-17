@@ -16,7 +16,7 @@ import { createUser, updateUser } from '../../../redux/user/userSlice';
 import { t } from 'i18next';
 
 interface User {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -53,7 +53,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
       firstName: selectedUser?.firstName || '',
       lastName: selectedUser?.lastName || '',
       email: selectedUser?.email || '',
-      phoneNumber: selectedUser?.phoneNumber || '',
+      // phoneNumber: selectedUser?.phoneNumber || '',
     },
   });
 
@@ -63,7 +63,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
         firstName: selectedUser.firstName,
         lastName: selectedUser.lastName,
         email: selectedUser.email,
-        phoneNumber: selectedUser.phoneNumber || '',
+        // phoneNumber: selectedUser.phoneNumber || '',
       });
     }
   }, [selectedUser, reset]);
@@ -77,7 +77,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
     try {
       if (selectedUser) {
         await dispatch(
-          updateUser({ id: selectedUser.id, updatedData: data })
+          updateUser({ id: selectedUser._id, updatedData: data })
         ).unwrap();
       } else {
         await dispatch(
@@ -163,7 +163,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
               </FormControl>
             </Grid>
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <FormControl fullWidth variant="outlined">
                 <TextField
                   label={t('phoneNumber')}
@@ -179,7 +179,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = (props) => {
                   fullWidth
                 />
               </FormControl>
-            </Grid>
+            </Grid> */}
           </Grid>
 
           <Box

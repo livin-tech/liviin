@@ -75,5 +75,8 @@
   "usersDesc": "El total de usuarios registrados está aquí",
   "propertyDesc": "El total de propiedades listadas está aquí",
   "signOut": "Cerrar sesión",
-  "searchProperties": "Buscar Propiedades"
+  "searchProperties": "Buscar Propiedades",
+  "questions": "Preguntas",
+  "comingSoon": "Próximamente",
+  "maintenanceDesc": "Estamos trabajando en implementar las últimas características antes de nuestro lanzamiento."
 }

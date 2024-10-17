@@ -99,7 +99,7 @@ export const editProperty = createAsyncThunk(
 
     try {
       const response = await axios.put(
-        `${API_BASE_URL}properties/${propertyId}`,
+        `${API_BASE_URL}/properties/${propertyId}`,
         formattedData,
         {
           headers: {

@@ -37,8 +37,8 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
                   )}, 0px 5px 12px -4px ${alpha(
                     theme.colors.alpha.black[100],
                     0.05
-                  )}`
-          }
+                  )}`,
+          },
         }}
       >
         <Header />
@@ -51,8 +51,8 @@ const SidebarLayout: FC<SidebarLayoutProps> = () => {
             flex: 1,
             pt: `${theme.header.height}`,
             [theme.breakpoints.up('lg')]: {
-              ml: `${theme.sidebar.width}`
-            }
+              ml: `${theme.sidebar.width}`,
+            },
           }}
         >
           <Box display="block">
