@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Button, TextInput } from 'react-native-paper';
-import { View, StyleSheet, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, useWindowDimensions, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // Utils
 import { theme } from '../../../theme';
 import { Icons } from '../../../assets';
 import { useAuth } from 'apps/mobile/src/contexts';
-// import { Routes } from 'apps/mobile/src/navigation';
+import { Routes } from 'apps/mobile/src/navigation';
 
 // Components
 import { BackgroundLayout } from '../../../layouts';
@@ -45,21 +45,23 @@ export const ForgotPassword = ({ navigation }) => {
     navigation.goBack();
   };
 
-  // Form submission logic
   const onResetPress = async (data) => {
-    console.log({data})
-    // const { email } = data;
-    // setIsLoading(true);
-    // resetPassword(email)
-    //   .then(() => {
-    //     navigation.navigate(Routes.Login);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   })
-    //   .finally(() => {
-    //     setIsLoading(false);
-    //   });
+    const { email } = data;
+    setIsLoading(true);
+    resetPassword(email)
+      .then(() => {
+        Alert.alert(
+          'Success',
+          'A password reset email has been sent to your email address. Please check your inbox and follow the instructions to reset your password.'
+        );
+        navigation.navigate(Routes.Login);
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -79,7 +81,6 @@ export const ForgotPassword = ({ navigation }) => {
         </View>
         <Spacer.xl />
         <View style={styles.inputContainer}>
-          {/* Email input with validation */}
           <Controller
             control={control}
             name="email"
@@ -92,6 +93,8 @@ export const ForgotPassword = ({ navigation }) => {
             }}
             render={({ field: { onChange, value } }) => (
               <TextInput
+                autoCapitalize="none"
+                autoComplete={'email'}
                 mode="outlined"
                 label="Email"
                 placeholder="Type your email"
@@ -107,11 +110,11 @@ export const ForgotPassword = ({ navigation }) => {
               />
             )}
           />
-          {errors?.email && (
-            <StyledText.Body color={theme.colors.error}>
+          {errors?.email ? (
+            <StyledText.Body2 color={theme.colors.error}>
               {errors.email.message}
-            </StyledText.Body>
-          )}
+            </StyledText.Body2>
+          ) : null}
         </View>
         <Spacer.md />
         <Button
@@ -119,8 +122,7 @@ export const ForgotPassword = ({ navigation }) => {
           style={[styles.resetButton, { width: windowWidth - 32, height: 40 }]}
           onPress={handleSubmit(onResetPress)}
           labelStyle={styles.label}
-          // disabled={isLoading || !!errors.email}
-          // disabled={true}
+          disabled={isLoading || !!errors.email}
           loading={isLoading}
           contentStyle={styles.buttonContent}
         >

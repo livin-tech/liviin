@@ -15,6 +15,7 @@ class ApiService {
 
     this.axiosInstance.interceptors.request.use(
       (config) => {
+        console.log({config})
         const token = this.authToken || this.getToken();
         if (token) {
           config.headers.Authorization = `Bearer ${token}`;
@@ -104,5 +105,6 @@ class ApiService {
   }
 }
 
-export const api = new ApiService('https://fndapi.com/api');
+// export const api = new ApiService('https://backend-xtol.onrender.com/api');
+export const api = new ApiService('http://localhost:80/api');
 // const api = new ApiService("http:/192.168.100.56/api");

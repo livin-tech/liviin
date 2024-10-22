@@ -4,6 +4,7 @@ import {
   View,
   type TextInput,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import { ScreenLayout } from '../../layouts';
 import {
@@ -16,6 +17,7 @@ import {
   Paragraph,
   Divider,
   Chip,
+  Text
 } from 'react-native-paper';
 import React, { useRef, useState } from 'react';
 import { Images } from '../../assets';
@@ -45,7 +47,14 @@ export function Step2({ navigation }) {
     : false;
 
   return (
-    <ScreenLayout headerTitle="Question 1">
+    <ScreenLayout
+      headerTitle="Question 1"
+      right={() => (
+        <TouchableOpacity onPress={() => navigation.navigate('Step3')}>
+          <Text>Skip </Text>
+        </TouchableOpacity>
+      )}
+    >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View style={{ alignItems: 'center' }}>
           <View style={{ width: 200, marginTop: 16, marginBottom: 32 }}>

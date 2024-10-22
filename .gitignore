@@ -113,6 +113,3 @@ yarn-error.log
 # Next.js
 .next
 out
-
-# Backend Environment file
-firebase-service.json

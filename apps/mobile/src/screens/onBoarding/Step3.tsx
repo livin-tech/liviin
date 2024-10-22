@@ -47,7 +47,14 @@ export function Step3({ navigation }) {
   const isSubmitDisabled = switchValue && meter === 'Select Material';
 
   return (
-    <ScreenLayout headerTitle="Question 2">
+    <ScreenLayout
+      headerTitle="Question 2"
+      right={() => (
+        <TouchableOpacity onPress={() => navigation.replace('Home')}>
+          <Text>Skip </Text>
+        </TouchableOpacity>
+      )}
+    >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View style={{ alignItems: 'center' }}>
           <View style={{ width: 200, marginVertical: 16 }}>

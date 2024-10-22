@@ -37,7 +37,8 @@ const WithSafeAreaNavigator = () => {
   StatusBar.setBarStyle('dark-content', true);
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StackWithSafeArea.Navigator initialRouteName={Routes.OnBoarding}>
+      {/* <StackWithSafeArea.Navigator initialRouteName={Routes.OnBoarding}> */}
+      <StackWithSafeArea.Navigator initialRouteName={Routes.Home}>
         <StackWithSafeArea.Screen
           options={noHeader}
           component={OnBoardingNavigation}
@@ -124,7 +125,8 @@ const RootNavigator = createNativeStackNavigator();
 export const AppNavigator = () => (
   <NavigationContainer>
     <RootNavigator.Navigator
-      initialRouteName={RouteNavigators.WithoutSafeAreaNavigator}
+      // initialRouteName={RouteNavigators.WithoutSafeAreaNavigator}
+      initialRouteName={RouteNavigators.WithSafeAreaNavigator}
     >
       <RootNavigator.Screen
         options={noHeader}

@@ -6,7 +6,7 @@ import { Icons } from '../../assets';
 import { HorizontalLayout } from '../../layouts/HorizontalLayout';
 import { ConfirmationModal } from '../../components';
 import { CenterContainer } from '../../components';
-import { PropertyList } from './property-list/PropertyList';
+// import { PropertyList } from './property-list/PropertyList';
 import { Routes } from '../../navigation';
 import { theme } from '../../theme';
 
@@ -22,15 +22,15 @@ export function Home({ navigation }) {
             <Icons.CalendarLogo />
             <View style={styles.calenderTitle}>
               <Subheading>View Calendar</Subheading>
-              <Caption>{`(for all your properties)`}</Caption>
+              <Caption>{'(for all your properties)'}</Caption>
             </View>
           </HorizontalLayout>
         </TouchableOpacity>
 
-        <PropertyList />
+        {/* <PropertyList /> */}
       </CenterContainer>
 
-      <ConfirmationModal
+      {/* <ConfirmationModal
         show={openModal}
         dismissText={null}
         confirmText="Ok"
@@ -45,7 +45,7 @@ export function Home({ navigation }) {
         style={styles.fab}
         icon="plus"
         onPress={() => navigation.navigate(Routes.OnBoarding, { screen: 'Step1' })}
-      />
+      /> */}
     </ScreenLayout>
   );
 }

@@ -22,14 +22,14 @@ export function PropertyList() {
       showsVerticalScrollIndicator={false}
       style={{ marginBottom: Dimensions.get('screen').height * 0.1 }}
     >
-      {[1, 2, 3, 4, 5].map((x) => (
+      {/* {[1, 2, 3, 4, 5].map((x, index) => (
         <TouchableOpacity
           onPress={() =>
             // @ts-ignore
             navigation.navigate(Routes.Tasks, { propertyName: `Property ${x}` })
           }
         >
-          <HorizontalLayout style={styles(x).container}>
+          <HorizontalLayout key={index} style={styles(x).container}>
             <View>
               <Subheading>Property {x}</Subheading>
               {x % 2 === 0 ? <ApartmentIcon /> : <House />}
@@ -37,7 +37,7 @@ export function PropertyList() {
             <Notification count={x % 2} />
           </HorizontalLayout>
         </TouchableOpacity>
-      ))}
+      ))} */}
     </ScrollView>
   );
 }

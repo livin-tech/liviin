@@ -26,6 +26,7 @@ export const Register = ({ navigation }) => {
 
   // const { signInWithGoogle, signInWithApple, user } = useContext(AuthContext);
   const { loginWithGoogle, loginWithApple } = useAuth()
+  
   const goBack = () => {
     navigation.goBack();
   };
