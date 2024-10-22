@@ -1,48 +1,51 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Step1 } from './Step1';
-import { Step3 } from './Step3';
-import { Step2 } from './Step2';
-import React, { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import LottieView from 'lottie-react-native';
-import { setTimeout } from '@testing-library/react-native/build/helpers/timers';
-import { PropertyProvider } from '../../contexts';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// Components
+import { Step1, Step2, Step3 } from './steps';
+
+// Utils
+import { PropertyProvider } from '../../contexts';
+import { Routes, noHeader } from '../../navigation';
+
+// Constants
+const { OnBoardingStep1, OnBoardingStep2, OnBoardingStep3 } = Routes;
+
+// Stack Navigator
 const Stack = createNativeStackNavigator();
 
 export const OnBoardingNavigation = () => {
-  const [visible, setVisibility] = React.useState(true);
+  const [visible, setVisibility] = useState<boolean>(true);
+
   useEffect(() => {
     setTimeout(() => setVisibility(false), 1000);
   }, []);
 
-  if (visible) {
-    return (
-      <LottieView
-        style={{ width: '100%', height: '100%' }}
-        source={require('../../assets/animations/loading.json')}
-        autoPlay
-        loop
-      />
-    );
-  }
-
-  return (
+  return visible ? (
+    <LottieView
+      style={{ width: '100%', height: '100%' }}
+      source={require('../../assets/animations/loading.json')}
+      autoPlay
+      loop
+    />
+  ) : (
     <PropertyProvider>
-      <Stack.Navigator initialRouteName="Step1">
+      <Stack.Navigator initialRouteName={OnBoardingStep1}>
         <Stack.Screen
-          options={{ headerShown: false }}
-          name="Step1"
           component={Step1}
+          options={noHeader}
+          name={OnBoardingStep1}
         />
         <Stack.Screen
-          options={{ headerShown: false }}
-          name="Step2"
           component={Step2}
+          options={noHeader}
+          name={OnBoardingStep2}
         />
         <Stack.Screen
-          options={{ headerShown: false }}
-          name="Step3"
           component={Step3}
+          options={noHeader}
+          name={OnBoardingStep3}
         />
       </Stack.Navigator>
     </PropertyProvider>

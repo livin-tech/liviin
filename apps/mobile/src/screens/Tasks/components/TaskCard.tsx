@@ -3,7 +3,7 @@ import { Avatar, Card, IconButton } from 'react-native-paper';
 
 // Components
 import { Icons } from '../../../assets';
-import { HorizontalLayout } from '../../../layouts/HorizontalLayout';
+import { HorizontalLayout } from '../../../layouts';
 
 export const TaskCard = ({
   card: { title, createdAt, duration, isMaintenance },

@@ -13,12 +13,12 @@ import {
 } from 'react-native-paper';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, Controller } from 'react-hook-form';
-import { theme } from '../../theme';
-import QuestionItem from '../../components/QuestionItem';
-import { Icons } from '../../assets';
-import { ScreenLayout } from '../../layouts';
+import { theme } from '../../../theme';
+import QuestionItem from '../../../components/QuestionItem';
+import { Icons } from '../../../assets';
+import { ScreenLayout } from '../../../layouts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Wind from 'apps/mobile/src/assets/icons/Wind';
+import Wind from 'apps/mobile/src/assets/icons/components/Wind';
 import { Property, useAuth, useProperty } from 'apps/mobile/src/contexts';
 
 export function Step1({ navigation }) {
@@ -83,11 +83,11 @@ export function Step1({ navigation }) {
   return (
     <ScreenLayout
       headerTitle="Your property is..."
-      right={() => (
-        <TouchableOpacity onPress={() => navigation.navigate('Step3')}>
-          <Text>Skip </Text>
-        </TouchableOpacity>
-      )}
+      // right={() => (
+      //   <TouchableOpacity onPress={() => navigation.navigate('Step3')}>
+      //     <Text>Skip </Text>
+      //   </TouchableOpacity>
+      // )}
     >
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <View>

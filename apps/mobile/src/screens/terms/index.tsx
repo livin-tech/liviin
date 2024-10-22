@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet } from 'react-native';
 import { Card, Title, Paragraph, Divider } from 'react-native-paper';
 import { ScreenLayout } from '../../layouts';
 
-export const Terms = ({ navigation }) => {
+export const Terms = () => {
   return (
     <ScreenLayout headerTitle="Terms & Conditions">
       <ScrollView showsVerticalScrollIndicator={false}>

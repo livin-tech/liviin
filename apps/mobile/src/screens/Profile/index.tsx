@@ -3,7 +3,7 @@ import { Button, TextInput, List } from 'react-native-paper';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import React, { useState } from 'react';
-import { HorizontalLayout } from '../../layouts/HorizontalLayout';
+import { HorizontalLayout } from '../../layouts';
 import { Routes } from '../../navigation';
 import { useForm, Controller } from 'react-hook-form';
 

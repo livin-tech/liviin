@@ -3,10 +3,10 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { HorizontalLayout } from '../../../layouts/HorizontalLayout';
+import { HorizontalLayout } from '../../../layouts';
 import { IconButton, Subheading } from 'react-native-paper';
-import ApartmentIcon from '../../../assets/icons/ApartmentIcon';
-import House from '../../../assets/icons/House';
+import ApartmentIcon from '../../../assets/icons/components/ApartmentIcon';
+import House from '../../../assets/icons/components/House';
 import { theme } from '../../../theme';
 import { useRef, useState } from 'react';
 

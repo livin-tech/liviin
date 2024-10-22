@@ -1,6 +1,6 @@
 import { ScreenLayout } from '../../layouts';
 import { CenterContainer, Spacer } from '../../components';
-import CalendarRound from '../../assets/icons/CalendarRound';
+import CalendarRound from '../../assets/icons/components/CalendarRound';
 import { Headline } from 'react-native-paper';
 import { PropertyCarousel } from './propertyCarousel';
 import { Calendar, DateData } from 'react-native-calendars';

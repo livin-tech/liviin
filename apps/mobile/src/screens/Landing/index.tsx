@@ -10,7 +10,7 @@ import { LANGS } from '../../utils';
 import { theme } from '../../theme';
 import { Icons } from '../../assets';
 import { BackgroundLayout } from '../../layouts';
-import { Routes } from '../../navigation/routes';
+import { Routes } from '../../navigation/utils/routes';
 
 export const Landing = ({ navigation }) => {
   const [currentLanguage, setCurrentLanguage] = useState(LANGS[0].name);

@@ -1,4 +1,3 @@
-export * from './StyledButton';
 export { Spacer } from './Spacer';
 export { BackButton } from './BackButton';
 export { CountInput } from './CountInput';

@@ -1,4 +1,3 @@
-// BackgroundLayout.tsx
 import React, { ReactNode } from 'react';
 import { Dimensions, StyleSheet, View, ImageBackground } from 'react-native';
 

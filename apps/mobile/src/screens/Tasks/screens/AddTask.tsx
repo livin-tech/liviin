@@ -23,7 +23,7 @@ import {
 import { ScreenLayout } from '../../../layouts';
 import { ConfirmationModal } from '../../../components';
 import QuestionItem from '../../../components/QuestionItem';
-import { HorizontalLayout } from '../../../layouts/HorizontalLayout';
+import { HorizontalLayout } from '../../../layouts';
 
 // Utils
 import { theme } from '../../../theme';

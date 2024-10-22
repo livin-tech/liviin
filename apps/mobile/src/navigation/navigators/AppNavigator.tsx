@@ -3,8 +3,9 @@ import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Utils
-import { theme } from '../theme';
-import { RouteNavigators, Routes } from './routes';
+import { theme } from '../../theme';
+import { DrawerNavigator } from './DrawerNavigator';
+import { RouteNavigators, Routes, noHeader } from '../utils';
 
 // Screens
 import {
@@ -19,14 +20,8 @@ import {
   Profile,
   ForgotPassword,
   CalendarScreen,
-  HomeNavigation,
   OnBoardingNavigation,
-} from '../screens';
-
-// Navigation Options
-const noHeader = {
-  headerShown: false,
-};
+} from '../../screens';
 
 // Stack Navigators
 const StackWithSafeArea = createNativeStackNavigator();
@@ -46,7 +41,7 @@ const WithSafeAreaNavigator = () => {
         />
         <StackWithSafeArea.Screen
           options={noHeader}
-          component={HomeNavigation}
+          component={DrawerNavigator}
           name={Routes.Home}
         />
         <StackWithSafeArea.Screen

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { ScreenLayout } from '../../layouts';
+import { ScreenLayout } from '../../../layouts';
 import {
   Button,
   Caption,
@@ -21,14 +21,14 @@ import {
 } from 'react-native-paper';
 import React, { useRef, useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { theme } from '../../theme';
-import { Icons, Images } from '../../assets';
-import QuestionItem from '../../components/QuestionItem';
-import { HorizontalLayout } from '../../layouts/HorizontalLayout';
+import { theme } from '../../../theme';
+import { Icons, Images } from '../../../assets';
+import QuestionItem from '../../../components/QuestionItem';
+import { HorizontalLayout } from '../../../layouts';
 import DatePicker from 'react-native-date-picker';
-import { ConfirmationModal } from '../../components';
-import Sofa from '../../assets/icons/Sofa';
-import { LANGS } from '../../utils';
+import { ConfirmationModal } from '../../../components';
+import Sofa from '../../../assets/icons/components/Sofa';
+import { LANGS } from '../../../utils';
 
 export function Step3({ navigation }) {
   const [date, setDate] = useState(new Date());

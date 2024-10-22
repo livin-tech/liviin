@@ -1,8 +1,10 @@
 import { Image, TouchableOpacity, View } from 'react-native';
-import { MenuIcon } from '../../assets/icons/MenuIcon';
-import ProfileIcon from '../../assets/icons/ProfileIcons';
+
+// Utils
 import { Images } from '../../assets';
-import { Routes } from '../../navigation';
+import { Routes } from '..';
+import { MenuIcon } from '../../assets/icons/components/MenuIcon';
+import ProfileIcon from '../../assets/icons/components/ProfileIcons';
 
 export function AppBar({ navigation }) {
   return (
