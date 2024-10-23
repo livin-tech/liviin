@@ -3,15 +3,15 @@ import { FAB, IconButton } from 'react-native-paper';
 import { View, StyleSheet, Text, FlatList } from 'react-native';
 
 // Utils
-import { theme } from '../../../theme';
-import { Icons } from '../../../assets';
+import { theme } from '@/src/theme';
+import { Icons } from '@/src/assets';
 import { TASKS_MOCK } from '../mocks/mockData';
 
 // Components
 import { TaskCard } from '../components';
-import { Routes } from '../../../navigation';
-import { Spacer } from '../../../components';
-import { ScreenLayout } from '../../../layouts';
+import { Routes } from '@/src/navigation';
+import { Spacer } from '@/src/components';
+import { ScreenLayout } from '@/src/layouts';
 
 const TASK_TYPES = {
   MAINTENANCE: 'MAINTENANCE',

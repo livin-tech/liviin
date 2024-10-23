@@ -3,8 +3,8 @@ import { FAB } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 
 // Utils
-import { theme } from '../theme';
-import { Icons } from '../assets';
+import { theme } from '@/src/theme';
+import { Icons } from '@/src/assets';
 
 export const BackButton = ({ onPress = () => {} }) => (
   <FAB

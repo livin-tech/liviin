@@ -1,8 +1,7 @@
-// BackgroundLayout.tsx
 import React, { ReactNode } from 'react';
 import { Dimensions, StyleSheet, View, ImageBackground } from 'react-native';
 
-import { Images } from '../assets';
+import { Images } from '@/src/assets';
 
 interface BackgroundLayoutProps {
   children: ReactNode;

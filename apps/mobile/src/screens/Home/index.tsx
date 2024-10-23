@@ -1,94 +1,78 @@
-import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-} from '@react-navigation/drawer';
-import LottieView from 'lottie-react-native';
-import { Home } from './Home';
-import { AppBar } from './AppBar';
-import { Terms } from '../terms/Terms';
-import { Routes } from '../../navigation';
-import { FAQs } from '../FAQs';
-import { theme } from '../../theme';
-import { Images } from '../../assets';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ScreenLayout } from '@/src/layouts';
+import { Caption, FAB, Subheading, Text } from 'react-native-paper';
+import React, { useState } from 'react';
+import { Icons } from '@/src/assets';
+import { HorizontalLayout } from '@/src/layouts';
+import { ConfirmationModal } from '@/src/components';
+import { CenterContainer } from '@/src/components';
+import { PropertyList } from './components';
+import { Routes } from '@/src/navigation';
+import { theme } from '@/src/theme';
 
-const Drawer = createDrawerNavigator();
+export function Home({ navigation }) {
+  // const navigation = useNavigation();
+  const [openModal, setOpenModal] = useState(false);
 
-export const HomeNavigation = () => {
-  const [visible, setVisibility] = React.useState(true);
+  return (
+    <ScreenLayout headerTitle="">
+      <CenterContainer direction="vertical">
+        <TouchableOpacity onPress={() => navigation.navigate(Routes.Calendar)}>
+          <HorizontalLayout style={styles.calender}>
+            <Icons.CalendarLogo />
+            <View style={styles.calenderTitle}>
+              <Subheading>View Calendar</Subheading>
+              <Caption>{'(for all your properties)'}</Caption>
+            </View>
+          </HorizontalLayout>
+        </TouchableOpacity>
 
-  useEffect(() => {
-    setTimeout(() => setVisibility(false), 1000);
-  }, []);
+        <PropertyList />
+      </CenterContainer>
 
-  if (visible) {
-    return (
-      <LottieView
-        style={{ width: '100%', height: '100%' }}
-        source={require('../../assets/animations/loading.json')}
-        autoPlay
-        loop
+      <ConfirmationModal
+        show={openModal}
+        dismissText={null}
+        confirmText="Ok"
+        onConfirm={() => setOpenModal(false)}
+        onDismiss={() => setOpenModal(false)}
+        headline="Done!"
+      >
+        <Text style={{ textAlign: 'center' }}>Property created!</Text>
+      </ConfirmationModal>
+
+      <FAB
+        style={styles.fab}
+        icon="plus"
+        onPress={() =>
+          navigation.navigate(Routes.OnBoarding, { screen: 'Step1' })
+        }
       />
-    );
-  }
-
-  return (
-    <Drawer.Navigator
-      initialRouteName={Routes.Home}
-      screenOptions={{
-        header: ({ navigation, route }) => {
-          if (route.name === Routes.Home) {
-            return <AppBar navigation={navigation} />;
-          }
-          return null;
-        },
-        drawerActiveTintColor: theme.colors.primary,
-      }}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-    >
-      <Drawer.Screen name={Routes.Home} component={Home} />
-      <Drawer.Screen name={Routes.Terms} component={Terms} />
-      <Drawer.Screen name={Routes.FAQs} component={FAQs} />
-    </Drawer.Navigator>
-  );
-};
-
-// Custom drawer content with logo and footer
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      {/* Drawer navigation items */}
-      <DrawerItemList {...props} />
-
-      {/* Footer with logo and copyright at the bottom */}
-      <View style={styles.footer}>
-        <View style={styles.logoContainer}>
-          <Image source={Images.Logo} />
-        </View>
-        <Text style={styles.copyrightText}>© 2024 Liviin </Text>
-      </View>
-    </DrawerContentScrollView>
+    </ScreenLayout>
   );
 }
 
 const styles = StyleSheet.create({
-  logoContainer: {
-    alignItems: 'center',
-    padding: 20,
+  mainContainer: {
+    marginTop: 20,
   },
-  logo: {
-    width: 120,
-    height: 120,
-  },
-  footer: {
-    marginTop: 250,
-    padding: 20,
-  },
-  copyrightText: {
+  header: {
+    fontWeight: '600',
+    fontSize: 16,
     textAlign: 'center',
-    fontSize: 12,
-    color: '#777',
+  },
+  calender: {
+    marginVertical: 16,
+  },
+  calenderTitle: {
+    marginLeft: 10,
+    alignItems: 'center',
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: theme.colors.primary,
   },
 });

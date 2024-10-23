@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-// import { useTranslation } from 'react-i18next';
 import { useFocusEffect } from '@react-navigation/native';
 import { StatusBar, StyleSheet, View } from 'react-native';
 import { Button, Text, FAB, Menu, Divider } from 'react-native-paper';
 
 // Utils
-import i18n from '../../i18n';
-import { LANGS } from '../../utils';
-import { theme } from '../../theme';
-import { Icons } from '../../assets';
-import { BackgroundLayout } from '../../layouts';
-import { Routes } from '../../navigation/routes';
+import i18n from '@/src/i18n';
+import { LANGS } from '@/src/utils';
+import { theme } from '@/src/theme';
+import { Icons } from '@/src/assets';
+import { Routes } from '@/src/navigation';
+import { BackgroundLayout } from '@/src/layouts';
 
 export const Landing = ({ navigation }) => {
   const [currentLanguage, setCurrentLanguage] = useState(LANGS[0].name);

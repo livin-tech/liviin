@@ -3,11 +3,11 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import { HorizontalLayout } from '../../../layouts/HorizontalLayout';
+import { HorizontalLayout } from '@/src/layouts';
 import { IconButton, Subheading } from 'react-native-paper';
-import ApartmentIcon from '../../../assets/icons/ApartmentIcon';
-import House from '../../../assets/icons/House';
-import { theme } from '../../../theme';
+import ApartmentIcon from '@/src/assets/icons/components/ApartmentIcon';
+import House from '@/src/assets/icons/components/House';
+import { theme } from '@/src/theme';
 import { useRef, useState } from 'react';
 
 export const PropertyCarousel = ({

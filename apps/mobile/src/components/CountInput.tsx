@@ -1,7 +1,8 @@
-import { TouchableOpacity, View, Text } from 'react-native';
-import { StyleSheet, TextInput } from 'react-native';
-import { theme } from '../theme';
 import { useEffect, useState } from 'react';
+import { StyleSheet, TextInput } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
+
+import { theme } from '@/src/theme';
 
 export const CountInput = ({ onValueChange }: any) => {
   const [count, setCount] = useState('0');

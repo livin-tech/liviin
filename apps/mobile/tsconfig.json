@@ -7,10 +7,14 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "declaration": true
+    "declaration": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/src/*": ["src/*"]
+    },
   },
   "files": [],
-  "include": [],
+  "include": ["src/**/*", "update-imports.js"],
   "references": [
     {
       "path": "./tsconfig.app.json"

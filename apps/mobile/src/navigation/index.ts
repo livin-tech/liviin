@@ -1,2 +1,2 @@
-export * from './routes';
-export { AppNavigator } from './AppNavigator';
+export * from './utils';
+export { AppNavigator } from './navigators';

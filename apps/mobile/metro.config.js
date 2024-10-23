@@ -4,6 +4,15 @@ const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const defaultConfig = getDefaultConfig(__dirname);
 const { assetExts, sourceExts } = defaultConfig.resolver;
 
+// For absolute imports support
+defaultConfig.resolver = {
+  ...defaultConfig.resolver,
+  sourceExts: [...defaultConfig.resolver.sourceExts, 'jsx', 'js', 'ts', 'tsx'], // Supported file extensions
+  extraNodeModules: {
+    '@/src': `${__dirname}/src`, // Resolve the alias "@/src" to the src folder
+  },
+};
+
 /**
  * Metro configuration
  * https://reactnative.dev/docs/metro

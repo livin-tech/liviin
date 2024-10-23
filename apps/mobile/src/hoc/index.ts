@@ -1,1 +1,0 @@
-export { withTranslation } from './withTranslation';

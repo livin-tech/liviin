@@ -8,7 +8,7 @@ import { StyleSheet, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // Utils
-import { theme } from '../theme';
+import { theme } from '@/src/theme';
 
 // Styles
 const styles = StyleSheet.create({

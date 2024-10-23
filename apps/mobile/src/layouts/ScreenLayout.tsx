@@ -1,12 +1,15 @@
 import { StyleSheet, View } from 'react-native';
-import { Header } from './Header';
-import { theme } from '../theme';
+
+import { theme } from '@/src/theme';
+import { Header } from '@/src/components';
 
 export const ScreenLayout = ({ headerTitle, children, right }: any) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        {headerTitle && <Header headerTitle={headerTitle} right={right} />}
+        {headerTitle ? (
+          <Header headerTitle={headerTitle} right={right} />
+        ) : null}
       </View>
       {children}
     </View>

@@ -4,6 +4,7 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import { I18nextProvider } from 'react-i18next';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // Utils
 import i18n from './i18n';
@@ -22,6 +23,10 @@ i18n.changeLanguage('en'); /* English */
  */
 if (__DEV__) require('react-native-devsettings');
 
+/**
+ * Create a new query client
+ */
+const queryClient = new QueryClient();
 
 export const App = () => {
   return (
@@ -32,9 +37,11 @@ export const App = () => {
       />
       <I18nextProvider i18n={i18n}>
         <PaperProvider theme={theme}>
-          <AuthProvider>
-            <AppNavigator />
-          </AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <AppNavigator />
+            </AuthProvider>
+          </QueryClientProvider>
         </PaperProvider>
       </I18nextProvider>
     </>
