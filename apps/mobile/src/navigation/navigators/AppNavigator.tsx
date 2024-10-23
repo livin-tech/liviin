@@ -3,7 +3,7 @@ import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Utils
-import { theme } from '../../theme';
+import { theme } from '@/src/theme';
 import { DrawerNavigator } from './DrawerNavigator';
 import { RouteNavigators, Routes, noHeader } from '../utils';
 
@@ -21,7 +21,7 @@ import {
   ForgotPassword,
   CalendarScreen,
   OnBoardingNavigation,
-} from '../../screens';
+} from '@/src/screens';
 
 // Stack Navigators
 const StackWithSafeArea = createNativeStackNavigator();

@@ -4,8 +4,8 @@ import { initReactI18next } from 'react-i18next';
 import RNLanguageDetector from '@os-team/i18next-react-native-language-detector';
 
 // Import translation files
-import en from '../locales/en.json';
-import es from '../locales/es.json';
+import en from '@/src/locales/en.json';
+import es from '@/src/locales/es.json';
 
 // Define the structure of the translation files
 interface TranslationResources {

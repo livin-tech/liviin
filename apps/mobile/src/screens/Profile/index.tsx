@@ -1,11 +1,11 @@
-import { ScreenLayout } from '../../layouts';
+import React, { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { Button, TextInput, List } from 'react-native-paper';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import React, { useState } from 'react';
-import { HorizontalLayout } from '../../layouts';
-import { Routes } from '../../navigation';
-import { useForm, Controller } from 'react-hook-form';
+
+import { Routes } from '@/src/navigation';
+import { ScreenLayout, HorizontalLayout } from '@/src/layouts';
 
 export const Profile = ({ navigation }) => {
   const [isEditing, setIsEditing] = useState(false);

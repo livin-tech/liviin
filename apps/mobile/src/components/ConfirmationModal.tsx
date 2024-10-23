@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Divider, Headline, Modal } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
-import { HorizontalLayout } from '../layouts';
+import { HorizontalLayout } from '@/src/layouts';
 
 export function ConfirmationModal({
   show,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, { G, Rect, Path, Defs, ClipPath } from 'react-native-svg';
 
-function ProfileIcon(props) {
+export const ProfileIcon = (props) => {
   return (
     <Svg
       width={48}
@@ -39,5 +39,3 @@ function ProfileIcon(props) {
     </Svg>
   );
 }
-
-export default ProfileIcon;

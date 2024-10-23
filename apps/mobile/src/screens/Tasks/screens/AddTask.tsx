@@ -20,14 +20,14 @@ import {
 } from 'react-native-paper';
 
 // Components
-import { ScreenLayout } from '../../../layouts';
-import { ConfirmationModal } from '../../../components';
-import QuestionItem from '../../../components/QuestionItem';
-import { HorizontalLayout } from '../../../layouts';
+import { ScreenLayout } from '@/src/layouts';
+import { ConfirmationModal } from '@/src/components';
+import QuestionItem from '@/src/components/QuestionItem';
+import { HorizontalLayout } from '@/src/layouts';
 
 // Utils
-import { theme } from '../../../theme';
-import { Icons } from '../../../assets';
+import { theme } from '@/src/theme';
+import { Icons } from '@/src/assets';
 
 const TASK_TYPES = {
   MAINTENANCE: 'MAINTENANCE',

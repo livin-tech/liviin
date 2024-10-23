@@ -9,14 +9,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button, Text, TextInput } from 'react-native-paper';
 import { useForm, Controller } from 'react-hook-form';
 
-import { Icons } from '../../../assets';
+import { Icons } from '@/src/assets';
 // Components
-import { BackButton, Spacer, StyledText } from '../../../components';
-import { BackgroundLayout } from '../../../layouts';
-import { RouteNavigators, Routes } from '../../../navigation';
+import { BackButton, Spacer, StyledText } from '@/src/components';
+import { BackgroundLayout } from '@/src/layouts';
+import { Routes } from '@/src/navigation';
 // Utils
-import { theme } from '../../../theme';
-import { useAuth } from 'apps/mobile/src/contexts';
+import { theme } from '@/src/theme';
+import { useAuth } from '@/src/contexts';
 
 // Fetches the translation for this particular page
 const getTransKey = (key: string) => `authentication.signUp.${key}`;

@@ -12,14 +12,15 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 
 // Utils
-import { theme } from '../../../theme';
-import { Icons } from '../../../assets';
-import { BackgroundLayout } from '../../../layouts';
-import { RouteNavigators, Routes } from '../../../navigation';
+import { theme } from '@/src/theme';
+import { Icons } from '@/src/assets';
+import { useAuth } from '@/src/contexts';
+import { BackgroundLayout } from '@/src/layouts';
+import { RouteNavigators, Routes } from '@/src/navigation';
 
 // Components
-import { Spacer, StyledText, BackButton } from '../../../components';
-import { useAuth } from 'apps/mobile/src/contexts/AuthContext';
+import { Spacer, StyledText, BackButton } from '@/src/components';
+
 
 // Fetches the translation for this particular page
 const getTransKey = (key: string) => `authentication.login.${key}`;

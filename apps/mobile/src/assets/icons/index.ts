@@ -4,6 +4,7 @@ import { Edit } from './components/Edit';
 import { Email } from './components/Email';
 import { House } from './components/House';
 import { Clock } from './components/Clock';
+import { MenuIcon } from './components/MenuIcon';
 import { Bathroom } from './components/Bathroom';
 import { AppleLogo } from './components/AppleLogo';
 import { WindRound } from './components/WindRound';
@@ -12,6 +13,7 @@ import { CouchRound } from './components/CouchRound';
 import { GoogleLogo } from './components/GoogleLogo';
 import { RightArrow } from './components/RightArrow';
 import { LiviinLogo } from './components/LiviinLogo';
+import { ProfileIcon } from './components/ProfileIcon';
 import { MeasureTape } from './components/MeasureTape';
 import { CalendarLogo } from './components/CalendarLogo';
 import { ApartmentIcon } from './components/ApartmentIcon';
@@ -29,6 +31,7 @@ export const Icons = {
   Wind,
   Clock,
   House,
+  MenuIcon,
   Bathroom,
   AppleLogo,
   LeftArrow,
@@ -36,11 +39,12 @@ export const Icons = {
   WindRound,
   LiviinLogo,
   CouchRound,
-  CalendarLogo,
   RightArrow,
+  ProfileIcon,
   MeasureTape,
-  ArrowDownSmall,
+  CalendarLogo,
   ApartmentIcon,
+  ArrowDownSmall,
   CleaningFilled,
   CheckmarkCircle,
   CleaningOutline,

@@ -7,7 +7,7 @@ import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 // Utils
-import { theme } from '../theme';
+import { theme } from '@/src/theme';
 
 // Styles
 const styles = StyleSheet.create({

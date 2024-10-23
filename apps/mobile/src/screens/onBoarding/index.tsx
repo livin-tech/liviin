@@ -6,8 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Step1, Step2, Step3 } from './steps';
 
 // Utils
-import { PropertyProvider } from '../../contexts';
-import { Routes, noHeader } from '../../navigation';
+import { PropertyProvider } from '@/src/contexts';
+import { Routes, noHeader } from '@/src/navigation';
 
 // Constants
 const { OnBoardingStep1, OnBoardingStep2, OnBoardingStep3 } = Routes;
@@ -25,7 +25,7 @@ export const OnBoardingNavigation = () => {
   return visible ? (
     <LottieView
       style={{ width: '100%', height: '100%' }}
-      source={require('../../assets/animations/loading.json')}
+      source={require('@/src/assets/animations/loading.json')}
       autoPlay
       loop
     />

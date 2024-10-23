@@ -9,7 +9,7 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import appleAuth from '@invertase/react-native-apple-authentication';
 // import { useRouter } from 'expo-router';
-import { api } from '../services';
+import { api } from '@/src/services';
 import { Alert } from 'react-native';
 // import { User } from '@/services/types';
 

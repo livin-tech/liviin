@@ -9,14 +9,14 @@ import {
 
 // Utils
 import { Routes } from '../utils';
-import { theme } from '../../theme';
-import { Images } from '../../assets';
+import { theme } from '@/src/theme';
+import { Images } from '@/src/assets';
 
 // Components
 import { AppBar } from '../components';
 
 // Screens
-import { Home, FAQs, Terms } from '../../screens';
+import { Home, FAQs, Terms } from '@/src/screens';
 
 // Side Drawer
 const Drawer = createDrawerNavigator();
@@ -32,7 +32,7 @@ export const DrawerNavigator = () => {
     return (
       <LottieView
         style={{ width: '100%', height: '100%' }}
-        source={require('../../assets/animations/loading.json')}
+        source={require('@/src/assets/animations/loading.json')}
         autoPlay
         loop
       />

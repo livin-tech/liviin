@@ -13,13 +13,13 @@ import {
 } from 'react-native-paper';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, Controller } from 'react-hook-form';
-import { theme } from '../../../theme';
-import QuestionItem from '../../../components/QuestionItem';
-import { Icons } from '../../../assets';
-import { ScreenLayout } from '../../../layouts';
+import { theme } from '@/src/theme';
+import QuestionItem from '@/src/components/QuestionItem';
+import { Icons } from '@/src/assets';
+import { ScreenLayout } from '@/src/layouts';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Wind from 'apps/mobile/src/assets/icons/components/Wind';
-import { Property, useAuth, useProperty } from 'apps/mobile/src/contexts';
+import Wind from '@/src/assets/icons/components/Wind';
+import { Property, useAuth, useProperty } from '@/src/contexts';
 
 export function Step1({ navigation }) {
   const [visible, setVisibility] = React.useState(false);

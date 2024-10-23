@@ -1,21 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Checkbox, Text } from 'react-native-paper';
 import { View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
 
 // Utils
-import { theme } from '../../../theme';
-import { Icons } from '../../../assets';
-import { BackgroundLayout } from '../../../layouts';
+import { theme } from '@/src/theme';
+import { Icons } from '@/src/assets';
+import { BackgroundLayout } from '@/src/layouts';
 import {
   Spacer,
   StyledText,
   BackButton,
   OutlinedButton,
   ConfirmationModal,
-} from '../../../components';
-import { RouteNavigators, Routes } from '../../../navigation';
-import { AuthContext } from 'apps/mobile/src/contexts';
-import { useAuth } from 'apps/mobile/src/contexts/AuthContext';
+} from '@/src/components';
+import { RouteNavigators, Routes } from '@/src/navigation';
+import { useAuth } from '@/src/contexts';
 
 // Fetches the translation for this particular page
 const getTransKey = (key) => `authentication.register.${key}`;
@@ -24,7 +23,6 @@ export const Register = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  // const { signInWithGoogle, signInWithApple, user } = useContext(AuthContext);
   const { loginWithGoogle, loginWithApple } = useAuth()
   
   const goBack = () => {

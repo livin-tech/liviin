@@ -26,6 +26,7 @@
     "axios": "*",
     "i18next": "*",
     "intl-pluralrules": "^2.0.1",
+    "lodash": "*",
     "lottie-ios": "4.4.1",
     "lottie-react-native": "^6.7.2",
     "metro-config": "*",
@@ -45,8 +46,7 @@
     "react-native-svg": "*",
     "react-native-svg-transformer": "*",
     "react-native-vector-icons": "^10.1.0",
-    "yarn": "^1.22.22",
-    "lodash": "*"
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "react-native-devsettings": "^1.0.5"

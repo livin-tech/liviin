@@ -1,13 +1,13 @@
-import { ScreenLayout } from '../../layouts';
-import { CenterContainer, Spacer } from '../../components';
-import CalendarRound from '../../assets/icons/components/CalendarRound';
+import { ScreenLayout } from '@/src/layouts';
+import { CenterContainer, Spacer } from '@/src/components';
+import CalendarRound from '@/src/assets/icons/components/CalendarRound';
 import { Headline } from 'react-native-paper';
 import { PropertyCarousel } from './propertyCarousel';
 import { Calendar, DateData } from 'react-native-calendars';
-import { theme } from '../../theme';
+import { theme } from '@/src/theme';
 import { View, StyleSheet } from 'react-native';
 import { useEffect, useState } from 'react';
-import { Routes } from '../../navigation';
+import { Routes } from '@/src/navigation';
 
 const PROPERTY_DATA_MOCK = {
   0: ['2024-07-01', '2024-07-02', '2024-07-03'],

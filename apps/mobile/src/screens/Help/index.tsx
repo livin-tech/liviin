@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { ScreenLayout } from '../../layouts';
 import { List } from 'react-native-paper';
+
+import { ScreenLayout } from '@/src/layouts';
 
 export const Help = () => {
   return (

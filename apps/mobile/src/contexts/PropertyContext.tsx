@@ -1,6 +1,7 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../services';
+
+import { api } from '@/src/services';
 
 export interface Property {
   type: string;

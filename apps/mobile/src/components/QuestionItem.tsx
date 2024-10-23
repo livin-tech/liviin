@@ -1,8 +1,9 @@
-import { Card, Paragraph, TextInput, TextInputProps } from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
-import { CountInput } from './CountInput';
 import React from 'react';
-import { theme as AppTheme } from '../theme';
+import { StyleSheet, View } from 'react-native';
+import { Card, Paragraph, TextInput, TextInputProps } from 'react-native-paper';
+
+import { CountInput } from './CountInput';
+import { theme as AppTheme } from '@/src/theme';
 
 interface ItemProps {
   children?: React.ReactNode;

@@ -11,15 +11,15 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigation } from '@react-navigation/native';
 
 // Components
-import House from '../../../assets/icons/components/House';
-import Notification from '../../../assets/icons/components/Notification';
-import ApartmentIcon from '../../../assets/icons/components/ApartmentIcon';
-import { HorizontalLayout } from '../../../layouts';
+import House from '@/src/assets/icons/components/House';
+import Notification from '@/src/assets/icons/components/Notification';
+import ApartmentIcon from '@/src/assets/icons/components/ApartmentIcon';
+import { HorizontalLayout } from '@/src/layouts';
 
 // Utils
-import { theme } from '../../../theme';
-import { api } from '../../../services';
-import { Routes } from '../../../navigation';
+import { theme } from '@/src/theme';
+import { api } from '@/src/services';
+import { Routes } from '@/src/navigation';
 
 // Constants
 const QUERY_KEY = 'properties';

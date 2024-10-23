@@ -1,8 +1,9 @@
-import { Icons } from '../assets';
-import { theme } from '../theme';
 import { Headline } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import { Icons } from '@/src/assets';
+import { theme } from '@/src/theme';
 
 export const Header = ({ headerTitle, right }) => {
   const navigation = useNavigation();

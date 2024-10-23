@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Card, Title, Paragraph, Divider } from 'react-native-paper';
-import { ScreenLayout } from '../../layouts';
+import { ScreenLayout } from '@/src/layouts';
 
 export const Terms = () => {
   return (

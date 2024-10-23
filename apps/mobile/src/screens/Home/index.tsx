@@ -1,14 +1,14 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { ScreenLayout } from '../../layouts';
+import { ScreenLayout } from '@/src/layouts';
 import { Caption, FAB, Subheading, Text } from 'react-native-paper';
 import React, { useState } from 'react';
-import { Icons } from '../../assets';
-import { HorizontalLayout } from '../../layouts';
-import { ConfirmationModal } from '../../components';
-import { CenterContainer } from '../../components';
-import { PropertyList } from './components/PropertyList';
-import { Routes } from '../../navigation';
-import { theme } from '../../theme';
+import { Icons } from '@/src/assets';
+import { HorizontalLayout } from '@/src/layouts';
+import { ConfirmationModal } from '@/src/components';
+import { CenterContainer } from '@/src/components';
+import { PropertyList } from './components';
+import { Routes } from '@/src/navigation';
+import { theme } from '@/src/theme';
 
 export function Home({ navigation }) {
   // const navigation = useNavigation();

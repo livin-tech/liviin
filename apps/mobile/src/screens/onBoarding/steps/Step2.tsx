@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { ScreenLayout } from '../../../layouts';
+import { ScreenLayout } from '@/src/layouts';
 import {
   Button,
   ProgressBar,
@@ -20,14 +20,14 @@ import {
   Text
 } from 'react-native-paper';
 import React, { useRef, useState } from 'react';
-import { Images } from '../../../assets';
-import QuestionItem from '../../../components/QuestionItem';
-import Wind from '../../../assets/icons/components/Wind';
-import { theme } from '../../../theme';
+import { Images } from '@/src/assets';
+import QuestionItem from '@/src/components/QuestionItem';
+import Wind from '@/src/assets/icons/components/Wind';
+import { theme } from '@/src/theme';
 import DatePicker from 'react-native-date-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { HorizontalLayout } from '../../../layouts';
-import { ConfirmationModal } from '../../../components/ConfirmationModal';
+import { HorizontalLayout } from '@/src/layouts';
+import { ConfirmationModal } from '@/src/components';
 
 export function Step2({ navigation }) {
   const [date, setDate] = useState(new Date());

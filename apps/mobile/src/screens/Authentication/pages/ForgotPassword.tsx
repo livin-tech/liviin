@@ -5,14 +5,14 @@ import { View, StyleSheet, useWindowDimensions, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // Utils
-import { theme } from '../../../theme';
-import { Icons } from '../../../assets';
-import { useAuth } from 'apps/mobile/src/contexts';
-import { Routes } from 'apps/mobile/src/navigation';
+import { theme } from '@/src/theme';
+import { Icons } from '@/src/assets';
+import { useAuth } from '@/src/contexts';
+import { Routes } from '@/src/navigation';
 
 // Components
-import { BackgroundLayout } from '../../../layouts';
-import { Spacer, StyledText, BackButton } from '../../../components';
+import { BackgroundLayout } from '@/src/layouts';
+import { Spacer, StyledText, BackButton } from '@/src/components';
 
 const inputTheme = {
   colors: {
